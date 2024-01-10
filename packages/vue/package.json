@@ -1,0 +1,16 @@
+{
+  "name": "@easytable/vue",
+  "version": "1.0.0",
+  "description": "",
+  "author": "",
+  "license": "MIT",
+  "keywords": [],
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@easytable/ve-icon": "workspace:^1.0.0",
+    "@easytable/ve-table": "workspace:^1.0.0"
+  }
+}

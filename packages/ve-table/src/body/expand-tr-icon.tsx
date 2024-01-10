@@ -1,0 +1,82 @@
+import { ICON_NAMES } from '@easytable/common/utils/constant'
+import { computed, defineComponent } from 'vue'
+import { clsName } from '../util'
+import { COLUMN_TYPES, COMPS_NAME } from '../util/constant'
+
+// import VeIcon from 'vue-easytable/packages/ve-icon'
+const VeIcon = () => 'VeIcon'
+
+export default defineComponent({
+  name: COMPS_NAME.VE_TABLE_EXPAND_TR_ICON,
+  props: {
+    column: {
+      type: Object,
+      required: true,
+    },
+    // expand row option
+    expandOption: {
+      type: Object,
+      default() {
+        return null
+      },
+    },
+    rowData: {
+      type: Object,
+      required: true,
+    },
+    // expanded row keys
+    expandedRowkeys: {
+      type: Array,
+      default() {
+        return []
+      },
+    },
+    rowKeyFieldName: {
+      type: String,
+      default: null,
+    },
+    // row expand click event
+    cellClick: {
+      type: Function,
+      default: null,
+    },
+  },
+  setup(props) {
+    let content = null
+
+    const { cellClick, column } = props
+
+    // is row expanded
+    const isExpanded = computed((): boolean => {
+      let result = false
+
+      const { column, rowData, expandedRowkeys, rowKeyFieldName } = props
+
+      if (column.type === COLUMN_TYPES.EXPAND) {
+        const rowKey = rowData[rowKeyFieldName]
+        result = expandedRowkeys.includes(rowKey)
+      }
+
+      return result
+    })
+    // expand row icon class
+    const expandRowIconContainerClass = computed(() => {
+      return {
+        [clsName('row-expand-icon')]: true,
+        [clsName('expand-icon-collapsed')]: isExpanded.value,
+      }
+    })
+
+    if (column.type === COLUMN_TYPES.EXPAND) {
+      content = (
+        <span
+          onClick={e => cellClick(e)}
+          class={expandRowIconContainerClass}
+        >
+          <VeIcon name={ICON_NAMES.RIGHT_ARROW} />
+        </span>
+      )
+    }
+    return content
+  },
+})

@@ -1,0 +1,537 @@
+@ve-virtual-phantom-index: -1;
+
+@ve-normal-cell-selection-border-index: 0;
+@ve-normal-cell-selection-corner-index: 1;
+@ve-column-resizer-handler-index: 50;
+@ve-column-resizer-line-index: 50;
+
+.ve-table *,
+.ve-table *:before,
+.ve-table *:after {
+    box-sizing: border-box;
+    // margin: 0;
+    // padding: 0;
+}
+
+.ve-table {
+    position: relative;
+    overflow: hidden;
+
+    // table container
+    .ve-table-container {
+        position: relative;
+        overflow-y: auto;
+        height: 100%;
+        width: 100%;
+        // 修复嵌套表格外层开启单元格选择，子表格未开启单元格选择，导致默认文字无法选中的问题
+        user-select: text;
+
+        // table content wrapper
+        .ve-table-content-wrapper {
+            position: relative;
+            left: 0;
+            right: 0;
+            top: 0;
+
+            // table content
+            table.ve-table-content {
+                min-width: 100%;
+                table-layout: fixed;
+                border-collapse: separate;
+                border-spacing: 0;
+
+                // 表头（需要处理多表头情况）
+                thead.ve-table-header {
+                    tr.ve-table-header-tr {
+                        height: @ve-table-head-row-height;
+                        th.ve-table-header-th {
+                            background-color: @ve-table-header-background-color;
+                            padding: @ve-table-head-row-td-padding;
+                            font-weight: 500;
+                            color: @ve-table-head-text-color;
+                            font-size: @ve-table-head-text-font-size;
+                            // cell indicator
+                            &.ve-table-cell-indicator {
+                                background-color: @ve-table-header-cell-indicator-background-color;
+                            }
+                            // cell indicator active
+                            &.ve-table-cell-indicator-active {
+                                background-color: @ve-table-header-cell-indicator-active-background-color;
+                                color: @ve-table-head-indicator-active-text-color;
+                            }
+                        }
+                    }
+                    // 固定头
+                    &.ve-table-fixed-header {
+                        tr th {
+                            position: sticky;
+                            z-index: @ve-fixed-header-index;
+                        }
+                    }
+                    .ve-table-header-tr {
+                        .ve-table-header-th {
+                            // 固定左列、右列
+                            &.ve-table-fixed-left,
+                            &.ve-table-fixed-right {
+                                position: sticky;
+                                z-index: @ve-fixed-header-cell-index;
+                            }
+                            // checkbox
+                            .ve-table-checkbox-wrapper {
+                                width: 25px;
+                            }
+
+                            // sort
+                            .ve-table-sort {
+                                display: inline-block;
+                                position: relative;
+                                width: 16px;
+                                height: 16px;
+                                margin-left: 5px;
+                                color: @ve-table-sort-icon-default-color;
+                                pointer-events: none;
+                                .ve-table-sort-icon {
+                                    position: absolute;
+                                    display: block;
+                                    font-size: 14px;
+                                    &.ve-table-sort-icon-top {
+                                        top: 1px;
+                                    }
+
+                                    &.ve-table-sort-icon-bottom {
+                                        top: 9px;
+                                    }
+
+                                    &.active {
+                                        color: @ve-table-sort-icon-active-color;
+                                    }
+                                }
+                            }
+
+                            &.ve-table-sortable-column {
+                                cursor: pointer;
+                            }
+
+                            /* filter */
+                            .ve-table-filter {
+                                display: inline-block;
+                                position: relative;
+                                width: 0;
+                                height: 16px;
+                                cursor: pointer;
+                                .ve-table-filter-icon {
+                                    color: @ve-table-header-filter-icon-color;
+                                    position: absolute;
+                                    top: 0;
+                                    left: 5px;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                // tbody
+                tbody.ve-table-body {
+                    tr.ve-table-body-tr,
+                    tr.ve-table-expand-tr {
+                        height: @ve-table-body-row-height;
+                        td.ve-table-body-td,
+                        td.ve-table-expand-td {
+                            background-color: @ve-table-body-background-color;
+                            color: @ve-table-body-text-color;
+                            // hack content fill td height
+                            //height: 1px;
+                            height: inherit;
+                            font-size: @ve-table-body-text-font-size;
+                            // 解决展开表格偶发抖动的问题
+                            overflow: hidden;
+                        }
+
+                        td.ve-table-body-td {
+                            padding: @ve-table-body-row-td-padding;
+                            white-space: pre-wrap;
+                            overflow: hidden;
+                        }
+
+                        td.ve-table-operation-col {
+                            background-color: @ve-table-td-operation-column-background-color;
+                            // cell indicator
+                            &.ve-table-cell-indicator {
+                                background-color: @ve-table-body-cell-indicator-background-color;
+                            }
+                            // cell indicator active
+                            &.ve-table-cell-indicator-active {
+                                background-color: @ve-table-body-cell-indicator-active-background-color;
+                                color: @ve-table-body-indicator-active-text-color;
+                            }
+                        }
+                    }
+
+                    // 展开行
+                    tr.ve-table-expand-tr {
+                        display: table-row;
+                    }
+
+                    // 滚动中效果
+                    tr.ve-table-body-row-scrolling {
+                        & > td {
+                            background-color: @ve-table-body-row-row-scrolling-background-color;
+                        }
+                    }
+
+                    // 斑马纹
+                    &.ve-table-stripe {
+                        tr.ve-table-body-tr:nth-child(2n + 1) td {
+                            background-color: @ve-table-body-row-stripe-background-color;
+                        }
+                    }
+
+                    // 行悬浮效果
+                    &.ve-table-row-hover {
+                        tr.ve-table-body-tr:hover td {
+                            background-color: @ve-table-body-row-hover-background-color;
+                        }
+                    }
+
+                    // 行点击高亮
+                    &.ve-table-row-highlight {
+                        tr.ve-table-body-tr {
+                            &.ve-table-tr-highlight {
+                                td {
+                                    background-color: @ve-table-body-row-highlight-background-color;
+                                }
+                            }
+                        }
+                    }
+
+                    .ve-table-body-tr {
+                        .ve-table-body-td {
+                            // 固定左列、右列
+                            &.ve-table-fixed-left,
+                            &.ve-table-fixed-right {
+                                position: sticky;
+                                z-index: @ve-fixed-body-cell-index;
+                            }
+
+                            // expand row icon
+                            .ve-table-row-expand-icon {
+                                cursor: pointer;
+                                display: inline-block;
+                                width: 20px;
+                                height: 20px;
+                                i {
+                                    display: inline-flex;
+                                    &::before {
+                                        transform: rotate(0deg);
+                                        transition: transform 0.3s;
+                                    }
+                                }
+                                &.ve-table-expand-icon-collapsed {
+                                    i::before {
+                                        transform: rotate(90deg);
+                                        transition: transform 0.3s;
+                                    }
+                                }
+                            }
+
+                            // checkbox
+                            .ve-table-checkbox-wrapper {
+                                width: 25px;
+                            }
+
+                            // ellipsis
+                            .ve-table-body-td-span-ellipsis {
+                                overflow: hidden;
+                                display: -webkit-box;
+                                text-overflow: ellipsis;
+                                /* -webkit-line-clamp: 1; */
+                                -webkit-box-orient: vertical;
+                            }
+                        }
+                    }
+
+                    // expand row
+                    .ve-table-expand-tr {
+                        .ve-table-expand-td-content {
+                            position: sticky;
+                            z-index: @ve-fixed-body-cell-index;
+                            left: 0px;
+                            padding: @ve-table-body-row-expand-content-padding;
+                        }
+                    }
+                }
+
+                //  tfooter
+                tfoot.ve-table-footer {
+                    tr.ve-table-footer-tr {
+                        height: @ve-table-foot-row-height;
+                        td.ve-table-footer-td {
+                            background-color: @ve-table-foot-background-color;
+                            color: @ve-table-foot-text-color;
+                            padding: @ve-table-foot-row-td-padding;
+                            font-size: @ve-table-foot-text-font-size;
+                        }
+                    }
+                    // 固定footer
+                    &.ve-table-fixed-footer {
+                        tr td {
+                            position: sticky;
+                            z-index: @ve-fixed-foot-index;
+                        }
+                    }
+
+                    .ve-table-footer-tr {
+                        .ve-table-footer-td {
+                            // 固定左列、右列
+                            &.ve-table-fixed-left,
+                            &.ve-table-fixed-right {
+                                position: sticky;
+                                z-index: @ve-fixed-foot-cell-index;
+                            }
+                        }
+                    }
+                }
+            }
+
+            // cell selection
+            .ve-table-selection-wrapper {
+                .ve-table-selection-fixed-left {
+                    .ve-table-selection-current,
+                    .ve-table-selection-normal-area,
+                    .ve-table-selection-autofill-area {
+                        .ve-table-selection-corner {
+                            position: absolute;
+                            z-index: @ve-fixed-cell-selection-corner-index;
+                        }
+                        .ve-table-selection-border {
+                            position: absolute;
+                            z-index: @ve-fixed-cell-selection-border-index;
+                        }
+                    }
+
+                    .ve-table-selection-normal-area-layer {
+                        position: absolute;
+                        z-index: @ve-fixed-cell-selection-border-index;
+                    }
+                }
+
+                .ve-table-selection-middle {
+                    .ve-table-selection-current,
+                    .ve-table-selection-normal-area,
+                    .ve-table-selection-autofill-area {
+                        .ve-table-selection-corner {
+                            position: absolute;
+                            z-index: @ve-normal-cell-selection-corner-index;
+                        }
+                        .ve-table-selection-border {
+                            position: absolute;
+                            z-index: @ve-normal-cell-selection-border-index;
+                        }
+                    }
+
+                    .ve-table-selection-normal-area-layer {
+                        position: absolute;
+                        z-index: @ve-normal-cell-selection-border-index;
+                    }
+                }
+
+                .ve-table-selection-fixed-right {
+                    .ve-table-selection-current,
+                    .ve-table-selection-normal-area,
+                    .ve-table-selection-autofill-area {
+                        .ve-table-selection-corner {
+                            position: absolute;
+                            z-index: @ve-fixed-cell-selection-corner-index;
+                        }
+                        .ve-table-selection-border {
+                            position: absolute;
+                            z-index: @ve-fixed-cell-selection-border-index;
+                        }
+                    }
+
+                    .ve-table-selection-normal-area-layer {
+                        position: absolute;
+                        z-index: @ve-fixed-cell-selection-border-index;
+                    }
+                }
+
+                // 浮层
+                .ve-table-selection-normal-area-layer {
+                    background-color: @ve-table-selection-area-layer-background-color;
+                    opacity: 0.1;
+                    pointer-events: none;
+                }
+
+                .ve-table-selection-current,
+                .ve-table-selection-normal-area {
+                    .ve-table-selection-corner {
+                        display: block;
+                        height: 8px;
+                        width: 8px;
+                        border-style: solid;
+                        border-color: @ve-table-selection-corner-border-color;
+                        background-color: @ve-table-selection-corner-background-color;
+                        cursor: crosshair;
+                    }
+
+                    .ve-table-selection-border {
+                        display: block;
+                        background-color: @ve-table-selection-border-color;
+                    }
+                }
+
+                .ve-table-selection-autofill-area {
+                    .ve-table-selection-border {
+                        display: block;
+                        background-color: @ve-table-selection-autofill-border-color;
+                    }
+                }
+
+                .ve-table-selection-border {
+                    pointer-events: none;
+                }
+            }
+        }
+
+        // virtual scroll phantom
+        .ve-table-virtual-phantom {
+            &.ve-table-virtual-scroll {
+                position: absolute;
+                left: 0;
+                top: 0;
+                right: 0;
+                z-index: @ve-virtual-phantom-index;
+            }
+        }
+
+        // column fix effect
+        &.ve-table-container-left-scrolling {
+            .ve-table-last-left-fixed-column {
+                border-right-color: @ve-table-column-fixed-border-color;
+            }
+        }
+        &.ve-table-container-right-scrolling {
+            .ve-table-first-right-fixed-column {
+                border-left: 1px solid @ve-table-column-fixed-border-color;
+            }
+        }
+
+        // autofilling
+        &.ve-table-autofilling {
+            cursor: crosshair;
+        }
+
+        // enable cell selection
+        &.ve-table-enable-cell-selection {
+            user-select: none;
+        }
+
+        // border x
+        .ve-table-border-x {
+            th,
+            td {
+                border-bottom: 1px solid @ve-table-border-color;
+            }
+
+            tr:first-child > th,
+            // footer
+            tr.ve-table-footer-tr:first-child > td {
+                border-top: 1px solid @ve-table-border-color;
+            }
+        }
+        // border y
+        .ve-table-border-y {
+            th,
+            td {
+                border-right: 1px solid @ve-table-border-color;
+            }
+
+            th:first-child,
+            td:first-child {
+                border-left: 1px solid @ve-table-border-color;
+            }
+        }
+    }
+
+    // border around
+    &.ve-table-border-around {
+        border: 1px solid @ve-table-border-color;
+        .ve-table-container {
+            table.ve-table-content {
+                &.ve-table-border-x {
+                    tr:last-child > td {
+                        border-bottom: 0px;
+                    }
+                    tr:first-child > th {
+                        border-top: 0px;
+                    }
+                }
+
+                &.ve-table-border-y {
+                    th.ve-table-last-column,
+                    td:last-child {
+                        border-right: 0px;
+                    }
+
+                    th:first-child,
+                    td:first-child {
+                        border-left: 0px;
+                    }
+                }
+            }
+        }
+    }
+
+    // edit input
+    .ve-table-edit-input-container {
+        position: absolute;
+        right: auto;
+
+        .ve-table-edit-input {
+            resize: none;
+            overflow-y: visible;
+            border: none;
+            outline-width: 0;
+            margin: 0;
+            padding: 1px 5px 0;
+            font-family: inherit;
+            line-height: @ve-table-td-editing-line-height;
+            font-size: inherit;
+            border: 2px solid @ve-table-td-editing-border-color;
+            box-shadow: 1px 2px 5px 0 @ve-table-td-editing-box-shadow-color;
+            display: block;
+            color: @ve-table-td-editing-font-color;
+            border-radius: 0;
+            background-color: @ve-table-td-editing-background-color;
+        }
+    }
+
+    // column resizer
+    .ve-table-column-resizer {
+        &-handler {
+            position: absolute;
+            cursor: col-resize;
+            // left: 0;
+            top: 0;
+            bottom: 0;
+            width: 5px;
+            height: 40px;
+            z-index: @ve-column-resizer-handler-index;
+            &.active {
+                background-color: @ve-table-column-resizer-handler-background-color;
+            }
+        }
+
+        &-line {
+            position: absolute;
+            pointer-events: none;
+            // left: 0;
+            top: 0;
+            bottom: 0;
+            width: 0;
+            border-left: 1px solid
+                @ve-table-column-resizer-line-background-color;
+            z-index: @ve-column-resizer-line-index;
+        }
+    }
+}

@@ -1,0 +1,51 @@
+// import './assets/main.css'
+
+import { createApp } from 'vue'
+import hljs from 'highlight.js'
+
+import 'highlight.js/styles/color-brewer.css'
+
+import '@/css/index.less'
+import '@/css/custom.less'
+import '@/comp/app.less'
+
+// import 'md-powerpack'
+import {
+  // VeCheckbox,
+  // VeCheckboxGroup,
+  // VeContextmenu,
+  // VeDropdown,
+  VeIcon,
+  // VeLoading,
+  // VeLocale,
+  // VePagination,
+  // VeRadio,
+  // VeSelect,
+  VeTable,
+} from '../../packages/vue/src/index'
+import '../../packages/theme-default/index.less'
+import App from './App.vue'
+import router from './router'
+import DemoBlock from '@/comp/demo-block.vue'
+import Anchor from '@/comp/anchor.vue'
+
+// console.log(VeTable);
+const app = createApp(App)
+
+app.use(VeTable)
+app.use(VeIcon)
+app.use(router)
+
+router.afterEach(() => {
+  nextTick(() => {
+    const blocks = document.querySelectorAll('pre code:not(.hljs)')
+    Array.prototype.forEach.call(blocks, hljs.highlightBlock)
+
+    window.scroll(0, 0)
+  })
+})
+
+app.component('anchor', Anchor)
+app.component('demo-block', DemoBlock)
+
+app.mount('#app')

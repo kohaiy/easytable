@@ -1,0 +1,15 @@
+{
+  "extends": "@vue/tsconfig/tsconfig.dom.json",
+  "compilerOptions": {
+    "composite": true,
+    "baseUrl": ".",
+    "rootDir": "../",
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+    "types": ["node"],
+    "noEmit": true
+  },
+  "include": ["env.d.ts", "src/**/*", "src/**/*.vue", "./auto-imports.d.ts", "../packages/**/*"],
+  "exclude": ["src/**/__tests__/*"]
+}

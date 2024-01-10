@@ -1,0 +1,76 @@
+// popper
+.ve-contextmenu-popper {
+    z-index: 9999;
+    overflow: hidden;
+    border-radius: @ve-contextmenu-border-radius;
+    border: 1px solid @ve-contextmenu-border-color;
+    background-color: @ve-contextmenu-background-color;
+    box-shadow: 0 2px 12px 0 @ve-contextmenu-box-shadow-color;
+}
+
+.ve-contextmenu {
+    display: flex;
+    flex-direction: row;
+
+    &-panel {
+        min-width: @ve-contextmenu-min-width;
+        min-height: @ve-contextmenu-min-height;
+        overflow: hidden;
+
+        .ve-contextmenu-list {
+            min-height: 100%;
+            margin: 0;
+            padding: 6px 0;
+            list-style: none;
+            box-sizing: border-box;
+
+            .ve-contextmenu-node {
+                display: flex;
+                align-items: center;
+                padding: 0 30px 0 20px;
+                height: 34px;
+                justify-content: center;
+                outline: none;
+                color: @ve-contextmenu-node-text-color;
+                cursor: pointer;
+
+                &:not(&-disabled):hover {
+                    background: @ve-contextmenu-node-hover-background-color;
+                    color: @ve-contextmenu-node-hover-text-color;
+                }
+
+                &-active {
+                    background: @ve-contextmenu-node-hover-background-color;
+                    color: @ve-contextmenu-node-active-text-color;
+                }
+
+                &-label {
+                    flex: 1;
+                    padding: 0 10px;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+
+                &-icon-postfix {
+                    color: @ve-contextmenu-node-icon-postfix-color;
+                }
+
+                &-disabled {
+                    color: @ve-contextmenu-node-disabled-text-color;
+                    cursor: not-allowed;
+                    .ve-contextmenu-node-icon-postfix {
+                        color: @ve-contextmenu-node-disabled-icon-postfix-color;
+                    }
+                }
+            }
+
+            .ve-contextmenu-node-separator {
+                height: 1px;
+                margin: 5px 0px;
+                border-bottom: 1px solid
+                    @ve-contextmenu-node-separator-line-color;
+            }
+        }
+    }
+}

@@ -1,5 +1,5 @@
 <script>
-import API from '../api/expand-option-props'
+import API from '../api/expand-option-props.vue'
 import Explain from './explain.md'
 import Base from './base.md'
 import ExpandTrigger from './expand-trigger.md'

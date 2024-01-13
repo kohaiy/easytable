@@ -33,14 +33,14 @@ export function genInlineComponentText(template: string, script: string) {
   try {
     // console.log(template);
     // console.log(script);
-
     const parsed = parse(`
-${template.replace(/<\/?template>/g, '')}
-<script lang="ts">
-${script}
-</script>
-    `)
-    // console.log(11, parsed.descriptor.template?.content);
+    ${template.replace(/<\/?template>/g, '')}
+    <script lang="ts">
+    ${script}
+    </script>
+        `)
+    // console.log(11, parsed.descriptor.template?.content)
+
     const renderStr = `(function() {${
       compileTemplate({
         ...parsed.descriptor,
@@ -54,29 +54,54 @@ ${script}
     }})()`
 
     const scriptStr = script
-      ? compileScript(
-        {
-          ...parsed.descriptor,
-          shouldForceReload(): boolean {
-            throw new Error('Function not implemented.')
-          },
-        },
-        {
-          id: '',
-        },
-      ).content
-      : ''
+    // = script
+    //   ? compileScript(
+    //     {
+    //       ...parsed.descriptor,
+    //       shouldForceReload(): boolean {
+    //         throw new Error('Function not implemented.')
+    //       },
+    //     },
+    //     {
+    //       id: '',
+    //     },
+    //   ).content
+    //   : ''
     const res = `{
         render: ${renderStr},
-        ...${scriptStr.trim().replace(/;$/, '').replace(/export\s+default/, '') || '{}'}
+        ...(function(){${scriptStr.trim().replace(/;$/, '').replace(/export\s+default/, 'return') || 'return {}'}})()
     }`
+    // console.log(res)
 
     return res
+    // return `{
+    //   render: ${renderStr},
+    // }`
   }
   catch (e) {
     console.error(e)
+    let error = (e as Error).message || 'Error'
+    ;[
+      ['&', '&amp;'],
+      ['<', '&lt;'],
+      ['>', '&gt;'],
+      ['"', '&quot;'],
+      ['\'', '&apos;'],
+    ].forEach(([a, b]) => {
+      error = error.replaceAll(a, b)
+    })
+    const renderStr = `(function() {${
+      compileTemplate({
+        source: `<pre><code class="language-sh">${error}</code></pre>`,
+        filename: '2',
+        id: '2',
+        compilerOptions: {
+          mode: 'function',
+        },
+      }).code
+    }})()`
     return `{
-        render: () => \`${(e as Error).message || 'Error'}\`
+      render: ${renderStr},
     }`
   }
 }

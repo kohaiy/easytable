@@ -1,6 +1,6 @@
 <script>
-import API1 from '../api/contextmenu-header-option-props'
-import API2 from '../api/contextmenu-body-option-props'
+import API1 from '../api/contextmenu-header-option-props.vue'
+import API2 from '../api/contextmenu-body-option-props.vue'
 import Explain from './explain.md'
 import ContextmenuTypes from './contextmenu-types.md'
 import Base from './base.md'

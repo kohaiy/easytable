@@ -72,7 +72,7 @@ export default function mdToSfc(source: string, filename: string) {
   // todo: 优化这段逻辑
   let pageScript = ''
   if (componenetsString) {
-    pageScript = `<script>
+    pageScript = `<script lang="tsx">
         import * as Vue from 'vue';
         ${importMods && importMods.join('\r\n')}
       export default {

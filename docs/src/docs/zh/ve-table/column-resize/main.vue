@@ -1,5 +1,5 @@
-<script>
-import API from '../api/column-width-resize-option-props'
+<script lang="ts">
+import API from '../api/column-width-resize-option-props.vue'
 import Explain from './explain.md'
 import Basic from './basic.md'
 import DisableResizing from './disable-resizing.md'

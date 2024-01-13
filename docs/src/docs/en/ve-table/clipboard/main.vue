@@ -1,5 +1,5 @@
 <script>
-import API from '../api/clipboard-option-props'
+import API from '../api/clipboard-option-props.vue'
 import Explain from './explain.md'
 import ShortCuts from './shortcuts.md'
 import Base from './base.md'

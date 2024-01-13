@@ -1,5 +1,5 @@
 <script>
-import API from '../api/cell-autofill-option-props'
+import API from '../api/cell-autofill-option-props.vue'
 import Explain from './explain.md'
 import Base from './base.md'
 import AutofillDirection from './autofill-direction.md'

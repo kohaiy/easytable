@@ -1,6 +1,6 @@
 <script>
 import FooterSummary from '../footer-summary/virtual-scroll.md'
-import API from '../api/virtual-scroll-option-props'
+import API from '../api/virtual-scroll-option-props.vue'
 import Explain from './explain.md'
 import Base from './base.md'
 import AutoHeight from './auto-height.md'

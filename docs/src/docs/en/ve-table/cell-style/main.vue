@@ -1,6 +1,6 @@
 <script>
 import FooterRowStyle from '../footer-summary/cell-style.md'
-import API from '../api/cell-style-option-props'
+import API from '../api/cell-style-option-props.vue'
 import Explain from './explain.md'
 import BodyCellStyle from './body-cell-style.md'
 import BodyRowStyle from './body-row-style.md'

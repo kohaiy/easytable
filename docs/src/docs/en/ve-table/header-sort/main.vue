@@ -1,5 +1,5 @@
 <script>
-import API from '../api/sort-option-props'
+import API from '../api/sort-option-props.vue'
 import Explain from './explain.md'
 import SingleSort from './single-sort.md'
 import MultiSort from './multi-sort.md'

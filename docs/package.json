@@ -12,9 +12,12 @@
     "type-check": "vue-tsc --build --force"
   },
   "dependencies": {
+    "echarts": "^5.4.3",
     "element-plus": "^2.4.4",
     "highlight.js": "^11.9.0",
     "js-cookie": "^3.0.5",
+    "lodash": "^4.17.21",
+    "mockjs": "^1.1.0",
     "prismjs": "^1.29.0",
     "theme-switcher-tool": "^1.0.3",
     "transliteration": "^2.3.5",

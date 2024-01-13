@@ -1,5 +1,5 @@
 <script>
-import API from '../api/checkbox-option-props'
+import API from '../api/checkbox-option-props.vue'
 import Explain from './explain.md'
 import Base from './base.md'
 import SelectedDefault from './selected-default.md'

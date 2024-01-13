@@ -1,5 +1,5 @@
 <script>
-import API from '../api/radio-option-props'
+import API from '../api/radio-option-props.vue'
 import Explain from './explain.md'
 import Base from './base.md'
 import RadioColumn from './radio-column.md'

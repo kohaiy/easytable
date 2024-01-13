@@ -1,5 +1,5 @@
 <script>
-import API from '../api/row-style-option-props'
+import API from '../api/row-style-option-props.vue'
 import Explain from './explain.md'
 import RowStripe from './row-stripe.md'
 import HoverHighlight from './hover-highlight.md'

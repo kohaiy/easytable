@@ -4,12 +4,12 @@
 
 | 参数                               | 说明                                                      | 类型       | 可选值 | 默认值 |
 | ---------------------------------- | --------------------------------------------------------- | ---------- | ------ | ------ |
+| modelValue                         | v-model 输入值                                            | `Array`    | -      | -      |
 | isSelect                           | 是否供 select 组件使用                                    | `Boolean`  | -      | false  |
 | showOperation                      | 展示操作按钮                                              | `Boolean`  | -      | false  |
 | width                              | 下拉组件最小宽度                                          | `Number`   | -      | 90     |
 | maxWidth                           | 下拉组件最大宽度                                          | `Number`   | -      | 1000   |
 | isMultiple                         | 是否是多选下拉                                            | `Boolean`  | -      | false  |
-| value                              | v-model 输入值                                            | `Array`    | -      | -      |
 | textAlign                          | 下拉项居中方式                                            | `String`   | -      | "left" |
 | isInput                            | 是否包含 input                                            | `Boolean`  | -      | false  |
 | confirmFilterText                  | 确认按钮文本                                              | `String`   | -      | -      |

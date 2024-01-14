@@ -48,7 +48,7 @@ export default defineComponent({
     },
 
     // 用户传入v-model 的值 [{value/label/selected}]
-    value: {
+    modelValue: {
       type: Array as PropType<VeDropdownItem[]>,
       default: null,
     },
@@ -182,7 +182,7 @@ export default defineComponent({
     },
   },
   watch: {
-    value() {
+    modelValue() {
       this.init()
     },
     visible: {
@@ -240,7 +240,7 @@ export default defineComponent({
   methods: {
     // 初始化
     init() {
-      this.internalOptions = Object.assign([], this.value)
+      this.internalOptions = Object.assign([], this.modelValue)
 
       if (this.isInput)
         this.setInputValue()
@@ -249,7 +249,7 @@ export default defineComponent({
     // operation filter confirm
     confirm() {
       // 使用户传入的v-model 生效
-      this.$emit('input', this.internalOptions)
+      this.$emit('update:modelValue', this.internalOptions)
       this.$emit(EMIT_EVENTS.FILTER_CONFIRM, this.internalOptions)
       this.hideDropDown()
     },
@@ -265,7 +265,7 @@ export default defineComponent({
         })
 
         // 使用户传入的v-model 生效
-        this.$emit('input', this.internalOptions)
+        this.$emit('update:modelValue', this.internalOptions)
 
         this.$emit(EMIT_EVENTS.FILTER_RESET, this.internalOptions)
       }
@@ -464,7 +464,7 @@ export default defineComponent({
         this.setInputValue()
 
       // 使用户传入的v-model 生效
-      this.$emit('input', this.internalOptions)
+      this.$emit('update:modelValue', this.internalOptions)
 
       this.$emit(EMIT_EVENTS.ITEM_SELECT_CHANGE, this.internalOptions)
     },
@@ -656,7 +656,7 @@ export default defineComponent({
                 }}
               >
                 {/* custome content */}
-                {isCustomContent && this.$slots['custom-content']}
+                {isCustomContent && this.$slots['custom-content']?.()}
                 {/* not custom content */}
                 {!isCustomContent && (
                   <div>

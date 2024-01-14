@@ -1,32 +1,34 @@
 // This file is auto gererated by build/build-entry.js
 import type { Plugin } from 'vue'
 
-// import VeCheckbox from './ve-checkbox'
-// import VeCheckboxGroup from './ve-checkbox-group'
+import VeCheckbox from '@easytable/ve-checkbox'
+import VeCheckboxGroup from '@easytable/ve-checkbox-group'
+
 // import VeContextmenu from './ve-contextmenu'
-// import VeDropdown from './ve-dropdown'
+import VeDropdown from '@easytable/ve-dropdown'
 import VeIcon from '@easytable/ve-icon'
 
 import VeLoading from '@easytable/ve-loading'
 
 // import VeLocale from './ve-locale'
-// import VePagination from './ve-pagination'
-// import VeRadio from './ve-radio'
-// import VeSelect from './ve-select'
+import VePagination from '@easytable/ve-pagination'
+
+import VeRadio from '@easytable/ve-radio'
+import VeSelect from '@easytable/ve-select'
 import VeTable from '@easytable/ve-table/src'
 
 const version = '0.0.1'
 const components = [
-  //   VeCheckbox,
-  //   VeCheckboxGroup,
+  VeCheckbox,
+  VeCheckboxGroup,
   //   VeContextmenu,
-  //   VeDropdown,
+  VeDropdown,
   VeIcon,
   VeLoading,
   //   VeLocale,
-  //   VePagination,
-  //   VeRadio,
-  //   VeSelect,
+  VePagination,
+  VeRadio,
+  VeSelect,
   VeTable,
 ]
 
@@ -55,31 +57,31 @@ const useVeTable = function (): Plugin {
 export {
   useVeTable,
   version,
-  //   VeCheckbox,
-  //   VeCheckboxGroup,
+  VeCheckbox,
+  VeCheckboxGroup,
   //   VeContextmenu,
-  //   VeDropdown,
+  VeDropdown,
   VeIcon,
   VeLoading,
   //   VeLocale,
-  //   VePagination,
-  //   VeRadio,
-  //   VeSelect,
+  VePagination,
+  VeRadio,
+  VeSelect,
   VeTable,
 }
 
 export default {
   useVeTable,
   version,
-  //   VeCheckbox,
-  //   VeCheckboxGroup,
+  VeCheckbox,
+  VeCheckboxGroup,
   //   VeContextmenu,
-  //   VeDropdown,
-  //   VeIcon,
+  VeDropdown,
+  VeIcon,
   VeLoading,
   //   VeLocale,
-  //   VePagination,
-  //   VeRadio,
-  //   VeSelect,
+  VePagination,
+  VeRadio,
+  VeSelect,
   VeTable,
 }

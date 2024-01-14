@@ -1,7 +1,4 @@
+import { withUse } from '@easytable/common/uses/with-use'
 import VeCheckbox from './src/index'
 
-VeCheckbox.install = function (Vue) {
-  Vue.component(VeCheckbox.name, VeCheckbox)
-}
-
-export default VeCheckbox
+export default withUse(VeCheckbox)

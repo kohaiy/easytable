@@ -1,10 +1,10 @@
-import VeDropdown from 'vue-easytable/packages/ve-dropdown'
-import VeIcon from 'vue-easytable/packages/ve-icon'
-import { ICON_NAMES } from '../../src/utils/constant'
+import VeDropdown from '@easytable/ve-dropdown'
+import VeIcon from '@easytable/ve-icon'
+import { ICON_NAMES } from '@easytable/common/utils/constant'
 import { COMPS_NAME, EMIT_EVENTS } from './util/constant'
 import { clsName } from './util/index'
 
-export default {
+export default defineComponent({
   name: COMPS_NAME.VE_SELECT,
   props: {
     width: {
@@ -34,7 +34,7 @@ export default {
     placeholder: {
       type: String,
       default: '请选择',
-      validator(value) {
+      validator(value: string) {
         return value.length > 0
       },
     },
@@ -129,32 +129,28 @@ export default {
 
     const props = {
       class: 've-select',
-      props: {
-        isSelect: true,
-        width: this.width,
-        maxWidth: this.maxWidth,
-        isMultiple: this.isMultiple,
-        textAlign: this.textAlign,
-        isInput: this.isInput,
-        // v-model
-        value: this.internalOptions,
-        hideByItemClick: true,
-        popperAppendTo: this.popperAppendTo,
-      },
+      isSelect: true,
+      width: this.width,
+      maxWidth: this.maxWidth,
+      isMultiple: this.isMultiple,
+      textAlign: this.textAlign,
+      isInput: this.isInput,
+      // v-model
+      value: this.internalOptions,
+      hideByItemClick: true,
+      popperAppendTo: this.popperAppendTo,
       style: {
         width: this.width,
       },
-      on: {
-        // change: this.dropdownChange,
-        // v-model
-        'input': (val) => {
-          this.internalOptions = val
-          this.dropdownChange()
-        },
-        // dropdown visible change
-        'dropdown-visible-change': (visible) => {
-          this.dropdownVisible = visible
-        },
+      // change: this.dropdownChange,
+      // v-model
+      onInput: (val) => {
+        this.internalOptions = val
+        this.dropdownChange()
+      },
+      // dropdown visible change
+      onDropdownVisibleChange: (visible) => {
+        this.dropdownVisible = visible
       },
     }
 
@@ -190,4 +186,4 @@ export default {
       </VeDropdown>
     )
   },
-}
+})

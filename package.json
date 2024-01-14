@@ -21,6 +21,7 @@
     "docs": "pnpm --filter=docs dev",
     "docs:build": "pnpm --filter=docs build",
     "lint": "eslint .",
+    "lint:err": "eslint . --quiet",
     "lint:fix": "eslint . --fix",
     "test": "eslint -h"
   },

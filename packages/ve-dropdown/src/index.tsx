@@ -1,4 +1,4 @@
-import { defineComponent } from 'vue'
+import { defineComponent, withDirectives } from 'vue'
 import VeCheckbox from '@easytable/ve-checkbox'
 import VeRadio from '@easytable/ve-radio'
 import clickoutside from '@easytable/common/directives/clickoutside'
@@ -10,12 +10,10 @@ import {
 } from '@easytable/common/utils/dom'
 import { clsName } from './util/index'
 import { COMPS_NAME, EMIT_EVENTS } from './util/constant'
+import type { VeDropdownItem } from './type'
 
 export default defineComponent({
   name: COMPS_NAME.VE_DROPDOWN,
-  directives: {
-    'click-outside': clickoutside,
-  },
   props: {
     // 如果是select 组件将特殊处理
     isSelect: {
@@ -51,13 +49,13 @@ export default defineComponent({
 
     // 用户传入v-model 的值 [{value/label/selected}]
     value: {
-      type: [Array],
+      type: Array as PropType<VeDropdownItem[]>,
       default: null,
     },
 
     // 文本居中方式 left|center|right
     textAlign: {
-      type: String,
+      type: String as PropType<'left' | 'center' | 'right'>,
       default: 'left',
     },
 
@@ -125,7 +123,7 @@ export default defineComponent({
   data() {
     return {
       internalVisible: false,
-      internalOptions: [],
+      internalOptions: [] as VeDropdownItem[],
       inputValue: '',
       // 是否显示触发器被点击了（被点击将忽略 clickOutside 事件）
       isDropdownShowTriggerClicked: false,
@@ -134,9 +132,9 @@ export default defineComponent({
       // dropdown items panel id
       dropdownItemsPanelId: '',
       // 弹出被添加到的目标元素
-      popperAppendToEl: null,
+      popperAppendToEl: null as HTMLElement | null,
       // 弹出被添加到的目标元素标签名称
-      appendToElTagName: null,
+      appendToElTagName: null as string | null,
     }
   },
   computed: {
@@ -216,7 +214,7 @@ export default defineComponent({
                 = this.appendToElTagName === 'BODY'
                   ? document
                   : this.popperAppendToEl
-      targetEl.addEventListener(
+      targetEl?.addEventListener(
         'scroll',
         this.changDropdownPanelPosition,
       )
@@ -232,7 +230,7 @@ export default defineComponent({
                 = this.appendToElTagName === 'BODY'
                   ? document
                   : this.popperAppendToEl
-      targetEl.removeEventListener(
+      targetEl?.removeEventListener(
         'scroll',
         this.changDropdownPanelPosition,
       )
@@ -285,12 +283,12 @@ export default defineComponent({
       if (isBoolean(allowChange) && !allowChange)
         return false
 
-      const rootEl = document.querySelector(`#${rootId}`)
+      const rootEl = document.querySelector<HTMLElement>(`#${rootId}`)
 
       if (rootEl) {
         // remove first
         rootEl.innerHTML = ''
-        rootEl.appendChild(this.$refs[dropdownItemsPanelId])
+        rootEl.appendChild(this.$refs[dropdownItemsPanelId] as HTMLElement)
 
         rootEl.style.position = 'absolute'
         rootEl.classList.add(clsName('popper'))
@@ -320,7 +318,7 @@ export default defineComponent({
     },
 
     // before visible change callback
-    beforeVisibleChangeCallback(nextVisible) {
+    beforeVisibleChangeCallback(nextVisible: boolean) {
       const { beforeVisibleChange, isDropdownVisible } = this
 
       if (
@@ -352,7 +350,7 @@ export default defineComponent({
         appendToElTagName,
       } = this
 
-      const rootEl = document.querySelector(`#${rootId}`)
+      const rootEl = document.querySelector<HTMLElement>(`#${rootId}`)
 
       if (rootEl) {
         const { width: currentPanelWidth, height: currentPanelHeight }
@@ -429,7 +427,7 @@ export default defineComponent({
       if (Array.isArray(labels) && labels.length > 0)
         result = labels.join()
 
-      this.inputValue = result
+      this.inputValue = result || ''
     },
 
     // dropdown panel click
@@ -448,7 +446,7 @@ export default defineComponent({
     },
 
     // single select option click
-    singleSelectOptionClick(e, item) {
+    singleSelectOptionClick(e: MouseEvent, item: VeDropdownItem) {
       this.internalOptions = this.internalOptions.map((x) => {
         if (item.label === x.label)
           x.selected = true
@@ -491,7 +489,7 @@ export default defineComponent({
     },
 
     // checbox 受控属性管理
-    checkedChangeControl(item, isChecked) {
+    checkedChangeControl(item: VeDropdownItem, isChecked: boolean) {
       this.internalOptions = this.internalOptions.map((i) => {
         if (i.label === item.label)
           i.selected = isChecked
@@ -534,15 +532,15 @@ export default defineComponent({
             && popperAppendTo.length > 0
           ) {
             this.popperAppendToEl
-                            = document.querySelector(popperAppendTo)
+                            = document.querySelector<HTMLElement>(popperAppendTo)
           }
           else {
-            this.popperAppendToEl = popperAppendTo
+            this.popperAppendToEl = popperAppendTo as HTMLElement
           }
 
-          this.appendToElTagName = this.popperAppendToEl.tagName
+          this.appendToElTagName = this.popperAppendToEl!.tagName
 
-          this.popperAppendToEl.appendChild(containerEl)
+          this.popperAppendToEl?.appendChild(containerEl)
         })
       }
     },
@@ -566,22 +564,18 @@ export default defineComponent({
       dropdownItemsPanelId,
     } = this
 
-    let content = ''
+    let content = []
 
     if (isMultiple) {
       content = internalOptions.map((item, index) => {
         const checkboxProps = {
           key: item.label,
-          props: {
-            isControlled: true,
-            label: item.label,
-            showLine: item.showLine,
-            isSelected: item.selected,
-          },
-          on: {
-            'on-checked-change': isChecked =>
-              this.checkedChangeControl(item, isChecked),
-          },
+          isControlled: true,
+          label: item.label,
+          showLine: item.showLine,
+          isSelected: item.selected,
+          onOnCheckedChange: (isChecked: boolean) =>
+            this.checkedChangeControl(item, isChecked),
         }
 
         return (
@@ -601,13 +595,9 @@ export default defineComponent({
     else {
       content = internalOptions.map((item, index) => {
         const radioProps = {
-          props: {
-            isControlled: true,
-            isSelected: item.selected,
-          },
-          on: {
-            'on-radio-change': () => {},
-          },
+          isControlled: true,
+          isSelected: item.selected,
+          onOnRadioChange: () => {},
         }
 
         return (
@@ -617,7 +607,7 @@ export default defineComponent({
               clsName('items-li'),
               item.selected ? 'active' : '',
             ]}
-            on-click={e => singleSelectOptionClick(e, item)}
+            onClick={e => singleSelectOptionClick(e, item)}
           >
             <a
               class={[clsName('items-li-a'), getTextAlignClass()]}
@@ -643,73 +633,72 @@ export default defineComponent({
     const dropdownItemsProps = {
       ref: dropdownItemsPanelId,
       class: dropdownItemsClass,
-      directives: [
-        {
-          name: 'click-outside',
-          value: this.dropdownClickOutside,
-        },
-      ],
     }
 
     return (
       <dl {...dropdownProps}>
-        <dt class="ve-dropdown-dt" on-click={dropdownPanelClick}>
+        <dt class="ve-dropdown-dt" onClick={dropdownPanelClick}>
           <a
             class={[isSelect ? clsName('dt-selected') : '']}
             style={{ width: `${width}px` }}
           >
-            {this.$slots.default}
+            {this.$slots.default?.()}
           </a>
         </dt>
         <div style={{ display: 'none' }}>
-          <dd {...dropdownItemsProps}>
-            <ul
-              class={clsName('items')}
-              style={{
-                'min-width': `${width}px`,
-                'max-width': `${getMaxWidth}px`,
-              }}
-            >
-              {/* custome content */}
-              {isCustomContent && this.$slots['custom-content']}
-              {/* not custom content */}
-              {!isCustomContent && (
-                <div>
-                  <div
-                    style={{
-                      'max-height': `${maxHeight}px`,
-                    }}
-                    class={clsName('items-warpper')}
-                  >
-                    {content}
+          { withDirectives(
+            <dd {...dropdownItemsProps}>
+              <ul
+                class={clsName('items')}
+                style={{
+                  'min-width': `${width}px`,
+                  'max-width': `${getMaxWidth}px`,
+                }}
+              >
+                {/* custome content */}
+                {isCustomContent && this.$slots['custom-content']}
+                {/* not custom content */}
+                {!isCustomContent && (
+                  <div>
+                    <div
+                      style={{
+                        'max-height': `${maxHeight}px`,
+                      }}
+                      class={clsName('items-warpper')}
+                    >
+                      {content}
+                    </div>
+                    {showOperation && (
+                      <li class={clsName('operation')}>
+                        <a
+                          class={[
+                            clsName('operation-item'),
+                            this.operationFilterClass,
+                          ]}
+                          href="javascript:void(0)"
+                          onClick={reset}
+                        >
+                          {this.resetFilterText}
+                        </a>
+                        <a
+                          class={clsName(
+                            'operation-item',
+                          )}
+                          href="javascript:void(0)"
+                          onClick={this.confirm}
+                        >
+                          {this.confirmFilterText}
+                        </a>
+                      </li>
+                    )}
                   </div>
-                  {showOperation && (
-                    <li class={clsName('operation')}>
-                      <a
-                        class={[
-                          clsName('operation-item'),
-                          this.operationFilterClass,
-                        ]}
-                        href="javascript:void(0)"
-                        on-click={reset}
-                      >
-                        {this.resetFilterText}
-                      </a>
-                      <a
-                        class={clsName(
-                          'operation-item',
-                        )}
-                        href="javascript:void(0)"
-                        on-click={this.confirm}
-                      >
-                        {this.confirmFilterText}
-                      </a>
-                    </li>
-                  )}
-                </div>
-              )}
-            </ul>
-          </dd>
+                )}
+              </ul>
+            </dd>
+            , [
+              [clickoutside, this.dropdownClickOutside],
+            ],
+          ) }
         </div>
       </dl>
     )

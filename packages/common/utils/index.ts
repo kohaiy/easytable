@@ -102,49 +102,6 @@ export function getValByUnit(width: number | string) {
 }
 
 /*
- * @getParentCompByName
- * @desc  get parent comp by name
- * @param {object} context
- * @param {string} name - parent comp name
- */
-export function getParentCompByName(context, name) {
-  let parent = context.$parent
-
-  while (parent) {
-    if (parent.$options.name !== name)
-      parent = parent.$parent
-
-    else
-      return parent
-  }
-
-  return null
-}
-
-/*
- * @getChildCompsByName
- * @desc  get child comps by name
- * @param {object} context
- * @param {string} name - child comp name
- */
-export function getChildCompsByName(context, name) {
-  const result = []
-
-  let childrens = context.$children
-
-  while (childrens && childrens.length > 0) {
-    childrens.forEach((child) => {
-      childrens = child.$children ? child.$children : null
-
-      if (child.$options.name === name)
-        result.push(child)
-    })
-  }
-
-  return result
-}
-
-/*
  * @scrollTo
  * @desc element scrollTo https://developer.mozilla.org/zh-CN/docs/Web/API/Element/scrollTo
  * @param {element} el - element

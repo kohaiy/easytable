@@ -15,13 +15,14 @@ import {
   // VeCheckboxGroup,
   // VeContextmenu,
   // VeDropdown,
-  VeIcon,
-  VeLoading,
+  // VeIcon,
+  // VeLoading,
   // VeLocale,
   // VePagination,
   // VeRadio,
   // VeSelect,
-  VeTable,
+  // VeTable,
+  useVeTable,
 } from '../../packages/vue/src/index'
 import '../../packages/theme-default/index.less'
 import App from './App.vue'
@@ -32,9 +33,10 @@ import Anchor from '@/comp/anchor.vue'
 // console.log(VeTable);
 const app = createApp(App)
 
-app.use(VeTable)
-app.use(VeIcon)
-app.use(VeLoading)
+// app.use(VeTable)
+// app.use(VeIcon)
+// app.use(VeLoading)
+app.use(useVeTable())
 app.use(router)
 
 router.afterEach(() => {

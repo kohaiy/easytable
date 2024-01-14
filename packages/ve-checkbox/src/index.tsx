@@ -1,12 +1,12 @@
-import { getParentCompByName } from '@easytable/common/utils'
+import { injectCheckboxGroup } from '@easytable/ve-checkbox-group'
 import { clsName } from './util'
 import { COMPS_NAME, EMIT_EVENTS } from './util/constant'
 
-export default {
+export default defineComponent({
   name: COMPS_NAME.VE_CHECKBOX,
   props: {
     // 当前checkbox 选中状态,实现 v-model
-    value: {
+    modelValue: {
       type: [String, Number, Boolean],
       default: null,
     },
@@ -29,145 +29,119 @@ export default {
       default: false,
     },
   },
-  data() {
-    return {
-      // 当前checkbox 选中状态
-      model: this.value,
-      checkboxGroup: {},
-    }
-  },
+  setup(props, { emit, slots }) {
+    const { onCheckboxGroupUpdate, updateCheckboxGroup, inCheckboxGroup, isVerticalShow, groupModelValue } = injectCheckboxGroup()
+    onCheckboxGroupUpdate(updateModelByGroup)
 
-  computed: {
-    checkboxClass() {
+    // 当前checkbox 选中状态
+    const model = ref(props.modelValue)
+
+    // 是否横向显示还是纵向显示
+    const checkboxStyle = computed(() => {
+      return {
+        display: isVerticalShow.value
+          ? 'block'
+          : 'inline-block',
+      }
+    })
+    // 是否选中
+    const internalIsSelected = computed(() => {
+      return props.isControlled ? props.isSelected : model.value
+    })
+
+    const checkboxClass = computed(() => {
       return [
         clsName('content'),
         {
-          [clsName('checked')]: this.internalIsSelected,
-          [clsName('disabled')]: this.disabled,
-          [clsName('indeterminate')]: this.indeterminate,
+          [clsName('checked')]: internalIsSelected.value,
+          [clsName('disabled')]: props.disabled,
+          [clsName('indeterminate')]: props.indeterminate,
         },
       ]
-    },
+    })
 
-    // 是否横向显示还是纵向显示
-    checkboxStyle() {
-      return {
-        display:
-                    this.checkboxGroup && this.checkboxGroup.isVerticalShow
-                      ? 'block'
-                      : 'inline-block',
-      }
-    },
-    // 是否选中
-    internalIsSelected() {
-      return this.isControlled ? this.isSelected : this.model
-    },
-  },
+    watch(() => props.modelValue, () => {
+      updateModelBySingle()
+    })
 
-  watch: {
-    value() {
-      this.updateModelBySingle()
-    },
-  },
-
-  methods: {
     // checkbox change
-    checkboxChange(event) {
-      if (this.disabled)
-        return false
+    function checkboxChange(event: Event) {
+      if (props.disabled)
+        return
 
-      const isChecked = event.target.checked
+      const target = event.target as HTMLInputElement
+      const isChecked = target.checked
 
-      if (!this.isControlled)
-        this.$emit('input', isChecked)
+      if (!props.isControlled)
+        emit('update:modelValue', isChecked)
 
-      this.$emit(EMIT_EVENTS.ON_CHECKED_CHANGE, isChecked)
+      emit(EMIT_EVENTS.ON_CHECKED_CHANGE, isChecked)
 
-      if (this.isCheckBoxGroup()) {
+      if (isCheckBoxGroup()) {
         // update parent comp:checkbox-group
-        this.checkboxGroup.updateModel(this.label, isChecked)
+        updateCheckboxGroup(props.label, isChecked)
       }
-    },
+    }
 
     // is checkbox group
-    isCheckBoxGroup() {
-      this.checkboxGroup = getParentCompByName(
-        this,
-        COMPS_NAME.VE_CHECKBOX_GROUP,
-      )
-      return !!this.checkboxGroup
-    },
+    function isCheckBoxGroup() {
+      return inCheckboxGroup
+    }
 
     // get label content
-    getLabelContent() {
-      const { label, $slots } = this
+    function getLabelContent() {
+      return props.label || slots.default?.()
+    }
 
-      return label || $slots.default
-    },
-
-    initModel() {
-      if (this.isCheckBoxGroup()) {
-        const checkboxGroup = this.checkboxGroup
+    function initModel() {
+      if (isCheckBoxGroup()) {
         if (
-          Array.isArray(checkboxGroup.value)
-          && checkboxGroup.value.length > 0
+          Array.isArray(groupModelValue.value)
+          && groupModelValue.value.length > 0
         ) {
-          if (checkboxGroup.value.includes(this.label))
-            this.model = true
+          if (groupModelValue.value.includes(props.label))
+            model.value = true
         }
       }
       else {
-        this.model = this.value
+        model.value = props.modelValue
       }
-    },
+    }
 
     // 通过单选更新 model
-    updateModelBySingle() {
-      if (!this.disabled)
-        this.model = this.value
-    },
+    function updateModelBySingle() {
+      if (!props.disabled)
+        model.value = props.modelValue
+    }
 
     // 父组件调用更新 model
-    updateModelByGroup(checkBoxGroup) {
-      if (checkBoxGroup.includes(this.label)) {
-        if (!this.disabled)
-          this.model = true
+    function updateModelByGroup(checkBoxGroup: string[]) {
+      if (checkBoxGroup.includes(props.label)) {
+        if (!props.disabled)
+          model.value = true
       }
       else {
-        if (!this.disabled)
-          this.model = false
+        if (!props.disabled)
+          model.value = false
       }
-    },
-  },
+    }
 
-  created() {
-    this.initModel()
-  },
-  render() {
-    const {
-      checkboxStyle,
-      label,
-      checkboxClass,
-      checkboxChange,
-      getLabelContent,
-      internalIsSelected,
-    } = this
+    initModel()
 
-    return (
-      <label class="ve-checkbox" style={checkboxStyle}>
-        <span class={checkboxClass}>
+    return () => (
+      <label class="ve-checkbox" style={checkboxStyle.value}>
+        <span class={checkboxClass.value}>
           <input
-            checked={internalIsSelected}
+            checked={!!internalIsSelected.value}
             class={clsName('input')}
             type="checkbox"
-            value={label}
-            on-change={checkboxChange}
+            value={props.label}
+            onChange={checkboxChange}
           />
-
           <span class={clsName('inner')}></span>
         </span>
         <span class={clsName('label')}>{getLabelContent()}</span>
       </label>
     )
   },
-}
+})

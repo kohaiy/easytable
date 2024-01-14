@@ -1,16 +1,17 @@
 {
-  "name": "@easytable/ve-checkbox",
+  "name": "@easytable/ve-select",
   "version": "1.0.0",
   "description": "",
   "author": "",
   "license": "ISC",
   "keywords": [],
-  "main": "index.ts",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
     "@easytable/common": "workspace:^1.0.0",
-    "@easytable/ve-checkbox-group": "workspace:^1.0.0"
+    "@easytable/ve-dropdown": "workspace:^1.0.0",
+    "@easytable/ve-icon": "workspace:^1.0.0"
   }
 }

@@ -345,33 +345,33 @@ const config: RouteRecordRaw[] = [
       },
     ],
   },
-  /* {
-        path: "other",
-        name: "辅助组件",
-        component: emptyLayout,
-        children: [
-            {
-                path: "checkbox",
-                component: () => import("@/docs/zh/ve-checkbox/main.vue"),
-                name: "checkbox"
-            },
-            {
-                path: "radio",
-                component: () => import("@/docs/zh/ve-radio/main.vue"),
-                name: "radio"
-            },
-            {
-                path: "select",
-                component: () => import("@/docs/zh/ve-select/main.vue"),
-                name: "select"
-            },
-            {
-                path: "dropdown",
-                component: () => import("@/docs/zh/ve-dropdown/main.vue"),
-                name: "dropdown"
-            }
-        ]
-    } */
+  {
+    path: 'other',
+    name: '辅助组件',
+    component: emptyLayout,
+    children: [
+      {
+        path: 'checkbox',
+        component: () => import('@/docs/zh/ve-checkbox/main.vue'),
+        name: 'checkbox',
+      },
+      {
+        path: 'radio',
+        component: () => import('@/docs/zh/ve-radio/main.vue'),
+        name: 'radio',
+      },
+      {
+        path: 'select',
+        component: () => import('@/docs/zh/ve-select/main.vue'),
+        name: 'select',
+      },
+      {
+        path: 'dropdown',
+        component: () => import('@/docs/zh/ve-dropdown/main.vue'),
+        name: 'dropdown',
+      },
+    ],
+  },
 ]
 
 export default config

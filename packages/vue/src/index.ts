@@ -3,16 +3,13 @@ import type { Plugin } from 'vue'
 
 import VeCheckbox from '@easytable/ve-checkbox'
 import VeCheckboxGroup from '@easytable/ve-checkbox-group'
-
-// import VeContextmenu from './ve-contextmenu'
+import VeContextmenu from '@easytable/ve-contextmenu'
 import VeDropdown from '@easytable/ve-dropdown'
 import VeIcon from '@easytable/ve-icon'
-
 import VeLoading from '@easytable/ve-loading'
 
 // import VeLocale from './ve-locale'
 import VePagination from '@easytable/ve-pagination'
-
 import VeRadio from '@easytable/ve-radio'
 import VeSelect from '@easytable/ve-select'
 import VeTable from '@easytable/ve-table/src'
@@ -21,7 +18,7 @@ const version = '0.0.1'
 const components = [
   VeCheckbox,
   VeCheckboxGroup,
-  //   VeContextmenu,
+  VeContextmenu,
   VeDropdown,
   VeIcon,
   VeLoading,
@@ -59,7 +56,7 @@ export {
   version,
   VeCheckbox,
   VeCheckboxGroup,
-  //   VeContextmenu,
+  VeContextmenu,
   VeDropdown,
   VeIcon,
   VeLoading,
@@ -75,7 +72,7 @@ export default {
   version,
   VeCheckbox,
   VeCheckboxGroup,
-  //   VeContextmenu,
+  VeContextmenu,
   VeDropdown,
   VeIcon,
   VeLoading,

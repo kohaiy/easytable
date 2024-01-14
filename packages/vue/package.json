@@ -12,6 +12,7 @@
   "dependencies": {
     "@easytable/ve-checkbox": "workspace:^1.0.0",
     "@easytable/ve-checkbox-group": "workspace:^1.0.0",
+    "@easytable/ve-contextmenu": "workspace:^1.0.0",
     "@easytable/ve-dropdown": "workspace:^1.0.0",
     "@easytable/ve-icon": "workspace:^1.0.0",
     "@easytable/ve-loading": "workspace:^1.0.0",

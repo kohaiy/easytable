@@ -70,9 +70,11 @@ export default defineComponent({
         return (
           <VeSelect
             class={clsName('select')}
-            value={this.$parent.newPageSizeOption}
+            modelValue={this.$parent.newPageSizeOption}
             popperAppendTo={this.$parent.popperAppendTo}
-            onInput={this.handleChange}
+            // eslint-disable-next-line ts/ban-ts-comment
+            // @ts-expect-error
+            onUpdate:modelValue={this.handleChange}
           />
         )
       },

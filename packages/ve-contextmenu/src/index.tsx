@@ -1,4 +1,4 @@
-import { defineComponent } from 'vue'
+import { defineComponent, withDirectives } from 'vue'
 import VeIcon from '@easytable/ve-icon'
 import { cloneDeep, debounce } from 'lodash'
 import { ICON_NAMES } from '@easytable/common/utils/constant'
@@ -14,45 +14,38 @@ import {
   INSTANCE_METHODS,
 } from './util/constant'
 
+export interface Option {
+  id: string | number
+  label: string
+  disabled?: boolean
+  children?: Option[]
+}
+
+interface InternalOption extends Option {
+  type?: string
+  deep: number
+  hasChildren: boolean
+  children?: InternalOption[]
+}
+
+interface PanelOption {
+  id?: number
+  parentId?: InternalOption['id']
+  parentDeep?: number
+  menus: InternalOption[]
+}
+
 export default defineComponent({
   name: COMPS_NAME.VE_CONTEXTMENU,
-  directives: {
-    'events-outside': eventsOutside,
-  },
   props: {
-    /*
-         options(contextmenu)
-            [
-                {
-
-                    id: 1,
-                    label: "菜单1",
-                    disabled:true
-                },
-                {
-                    id: 2,
-                    label: "菜单2",
-                    children: [
-                        {
-                            id: "2-1",
-                            label: "菜单2-1",
-                        },
-                        {
-                            id: "2-2",
-                            label: "菜单2-2",
-                        },
-                    ],
-                },
-            ]
-        */
     options: {
-      type: Array,
+      type: Array as PropType<Option[]>,
       required: true,
     },
     /*
-        event target
-        contextmenu event will register on it
-        */
+      event target
+      contextmenu event will register on it
+      */
     eventTarget: {
       type: [String, HTMLElement],
       required: true,
@@ -60,77 +53,10 @@ export default defineComponent({
   },
   data() {
     return {
-      /*
-            internal options:
-            [
-                {
-                    id: 1,
-                    deep: 0,
-                    hasChildren: false,
-                    label: "菜单1",
-                },
-                {
-                    id: 2,
-                    label: "菜单2",
-                    deep: 0,
-                    hasChildren: true,
-                    children: [
-                        {
-                            id: "2-1",
-                            deep: 1,
-                            hasChildren: false,
-                            label: "菜单2-1",
-                        },
-                        {
-                            id: "2-2",
-                            deep: 1,
-                            hasChildren: false,
-                            label: "菜单2-2",
-                        },
-                    ],
-                },
-            ]
-            */
-      internalOptions: [],
-
-      /*
-            panels option
-            {
-                    id: 1,
-                    menus: [
-                        {
-                            id: "",
-                            deep: 0,
-                            label: "菜单1",
-                            hasChildren: true,
-                        },
-                        {
-                            id: "",
-                            deep: 0,
-                            label: "菜单2",
-                        },
-                    ],
-                },
-                {
-                    id: 2,
-                    menus: [
-                        {
-                            id: "",
-                            deep: 1,
-                            label: "菜单1",
-                            hasChildren: true,
-                        },
-                        {
-                            id: "",
-                            deep: 1,
-                            label: "菜单2",
-                        },
-                    ],
-                },
-            */
-      panelOptions: [],
+      internalOptions: [] as InternalOption[],
+      panelOptions: [] as PanelOption[],
       // event target element
-      eventTargetEl: '',
+      eventTargetEl: null as (HTMLElement | null),
       // root contextmenu id
       rootContextmenuId: '',
       /*
@@ -210,21 +136,21 @@ export default defineComponent({
     },
 
     // has children
-    hasChildren(option) {
-      return Array.isArray(option.children) && option.children.length
+    hasChildren(option: InternalOption) {
+      return Array.isArray(option.children) && option.children.length > 0
     },
 
     /*
         get panel option by menu id
         */
-    getPanelOptionByMenuId(options, menuId) {
+    getPanelOptionByMenuId(options: InternalOption[], menuId: InternalOption['id']): InternalOption[] | undefined {
       for (let i = 0; i < options.length; i++) {
         if (options[i].id === menuId)
           return options[i].children
 
         if (options[i].children) {
           const panelOption = this.getPanelOptionByMenuId(
-            options[i].children,
+            options[i].children!,
             menuId,
           )
           if (panelOption)
@@ -234,7 +160,7 @@ export default defineComponent({
     },
 
     // get parent contextmenu panel element
-    getParentContextmenuPanelEl(contextmenuPanelId) {
+    getParentContextmenuPanelEl(contextmenuPanelId: PanelOption['parentId']) {
       let result
 
       const { panelOptions } = this
@@ -245,13 +171,13 @@ export default defineComponent({
       if (panelIndex > 0) {
         // preview panel's panelId
         const parentPanelId = panelOptions[panelIndex - 1].parentId
-        result = document.querySelector(`#${parentPanelId}`)
+        result = document.querySelector<HTMLElement>(`#${parentPanelId}`)
       }
       return result
     },
 
     // create panel by hover
-    createPanelByHover({ event, menu }) {
+    createPanelByHover({ event, menu }: { event: MouseEvent, menu: InternalOption }) {
       const { internalOptions, panelOptions } = this
 
       // 如果被移除则不创建
@@ -267,7 +193,7 @@ export default defineComponent({
             remove panels
             */
       const deletePanelDeeps = panelOptions
-        .filter(x => x.parentDeep >= menu.deep)
+        .filter(x => x.parentDeep! >= menu.deep)
         .map(x => x.parentDeep)
         .reverse()
 
@@ -306,15 +232,15 @@ export default defineComponent({
     },
 
     // create panels option
-    createPanelOptions({ options, currentMenu }) {
+    createPanelOptions({ options, currentMenu }: { options: InternalOption[], currentMenu?: InternalOption }) {
       const { hasChildren, rootContextmenuId } = this
 
       if (Array.isArray(options)) {
         //
         const menus = options.map((option) => {
           return {
-            hasChildren: hasChildren(option),
             ...option,
+            hasChildren: hasChildren(option),
           }
         })
 
@@ -329,17 +255,18 @@ export default defineComponent({
     },
 
     // create internal options recursion
-    createInternalOptionsRecursion(options, deep = 0) {
-      options.id = this.getRandomIdWithPrefix()
-      options.deep = deep
+    createInternalOptionsRecursion(options: Option, deep = 0) {
+      const opts = options as InternalOption
+      opts.id = this.getRandomIdWithPrefix()
+      opts.deep = deep
       deep++
-      if (Array.isArray(options.children)) {
-        options.children.map((option) => {
+      if (Array.isArray(opts.children)) {
+        opts.children.map((option) => {
           return this.createInternalOptionsRecursion(option, deep)
         })
       }
 
-      return options
+      return opts
     },
 
     // create internal options
@@ -350,7 +277,7 @@ export default defineComponent({
     },
 
     // show root contextmenu panel
-    showRootContextmenuPanel(event) {
+    showRootContextmenuPanel(event: MouseEvent) {
       event.preventDefault()
       const { rootContextmenuId } = this
 
@@ -367,10 +294,10 @@ export default defineComponent({
     },
 
     // show contextmenu panel
-    showContextmenuPanel({ event, contextmenuId, isRootContextmenu }) {
+    showContextmenuPanel({ event, contextmenuId, isRootContextmenu }: { event: MouseEvent, contextmenuId: string | number, isRootContextmenu?: boolean }) {
       const { getParentContextmenuPanelEl } = this
 
-      const contextmenuPanelEl = document.querySelector(
+      const contextmenuPanelEl = document.querySelector<HTMLElement>(
         `#${contextmenuId}`,
       )
 
@@ -378,7 +305,7 @@ export default defineComponent({
         // remove first
         contextmenuPanelEl.innerHTML = ''
 
-        contextmenuPanelEl.appendChild(this.$refs[contextmenuId])
+        contextmenuPanelEl.appendChild(this.$refs[contextmenuId] as HTMLElement)
 
         contextmenuPanelEl.style.position = 'absolute'
         contextmenuPanelEl.classList.add(clsName('popper'))
@@ -491,7 +418,7 @@ export default defineComponent({
     },
 
     // remove or empty panels
-    removeOrEmptyPanels(isRemove) {
+    removeOrEmptyPanels(isRemove?: boolean) {
       const { panelOptions } = this
 
       panelOptions.forEach((panelOption) => {
@@ -515,7 +442,7 @@ export default defineComponent({
     },
 
     // add context menu panel to body
-    addContextmenuPanelToBody({ contextmenuId }) {
+    addContextmenuPanelToBody({ contextmenuId }: { contextmenuId: string | number }) {
       const contextmenuPanelEl = document.querySelector(
         `#${contextmenuId}`,
       )
@@ -526,7 +453,7 @@ export default defineComponent({
       else {
         const containerEl = document.createElement('div')
 
-        containerEl.setAttribute('id', contextmenuId)
+        containerEl.setAttribute('id', `${contextmenuId}`)
 
         document.body.appendChild(containerEl)
       }
@@ -549,7 +476,7 @@ export default defineComponent({
         this.eventTargetEl = document.querySelector(eventTarget)
 
       else
-        this.eventTargetEl = eventTarget
+        this.eventTargetEl = eventTarget as HTMLElement
 
       if (this.eventTargetEl) {
         // contextmenu is on the current element
@@ -582,8 +509,8 @@ export default defineComponent({
       activeMenuIds,
       hasChildren,
       emptyContextmenuPanels,
-      debounceCreatePanelByHover,
     } = this
+    const debounceCreatePanelByHover = this.debounceCreatePanelByHover as typeof this.createPanelByHover
 
     const contextmenuProps = {
       class: ['ve-contextmenu'],
@@ -596,56 +523,41 @@ export default defineComponent({
       <div {...contextmenuProps}>
         {panelOptions.map((panelOption, panelIndex) => {
           const contextmenuPanelProps = {
-            ref: panelOption.parentId,
+            ref: `${panelOption.parentId}`,
             class: {
               [clsName('panel')]: true,
             },
-            directives: [
-              {
-                name: 'events-outside',
-                value: {
-                  events: ['click'],
-                  callback: (e) => {
-                    // only for root panel
-                    if (panelIndex === 0)
-                      emptyContextmenuPanels()
-                  },
-                },
-              },
-            ],
-            on: {
-              click: () => {
-                if (panelIndex !== 0)
-                  this.isChildrenPanelsClicked = true
-              },
-              contextmenu: (e) => {
-                e.preventDefault()
-              },
+            onClick: () => {
+              if (panelIndex !== 0)
+                this.isChildrenPanelsClicked = true
+            },
+            onContextmenu: (e: Event) => {
+              e.preventDefault()
             },
           }
           return (
-            <div {...contextmenuPanelProps}>
-              <ul class={clsName('list')}>
-                {panelOption.menus.map((menu) => {
-                  let contextmenuNodeProps
+            withDirectives(
+              <div {...contextmenuPanelProps}>
+                <ul class={clsName('list')}>
+                  {panelOption.menus.map((menu) => {
+                    let contextmenuNodeProps
 
-                  if (
-                    menu.type
-                    !== CONTEXTMENU_NODE_TYPES.SEPARATOR
-                  ) {
-                    contextmenuNodeProps = {
-                      class: {
-                        [clsName('node')]: true,
-                        [clsName('node-active')]:
+                    if (
+                      menu.type
+                      !== CONTEXTMENU_NODE_TYPES.SEPARATOR
+                    ) {
+                      contextmenuNodeProps = {
+                        class: {
+                          [clsName('node')]: true,
+                          [clsName('node-active')]:
                                                     activeMenuIds.includes(
                                                       menu.id,
                                                     ),
-                        [clsName('node-disabled')]:
+                          [clsName('node-disabled')]:
                                                     menu.disabled,
-                      },
-                      on: {
-                        mouseover: (event) => {
-                          // disable
+                        },
+                        onMouseover: (event: MouseEvent) => {
+                        // disable
                           if (!menu.disabled) {
                             debounceCreatePanelByHover(
                               {
@@ -655,7 +567,7 @@ export default defineComponent({
                             )
                           }
                         },
-                        click: () => {
+                        onClick: () => {
                           if (
                             !menu.disabled
                             && !hasChildren(menu)
@@ -669,55 +581,65 @@ export default defineComponent({
                             }, 50)
                           }
                         },
-                      },
+                      }
                     }
-                  }
-                  // separator
-                  else {
+                    // separator
+                    else {
                     //
-                    contextmenuNodeProps = {
-                      class: {
-                        [clsName(
-                          'node-separator',
-                        )]: true,
-                      },
+                      contextmenuNodeProps = {
+                        class: {
+                          [clsName(
+                            'node-separator',
+                          )]: true,
+                        },
+                      }
                     }
-                  }
 
-                  if (
-                    menu.type
-                    !== CONTEXTMENU_NODE_TYPES.SEPARATOR
-                  ) {
-                    return (
-                      <li {...contextmenuNodeProps}>
-                        <span
-                          class={clsName(
-                            'node-label',
-                          )}
-                        >
-                          {menu.label}
-                        </span>
-                        {menu.hasChildren && (
-                          <VeIcon
+                    if (
+                      menu.type
+                      !== CONTEXTMENU_NODE_TYPES.SEPARATOR
+                    ) {
+                      return (
+                        <li {...contextmenuNodeProps}>
+                          <span
                             class={clsName(
-                              'node-icon-postfix',
+                              'node-label',
                             )}
-                            name={
+                          >
+                            {menu.label}
+                          </span>
+                          {menu.hasChildren && (
+                            <VeIcon
+                              class={clsName(
+                                'node-icon-postfix',
+                              )}
+                              name={
                               ICON_NAMES.RIGHT_ARROW
                             }
-                          />
-                        )}
-                      </li>
-                    )
-                  }
-                  else {
-                    return (
-                      <li {...contextmenuNodeProps}></li>
-                    )
-                  }
-                })}
-              </ul>
-            </div>
+                            />
+                          )}
+                        </li>
+                      )
+                    }
+                    else {
+                      return (
+                        <li {...contextmenuNodeProps}></li>
+                      )
+                    }
+                  })}
+                </ul>
+              </div>,
+              [
+                [eventsOutside, {
+                  events: ['click'],
+                  callback: () => {
+                    // only for root panel
+                    if (panelIndex === 0)
+                      emptyContextmenuPanels()
+                  },
+                }],
+              ],
+            )
           )
         })}
       </div>

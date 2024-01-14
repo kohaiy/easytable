@@ -147,7 +147,12 @@ watch(() => data.isExpanded, (val) => {
 function handleClickControl() {
   isExpanded.value = !isExpanded.value
   if (!isExpanded.value) {
-    const height = metaEl.value?.getBoundingClientRect().height ?? 0
+    let height = 0
+    if (fixedControl.value)
+      height = window.innerHeight - (metaEl.value?.getBoundingClientRect().top ?? 0) - 44 - 40
+    else
+      height = metaEl.value?.getBoundingClientRect().height ?? 0
+
     window.scrollTo({
       top: window.scrollY - height,
       behavior: 'instant',

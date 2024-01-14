@@ -8,7 +8,7 @@ const routes: readonly RouteRecordRaw[] = [
   {
     path: '/',
     meta: { keepAlive: true, hide: true },
-    redirect: '/en',
+    redirect: '/zh',
   }, // 默认路由
   {
     path: '/:pathMatch(.*)*', // 页面不存在的情况下会跳到首页
@@ -19,14 +19,15 @@ const routes: readonly RouteRecordRaw[] = [
   {
     path: '/zh',
     component: emptyLayout,
+    redirect: '/zh/doc',
     // redirect: '/zh/demo',
     children: [
-      // {
-      //   path: 'demo',
-      //   component: () => import('../demo/index.vue'),
-      //   name: '示例',
-      //   meta: { keepAlive: false, hide: true },
-      // },
+      {
+        path: 'demo',
+        component: () => import('../demo/index.vue'),
+        name: '示例',
+        meta: { keepAlive: false, hide: true },
+      },
       {
         path: 'doc',
         component: docLayout,

@@ -7,7 +7,8 @@ import type { Plugin } from 'vue'
 // import VeDropdown from './ve-dropdown'
 import VeIcon from '@easytable/ve-icon'
 
-// import VeLoading from './ve-loading'
+import VeLoading from '@easytable/ve-loading'
+
 // import VeLocale from './ve-locale'
 // import VePagination from './ve-pagination'
 // import VeRadio from './ve-radio'
@@ -21,7 +22,7 @@ const components = [
   //   VeContextmenu,
   //   VeDropdown,
   VeIcon,
-  //   VeLoading,
+  VeLoading,
   //   VeLocale,
   //   VePagination,
   //   VeRadio,
@@ -59,7 +60,7 @@ export {
   //   VeContextmenu,
   //   VeDropdown,
   VeIcon,
-  //   VeLoading,
+  VeLoading,
   //   VeLocale,
   //   VePagination,
   //   VeRadio,
@@ -75,7 +76,7 @@ export default {
   //   VeContextmenu,
   //   VeDropdown,
   //   VeIcon,
-  //   VeLoading,
+  VeLoading,
   //   VeLocale,
   //   VePagination,
   //   VeRadio,

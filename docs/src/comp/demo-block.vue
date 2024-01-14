@@ -1,12 +1,14 @@
 <script lang="ts" setup>
 // 最外层
 import { computed, nextTick, onBeforeUnmount, onMounted, reactive, ref, toRefs, useSlots, watch } from 'vue'
-import { version } from '../../../package.json'
 
 import locale from './locale'
 import useI18n from './mixins/i18n-mixins'
 import { stripScript, stripStyle, stripTemplate } from '@/utils/index'
 import CodeSandBoxOnline from '@/comp/online-edit/code-sand-box/index'
+
+// import { version } from '../../../package.json'
+const version = '2.27.1'
 
 const { currentDocLang } = useI18n()
 const slots = useSlots()
@@ -31,16 +33,17 @@ const { onlineExample, hovering, isDemoRendered, isExpanded, scrollParent, fixed
 
 data.onlineExample.version = version
 const highlight = slots.highlight as any
-console.log(slots)
 
-if (highlight && highlight[0]) {
+if (highlight) {
   let code = ''
-  let cur = highlight[0]
-  if (cur.tag === 'pre' && cur.children && cur.children[0]) {
+  let cur = highlight()[0]
+
+  if (cur.type === 'pre' && cur.children && cur.children[0]) {
     cur = cur.children[0]
-    if (cur.tag === 'code')
-      code = cur.children[0].text
+    if (cur.type === 'code')
+      code = cur.children
   }
+
   if (code) {
     data.onlineExample.html = stripTemplate(code)
     data.onlineExample.script = stripScript(code)
@@ -141,6 +144,17 @@ watch(() => data.isExpanded, (val) => {
   }, 200)
 })
 
+function handleClickControl() {
+  isExpanded.value = !isExpanded.value
+  if (!isExpanded.value) {
+    const height = metaEl.value?.getBoundingClientRect().height ?? 0
+    window.scrollTo({
+      top: window.scrollY - height,
+      behavior: 'instant',
+    })
+  }
+}
+
 onBeforeUnmount(() => {
   removeScrollHandler()
 })
@@ -184,7 +198,7 @@ onBeforeUnmount(() => {
       class="demo-block-control"
       :style="{ width: getDemoBlockControlWidth }"
       :class="{ 'is-fixed': fixedControl }"
-      @click="isExpanded = !isExpanded"
+      @click="handleClickControl"
     >
       <i
         class="arraw-slide-icon" :class="[iconClass, { hovering }]"

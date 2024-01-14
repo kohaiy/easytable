@@ -10,6 +10,6 @@
     "types": ["node"],
     "noEmit": true
   },
-  "include": ["env.d.ts", "src/**/*", "src/**/*.vue", "./auto-imports.d.ts", "../packages/**/*"],
+  "include": ["env.d.ts", "vue-properties.d.ts", "src/**/*", "src/**/*.vue", "./auto-imports.d.ts", "../packages/**/*"],
   "exclude": ["src/**/__tests__/*"]
 }

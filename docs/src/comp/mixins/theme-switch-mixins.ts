@@ -32,6 +32,8 @@ export default function useThemeSwitch() {
   return {
     // switch theme mix
     switchThemeMix(themeName: string) {
+      console.log('themeName', themeName)
+
       return new Promise((resolve, reject) => {
         themeSwitcherTool
           .switcher({

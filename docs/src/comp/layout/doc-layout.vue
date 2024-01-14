@@ -115,7 +115,7 @@ onBeforeUnmount(() => {
                 >
                   <li
                     :class="{ active: isActive }" role="link"
-                    @click="navigate" @keypress.enter="navigate"
+                    @click="navigate" @keypress.enter="navigate()"
                   >
                     <a :href="href">
                       {{ subConfig.name }}
@@ -140,7 +140,7 @@ onBeforeUnmount(() => {
             >
               <li
                 class="no-child" :class="{ active: isActive }" role="link" @click="navigate"
-                @keypress.enter="navigate"
+                @keypress.enter="navigate()"
               >
                 <a :href="href">{{ config.name }}</a>
               </li>
@@ -151,10 +151,12 @@ onBeforeUnmount(() => {
 
       <!-- 主体内容 Start -->
       <div class="main-wrapper-container">
-        <keep-alive>
-          <router-view v-if="route.meta.keepAlive" />
-        </keep-alive>
-        <router-view v-if="!route.meta.keepAlive" />
+        <router-view v-slot="{ Component }">
+          <keep-alive v-if="route.meta.keepAlive">
+            <component :is="Component" />
+          </keep-alive>
+          <component :is="Component" v-else />
+        </router-view>
         <!-- 主体内容 End -->
       </div>
 

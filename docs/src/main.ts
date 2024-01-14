@@ -16,7 +16,7 @@ import {
   // VeContextmenu,
   // VeDropdown,
   VeIcon,
-  // VeLoading,
+  VeLoading,
   // VeLocale,
   // VePagination,
   // VeRadio,
@@ -34,6 +34,7 @@ const app = createApp(App)
 
 app.use(VeTable)
 app.use(VeIcon)
+app.use(VeLoading)
 app.use(router)
 
 router.afterEach(() => {

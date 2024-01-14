@@ -7,6 +7,9 @@ export default antfu({
     'no-console': ['warn'],
     'vue/no-reserved-component-names': ['warn'],
     'node/prefer-global/process': ['warn'],
+    'vue/block-order': ['warn', {
+      order: [['script', 'template'], 'style'],
+    }],
   },
   ignores: [
     '**/font/*.js',

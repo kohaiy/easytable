@@ -1,17 +1,15 @@
 {
-  "name": "@easytable/vue",
+  "name": "@easytable/ve-loading",
   "version": "1.0.0",
   "description": "",
   "author": "",
-  "license": "MIT",
+  "license": "ISC",
   "keywords": [],
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "@easytable/ve-icon": "workspace:^1.0.0",
-    "@easytable/ve-loading": "workspace:^1.0.0",
-    "@easytable/ve-table": "workspace:^1.0.0"
+    "@easytable/common": "workspace:^1.0.0"
   }
 }

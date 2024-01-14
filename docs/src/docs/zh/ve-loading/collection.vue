@@ -1,26 +1,26 @@
-<script>
-export default {
+<script lang="ts">
+export default defineComponent({
   data() {
     return {
-      SPIN_NAMES: {
-        PLANE: 'plane',
-        GRID: 'grid',
-        WAVE: 'wave',
-        FLOW: 'flow',
-        BOUNCE: 'bounce',
-        PULSE: 'pulse',
-      },
+      SPIN_NAMES: [
+        'plane',
+        'grid',
+        'wave',
+        'flow',
+        'bounce',
+        'pulse',
+      ] as const,
     }
   },
   mounted() {
-    Object.values(this.SPIN_NAMES).forEach((spinName) => {
+    this.SPIN_NAMES.forEach((spinName) => {
       this.$veLoading({
         target: `#loading-${spinName}`,
         name: spinName,
       }).show()
     })
   },
-}
+})
 </script>
 
 <template>

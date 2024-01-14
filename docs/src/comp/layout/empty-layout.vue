@@ -4,9 +4,11 @@ const route = useRoute()
 
 <template>
   <div>
-    <keep-alive>
-      <router-view v-if="route.meta.keepAlive" />
-    </keep-alive>
-    <router-view v-if="!route.meta.keepAlive" />
+    <router-view v-slot="{ Component }">
+      <keep-alive v-if="route.meta.keepAlive">
+        <component :is="Component" />
+      </keep-alive>
+      <component :is="Component" v-else />
+    </router-view>
   </div>
 </template>

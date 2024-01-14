@@ -4,10 +4,10 @@
 
 | 参数        | 说明               | 类型      | 可选值 | 默认值   |
 | ----------- | ------------------ | --------- | ------ | -------- |
+| modelValue       | `v-model`绑定的值  | `Array`   | -      | -        |
 | width       | 宽度               | `Number`  | -      | 90       |
 | maxWidth    | 最大宽度           | `Number`  | -      | -        |
 | isMultiple  | 是否是多选下拉     | `Boolean` | -      | false    |
-| value       | `v-model`绑定的值  | `Array`   | -      | -        |
 | placeholder | placeholder 文本   | `String`  | -      | "请选择" |
 | textAlign   | 文本居中方式       | `String`  | -      | "left"   |
 | isInput     | 是否支持输入 input | `Boolean` | -      | false    |

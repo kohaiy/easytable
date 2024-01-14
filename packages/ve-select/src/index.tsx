@@ -1,6 +1,7 @@
 import VeDropdown from '@easytable/ve-dropdown'
 import VeIcon from '@easytable/ve-icon'
 import { ICON_NAMES } from '@easytable/common/utils/constant'
+import type { VeDropdownItem } from 'packages/ve-dropdown/src/type'
 import { COMPS_NAME, EMIT_EVENTS } from './util/constant'
 import { clsName } from './util/index'
 
@@ -25,8 +26,8 @@ export default defineComponent({
     },
 
     // 用户传入v-model 的值 [{value/label/selected}]
-    value: {
-      type: Array,
+    modelValue: {
+      type: Array as PropType<VeDropdownItem[]>,
       default: null,
     },
 
@@ -41,7 +42,7 @@ export default defineComponent({
 
     // 文本居中方式 left|center|right
     textAlign: {
-      type: String,
+      type: String as PropType<'left' | 'center' | 'right'>,
       default: 'left',
     },
 
@@ -62,7 +63,7 @@ export default defineComponent({
     return {
       visible: false,
 
-      internalOptions: [],
+      internalOptions: [] as VeDropdownItem[],
 
       inputValue: '',
       // dorpdown visible
@@ -79,14 +80,14 @@ export default defineComponent({
     },
   },
   watch: {
-    value() {
+    modelValue() {
       this.init()
     },
   },
   methods: {
     // 初始化
     init() {
-      this.internalOptions = Object.assign([], this.value)
+      this.internalOptions = Object.assign([], this.modelValue)
     },
 
     // 显示选中的信息
@@ -116,7 +117,7 @@ export default defineComponent({
     // dropdown change event
     dropdownChange() {
       // 使用户传入的v-model 生效
-      this.$emit('input', this.internalOptions)
+      this.$emit('update:modelValue', this.internalOptions)
       this.$emit(EMIT_EVENTS.SELECT_CHANGE, this.internalOptions)
     },
   },
@@ -128,33 +129,33 @@ export default defineComponent({
     const { isInput } = this
 
     const props = {
-      class: 've-select',
-      isSelect: true,
-      width: this.width,
-      maxWidth: this.maxWidth,
-      isMultiple: this.isMultiple,
-      textAlign: this.textAlign,
-      isInput: this.isInput,
+      'class': 've-select',
+      'isSelect': true,
+      'width': this.width,
+      'maxWidth': this.maxWidth,
+      'isMultiple': this.isMultiple,
+      'textAlign': this.textAlign,
+      'isInput': this.isInput,
       // v-model
-      value: this.internalOptions,
-      hideByItemClick: true,
-      popperAppendTo: this.popperAppendTo,
-      style: {
+      'modelValue': this.internalOptions,
+      'hideByItemClick': true,
+      'popperAppendTo': this.popperAppendTo,
+      'style': {
         width: this.width,
       },
       // change: this.dropdownChange,
       // v-model
-      onInput: (val) => {
+      'onUpdate:modelValue': (val: VeDropdownItem[]) => {
         this.internalOptions = val
         this.dropdownChange()
       },
       // dropdown visible change
-      onDropdownVisibleChange: (visible) => {
+      'onDropdownVisibleChange': (visible: boolean) => {
         this.dropdownVisible = visible
       },
     }
 
-    let content = ''
+    let content: JSX.Element
     if (isInput) {
       content = (
         <input

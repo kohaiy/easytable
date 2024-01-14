@@ -1,11 +1,11 @@
 import { clsName } from './util'
 import { COMPS_NAME, EMIT_EVENTS } from './util/constant'
 
-export default {
+export default defineComponent({
   name: COMPS_NAME.VE_RADIO,
   props: {
     // 当前checkbox 选中状态,实现 v-model
-    value: {
+    modelValue: {
       type: [String, Number, Boolean],
       default: null,
     },
@@ -29,7 +29,7 @@ export default {
   data() {
     return {
       // 当前checkbox 选中状态
-      model: this.value,
+      model: this.modelValue,
     }
   },
 
@@ -51,21 +51,22 @@ export default {
   },
 
   watch: {
-    value() {
+    modelValue() {
       this.updateModelBySingle()
     },
   },
 
   methods: {
     // checked change
-    checkedChange(event) {
+    checkedChange(event: Event) {
       if (this.disabled)
         return false
 
-      const isChecked = event.target.checked
+      const target = event.target as HTMLInputElement
+      const isChecked = target.checked
 
       if (!this.isControlled)
-        this.$emit('input', isChecked)
+        this.$emit('update:modelValue', isChecked)
 
       this.$emit(EMIT_EVENTS.ON_RADIO_CHANGE, isChecked)
     },
@@ -74,17 +75,17 @@ export default {
     getLabelContent() {
       const { label, $slots } = this
 
-      return label || $slots.default
+      return label || $slots.default?.()
     },
 
     initModel() {
-      this.model = this.value
+      this.model = this.modelValue
     },
 
     // 通过单选更新 model
     updateModelBySingle() {
       if (!this.disabled)
-        this.model = this.value
+        this.model = this.modelValue
     },
   },
 
@@ -104,11 +105,11 @@ export default {
       <label class="ve-radio">
         <span class={radioClass}>
           <input
-            checked={internalIsSelected}
+            checked={!!internalIsSelected}
             class={clsName('input')}
             type="radio"
             value={label}
-            on-change={checkedChange}
+            onChange={checkedChange}
           />
 
           <span class={clsName('inner')}></span>
@@ -117,4 +118,4 @@ export default {
       </label>
     )
   },
-}
+})

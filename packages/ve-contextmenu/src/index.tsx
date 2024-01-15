@@ -1,4 +1,4 @@
-import { defineComponent, withDirectives } from 'vue'
+import { defineComponent } from 'vue'
 import VeIcon from '@easytable/ve-icon'
 import { cloneDeep, debounce } from 'lodash'
 import { ICON_NAMES } from '@easytable/common/utils/constant'
@@ -37,6 +37,9 @@ interface PanelOption {
 
 export default defineComponent({
   name: COMPS_NAME.VE_CONTEXTMENU,
+  directives: {
+    'events-outside': eventsOutside,
+  },
   props: {
     options: {
       type: Array as PropType<Option[]>,
@@ -536,110 +539,108 @@ export default defineComponent({
             },
           }
           return (
-            withDirectives(
-              <div {...contextmenuPanelProps}>
-                <ul class={clsName('list')}>
-                  {panelOption.menus.map((menu) => {
-                    let contextmenuNodeProps
+            <div
+              {...contextmenuPanelProps}
+              v-events-outside={{
+                events: ['click'],
+                callback: () => {
+                  // only for root panel
+                  if (panelIndex === 0)
+                    emptyContextmenuPanels()
+                },
+              }}
+            >
+              <ul class={clsName('list')}>
+                {panelOption.menus.map((menu) => {
+                  let contextmenuNodeProps
 
-                    if (
-                      menu.type
-                      !== CONTEXTMENU_NODE_TYPES.SEPARATOR
-                    ) {
-                      contextmenuNodeProps = {
-                        class: {
-                          [clsName('node')]: true,
-                          [clsName('node-active')]:
+                  if (
+                    menu.type
+                    !== CONTEXTMENU_NODE_TYPES.SEPARATOR
+                  ) {
+                    contextmenuNodeProps = {
+                      class: {
+                        [clsName('node')]: true,
+                        [clsName('node-active')]:
                                                     activeMenuIds.includes(
                                                       menu.id,
                                                     ),
-                          [clsName('node-disabled')]:
+                        [clsName('node-disabled')]:
                                                     menu.disabled,
-                        },
-                        onMouseover: (event: MouseEvent) => {
+                      },
+                      onMouseover: (event: MouseEvent) => {
                         // disable
-                          if (!menu.disabled) {
-                            debounceCreatePanelByHover(
-                              {
-                                event,
-                                menu,
-                              },
-                            )
-                          }
-                        },
-                        onClick: () => {
-                          if (
-                            !menu.disabled
-                            && !hasChildren(menu)
-                          ) {
-                            this.$emit(
-                              EMIT_EVENTS.ON_NODE_CLICK,
-                              menu.type,
-                            )
-                            setTimeout(() => {
-                              emptyContextmenuPanels()
-                            }, 50)
-                          }
-                        },
-                      }
+                        if (!menu.disabled) {
+                          debounceCreatePanelByHover(
+                            {
+                              event,
+                              menu,
+                            },
+                          )
+                        }
+                      },
+                      onClick: () => {
+                        if (
+                          !menu.disabled
+                          && !hasChildren(menu)
+                        ) {
+                          this.$emit(
+                            EMIT_EVENTS.ON_NODE_CLICK,
+                            menu.type,
+                          )
+                          setTimeout(() => {
+                            emptyContextmenuPanels()
+                          }, 50)
+                        }
+                      },
                     }
-                    // separator
-                    else {
+                  }
+                  // separator
+                  else {
                     //
-                      contextmenuNodeProps = {
-                        class: {
-                          [clsName(
-                            'node-separator',
-                          )]: true,
-                        },
-                      }
+                    contextmenuNodeProps = {
+                      class: {
+                        [clsName(
+                          'node-separator',
+                        )]: true,
+                      },
                     }
+                  }
 
-                    if (
-                      menu.type
-                      !== CONTEXTMENU_NODE_TYPES.SEPARATOR
-                    ) {
-                      return (
-                        <li {...contextmenuNodeProps}>
-                          <span
+                  if (
+                    menu.type
+                    !== CONTEXTMENU_NODE_TYPES.SEPARATOR
+                  ) {
+                    return (
+                      <li {...contextmenuNodeProps}>
+                        <span
+                          class={clsName(
+                            'node-label',
+                          )}
+                        >
+                          {menu.label}
+                        </span>
+                        {menu.hasChildren && (
+                          <VeIcon
                             class={clsName(
-                              'node-label',
+                              'node-icon-postfix',
                             )}
-                          >
-                            {menu.label}
-                          </span>
-                          {menu.hasChildren && (
-                            <VeIcon
-                              class={clsName(
-                                'node-icon-postfix',
-                              )}
-                              name={
+                            name={
                               ICON_NAMES.RIGHT_ARROW
                             }
-                            />
-                          )}
-                        </li>
-                      )
-                    }
-                    else {
-                      return (
-                        <li {...contextmenuNodeProps}></li>
-                      )
-                    }
-                  })}
-                </ul>
-              </div>,
-              [
-                [eventsOutside, {
-                  events: ['click'],
-                  callback: () => {
-                    // only for root panel
-                    if (panelIndex === 0)
-                      emptyContextmenuPanels()
-                  },
-                }],
-              ],
-            )
+                          />
+                        )}
+                      </li>
+                    )
+                  }
+                  else {
+                    return (
+                      <li {...contextmenuNodeProps}></li>
+                    )
+                  }
+                })}
+              </ul>
+            </div>
           )
         })}
       </div>

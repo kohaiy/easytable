@@ -1,4 +1,4 @@
-import { defineComponent, withDirectives } from 'vue'
+import { defineComponent } from 'vue'
 import VeCheckbox from '@easytable/ve-checkbox'
 import VeRadio from '@easytable/ve-radio'
 import clickoutside from '@easytable/common/directives/clickoutside'
@@ -14,6 +14,9 @@ import type { VeDropdownItem } from './type'
 
 export default defineComponent({
   name: COMPS_NAME.VE_DROPDOWN,
+  directives: {
+    'click-outside': clickoutside,
+  },
   props: {
     // 如果是select 组件将特殊处理
     isSelect: {
@@ -646,59 +649,54 @@ export default defineComponent({
           </a>
         </dt>
         <div style={{ display: 'none' }}>
-          { withDirectives(
-            <dd {...dropdownItemsProps}>
-              <ul
-                class={clsName('items')}
-                style={{
-                  'min-width': `${width}px`,
-                  'max-width': `${getMaxWidth}px`,
-                }}
-              >
-                {/* custome content */}
-                {isCustomContent && this.$slots['custom-content']?.()}
-                {/* not custom content */}
-                {!isCustomContent && (
-                  <div>
-                    <div
-                      style={{
-                        'max-height': `${maxHeight}px`,
-                      }}
-                      class={clsName('items-warpper')}
-                    >
-                      {content}
-                    </div>
-                    {showOperation && (
-                      <li class={clsName('operation')}>
-                        <a
-                          class={[
-                            clsName('operation-item'),
-                            this.operationFilterClass,
-                          ]}
-                          href="javascript:void(0)"
-                          onClick={reset}
-                        >
-                          {this.resetFilterText}
-                        </a>
-                        <a
-                          class={clsName(
-                            'operation-item',
-                          )}
-                          href="javascript:void(0)"
-                          onClick={this.confirm}
-                        >
-                          {this.confirmFilterText}
-                        </a>
-                      </li>
-                    )}
+          <dd {...dropdownItemsProps} v-click-outside={this.dropdownClickOutside}>
+            <ul
+              class={clsName('items')}
+              style={{
+                'min-width': `${width}px`,
+                'max-width': `${getMaxWidth}px`,
+              }}
+            >
+              {/* custome content */}
+              {isCustomContent && this.$slots['custom-content']?.()}
+              {/* not custom content */}
+              {!isCustomContent && (
+                <div>
+                  <div
+                    style={{
+                      'max-height': `${maxHeight}px`,
+                    }}
+                    class={clsName('items-warpper')}
+                  >
+                    {content}
                   </div>
-                )}
-              </ul>
-            </dd>
-            , [
-              [clickoutside, this.dropdownClickOutside],
-            ],
-          ) }
+                  {showOperation && (
+                    <li class={clsName('operation')}>
+                      <a
+                        class={[
+                          clsName('operation-item'),
+                          this.operationFilterClass,
+                        ]}
+                        href="javascript:void(0)"
+                        onClick={reset}
+                      >
+                        {this.resetFilterText}
+                      </a>
+                      <a
+                        class={clsName(
+                          'operation-item',
+                        )}
+                        href="javascript:void(0)"
+                        onClick={this.confirm}
+                      >
+                        {this.confirmFilterText}
+                      </a>
+                    </li>
+                  )}
+                </div>
+              )}
+            </ul>
+          </dd>
         </div>
       </dl>
     )

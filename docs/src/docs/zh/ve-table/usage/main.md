@@ -11,7 +11,7 @@ Vue.use(VeTable);
 
 使用
 
-```vue
+```html
 <script>
 export default {
   data() {

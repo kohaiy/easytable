@@ -2,14 +2,16 @@
 /* import Footer from "@/comp/layout/footer.vue"; */
 import Mock from 'mockjs'
 import locale from '../comp/locale'
-import I18nMixins from '../comp/mixins/i18n-mixins'
 
-export default {
+// import I18nMixins from '../comp/mixins/i18n-mixins'
+
+// const { currentDocLang } = I18nMixins()
+export default defineComponent({
   name: 'Demo',
   components: {
     /* Footer */
   },
-  mixins: [I18nMixins],
+  // mixins: [I18nMixins],
   data() {
     return {
       columnWidthResizeOption: {
@@ -102,7 +104,7 @@ export default {
   computed: {
     // current local
     currentLocal() {
-      return locale[this.currentDocLang].completeDemo.demo1
+      return locale.zh.completeDemo.demo1
     },
 
     // tableScrollWidth
@@ -516,7 +518,7 @@ export default {
       this.resetTableData()
     },
   },
-}
+})
 </script>
 
 <template>

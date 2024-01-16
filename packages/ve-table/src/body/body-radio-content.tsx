@@ -1,11 +1,9 @@
 import emitter from '@easytable/common/mixins/emitter'
+import VeRadio from '@easytable/ve-radio'
 import { COMPS_NAME, EMIT_EVENTS } from '../util/constant'
 import { clsName } from '../util'
 
-// import VeRadio from 'vue-easytable/packages/ve-radio'
-const VeRadio = () => 'VeRadio'
-
-export default {
+export default defineComponent({
   name: COMPS_NAME.VE_TABLE_BODY_RADIO_CONTENT,
   mixins: [emitter],
   props: {
@@ -98,16 +96,12 @@ export default {
 
     const radioProps = {
       class: clsName('radio-wrapper'),
-      props: {
-        isControlled: true,
-        isSelected,
-        disabled,
-      },
-      on: {
-        'on-radio-change': () => selectedChange(),
-      },
+      isControlled: true,
+      isSelected,
+      disabled,
+      onOnRadioChange: () => selectedChange(),
     }
 
     return <VeRadio {...radioProps} />
   },
-}
+})

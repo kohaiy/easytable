@@ -66,7 +66,7 @@ export default class Hooks {
 
       hooks.forEach((hook) => {
         // exclude hookName param
-        hook(args)
+        hook(...args)
       })
     }
     // else {

@@ -4,7 +4,7 @@ import VeIcon from '@easytable/ve-icon'
 import { createLocale, isFunction } from '@easytable/common/utils'
 import { ICON_NAMES } from '@easytable/common/utils/constant'
 import { COMPS_NAME, EMIT_EVENTS, LOCALE_COMP_NAME } from '../util/constant'
-import { clsName } from '../util'
+import { clsName, getEmitEventName } from '../util'
 
 const t = createLocale(LOCALE_COMP_NAME)
 
@@ -64,27 +64,23 @@ export default defineComponent({
             = this.column.filter
 
     const compProps = {
-      props: {
-        value: filterList,
-        showOperation: true,
-        isMultiple,
-        showRadio: true, // when single selection
-        confirmFilterText: t('confirmFilter'),
-        resetFilterText: t('resetFilter'),
-        beforeVisibleChange,
-      },
-      on: {
-        [EMIT_EVENTS.HEADER_FILTER_CONFIRM]: this.filterConfirm,
-        [EMIT_EVENTS.HEADER_FILTER_RESET]: this.filterReset,
-        // v-model
-        input: (val) => {
-          this.filterList = val
-        },
+      'modelValue': filterList,
+      'showOperation': true,
+      isMultiple,
+      'showRadio': true, // when single selection
+      'confirmFilterText': t('confirmFilter'),
+      'resetFilterText': t('resetFilter'),
+      beforeVisibleChange,
+      [getEmitEventName(EMIT_EVENTS.HEADER_FILTER_CONFIRM)]: this.filterConfirm,
+      [getEmitEventName(EMIT_EVENTS.HEADER_FILTER_RESET)]: this.filterReset,
+      // v-model
+      'onUpdate:modelValue': (val) => {
+        this.filterList = val
       },
     }
 
     if (typeof maxHeight === 'number')
-      compProps.props.maxHeight = maxHeight
+      compProps.maxHeight = maxHeight
 
     return (
       <VeDropdown {...compProps}>

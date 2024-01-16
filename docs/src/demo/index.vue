@@ -3,7 +3,7 @@ import { computed } from 'vue'
 import locale from '../comp/locale'
 import useI18n from '../comp/mixins/i18n-mixins'
 
-// import NormalDataGrid from './normal-data-grid.vue'
+import NormalDataGrid from './normal-data-grid.vue'
 import Spreadsheet from './spreadsheet.vue'
 
 defineOptions({
@@ -26,7 +26,7 @@ const currentLocal = computed(() => {
           {{ currentLocal.demo1.selection }}
         </div>
       </div>
-      <!-- <NormalDataGrid /> -->
+      <NormalDataGrid />
       <div class="demo-title last">
         <div class="demo-title-text">
           {{ currentLocal.demo2.selection }}

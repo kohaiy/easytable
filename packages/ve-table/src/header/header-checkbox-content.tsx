@@ -54,15 +54,11 @@ export default {
 
     const checkboxProps = {
       class: clsName('checkbox-wrapper'),
-      props: {
-        isControlled: true,
-        isSelected,
-        indeterminate: isIndeterminate,
-      },
-      on: {
-        'on-checked-change': isSelectedParam =>
-          selectedChange(isSelectedParam),
-      },
+      isControlled: true,
+      isSelected,
+      indeterminate: isIndeterminate,
+      onOnCheckedChange: isSelectedParam =>
+        selectedChange(isSelectedParam),
     }
 
     return <VeCheckbox {...checkboxProps} />

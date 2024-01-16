@@ -3,7 +3,7 @@ import { clsName } from '../util'
 import { COMPS_NAME, EMIT_EVENTS } from '../util/constant'
 import HeaderTr from './header-tr'
 
-export default {
+export default defineComponent({
   name: COMPS_NAME.VE_TABLE_THADER,
   mixins: [emitter],
   props: {
@@ -166,7 +166,7 @@ export default {
 
     return (
       <thead class={headerClass}>
-        {groupColumns.map((groupColumn, rowIndex) => {
+        {groupColumns.map((groupColumn: any, rowIndex) => {
           const trProps = {
             key: rowIndex,
             columnsOptionResetTime: this.columnsOptionResetTime,
@@ -190,4 +190,4 @@ export default {
       </thead>
     )
   },
-}
+})

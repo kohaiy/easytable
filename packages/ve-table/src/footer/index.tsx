@@ -87,17 +87,15 @@ export default {
         {this.footerData.map((rowData, rowIndex) => {
           const trProps = {
             key: this.getTrKey({ rowData, rowIndex }),
-            props: {
-              rowIndex,
-              rowData,
-              colgroups,
-              rowKeyFieldName,
-              cellStyleOption,
-              footerRows: this.footerRows,
-              fixedFooter: this.fixedFooter,
-              cellSpanOption: this.cellSpanOption,
-              eventCustomOption: this.eventCustomOption,
-            },
+            rowIndex,
+            rowData,
+            colgroups,
+            rowKeyFieldName,
+            cellStyleOption,
+            footerRows: this.footerRows,
+            fixedFooter: this.fixedFooter,
+            cellSpanOption: this.cellSpanOption,
+            eventCustomOption: this.eventCustomOption,
           }
 
           return <FooterTr {...trProps} />

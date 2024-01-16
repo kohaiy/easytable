@@ -4,7 +4,7 @@ import { clsName, getDomResizeObserverCompKey } from '../util'
 import { COMPS_NAME, EMIT_EVENTS } from '../util/constant'
 import HeaderTh from './header-th'
 
-export default {
+export default defineComponent({
   name: COMPS_NAME.VE_TABLE_THADER_TR,
   mixins: [emitter],
   props: {
@@ -179,31 +179,31 @@ export default {
     } = customEvents
 
     const events = {
-      click: (e) => {
+      onClick: (e) => {
         this.rowClick(e, click)
       },
-      dblclick: (e) => {
+      onDblclick: (e) => {
         this.rowDblclick(e, dblclick)
       },
-      contextmenu: (e) => {
+      onContextmenu: (e) => {
         this.rowContextmenu(e, contextmenu)
       },
-      mouseenter: (e) => {
+      onMouseenter: (e) => {
         this.rowMouseenter(e, mouseenter)
       },
-      mouseleave: (e) => {
+      onMouseleave: (e) => {
         this.rowMouseleave(e, mouseleave)
       },
-      mousemove: (e) => {
+      onMousemove: (e) => {
         this.rowMousemove(e, mousemove)
       },
-      mouseover: (e) => {
+      onMouseover: (e) => {
         this.rowMouseover(e, mouseover)
       },
-      mousedown: (e) => {
+      onMousedown: (e) => {
         this.rowMousedown(e, mousedown)
       },
-      mouseup: (e) => {
+      onMouseup: (e) => {
         this.rowMouseup(e, mouseup)
       },
     }
@@ -215,15 +215,13 @@ export default {
       ),
       class: clsName('header-tr'),
       tagName: 'tr',
-      on: {
-        'on-dom-resize-change': trHeightChange,
-      },
-      nativeOn: events,
+      onOnDomResizeChange: trHeightChange,
+      ...events,
     }
 
     return (
       <VueDomResizeObserver {...trProps}>
-        {groupColumn.map((groupColumnItem) => {
+        {groupColumn.map((groupColumnItem: any) => {
           // th props
           const thProps = {
             key: groupColumnItem.key,
@@ -249,4 +247,4 @@ export default {
       </VueDomResizeObserver>
     )
   },
-}
+})

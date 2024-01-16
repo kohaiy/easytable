@@ -600,16 +600,14 @@ export default defineComponent({
     getExpandRowComp({ rowData, rowIndex }) {
       if (this.isExpandRow({ rowData, rowIndex })) {
         const expandTrProps = {
-          props: {
-            tableViewportWidth: this.tableViewportWidth,
-            colgroups: this.colgroups,
-            expandOption: this.expandOption,
-            expandedRowkeys: this.expandedRowkeys,
-            expandColumn: this.expandColumn,
-            rowKeyFieldName: this.rowKeyFieldName,
-            rowData,
-            rowIndex,
-          },
+          tableViewportWidth: this.tableViewportWidth,
+          colgroups: this.colgroups,
+          expandOption: this.expandOption,
+          expandedRowkeys: this.expandedRowkeys,
+          expandColumn: this.expandColumn,
+          rowKeyFieldName: this.rowKeyFieldName,
+          rowData,
+          rowIndex,
         }
 
         return <ExpandTr {...expandTrProps} />
@@ -902,9 +900,7 @@ export default defineComponent({
           if (showVirtualScrollingPlaceholder) {
             const trPropsScrolling = {
               key: this.getTrKey({ rowData, rowIndex }),
-              props: {
-                colgroups,
-              },
+              colgroups,
             }
 
             if (

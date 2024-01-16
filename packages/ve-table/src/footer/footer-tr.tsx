@@ -158,19 +158,17 @@ export default {
       return colgroups.map((column) => {
         const tdProps = {
           key: column.key,
-          props: {
-            rowIndex,
-            rowData,
-            column,
-            colgroups,
-            rowKeyFieldName,
-            cellStyleOption,
-            cellSelectionData: this.cellSelectionData,
-            footerRows: this.footerRows,
-            fixedFooter: this.fixedFooter,
-            cellSpanOption: this.cellSpanOption,
-            eventCustomOption: this.eventCustomOption,
-          },
+          rowIndex,
+          rowData,
+          column,
+          colgroups,
+          rowKeyFieldName,
+          cellStyleOption,
+          cellSelectionData: this.cellSelectionData,
+          footerRows: this.footerRows,
+          fixedFooter: this.fixedFooter,
+          cellSpanOption: this.cellSpanOption,
+          eventCustomOption: this.eventCustomOption,
         }
         return <FooterTd {...tdProps} />
       })
@@ -229,9 +227,7 @@ export default {
 
     const props = {
       class: this.trClass,
-      props: {
-        tagName: 'tr',
-      },
+      tagName: 'tr',
       attrs: {
         [COMPS_CUSTOM_ATTRS.BODY_ROW_KEY]: this.currentRowKey,
       },

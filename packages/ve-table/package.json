@@ -15,7 +15,9 @@
     "@easytable/ve-contextmenu": "workspace:^1.0.0",
     "@easytable/ve-dropdown": "workspace:^1.0.0",
     "@easytable/ve-icon": "workspace:^1.0.0",
-    "lodash": "^4.17.21"
+    "@easytable/ve-radio": "workspace:^1.0.0",
+    "lodash": "^4.17.21",
+    "mitt": "^3.0.1"
   },
   "devDependencies": {
     "@types/lodash": "^4.14.202"

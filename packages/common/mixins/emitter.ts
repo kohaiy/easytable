@@ -14,8 +14,15 @@ function broadcast(componentName, eventName, params) {
   })
 }
 export default {
+  inject: ['eventBus'],
   methods: {
     dispatch(componentName, eventName, params) {
+      if (componentName === 'VeTable' && this.eventBus) {
+        this.eventBus.emit(eventName, params)
+        return
+      }
+      // console.log(componentName, eventName, this.eventBus)
+
       let parent = this.$parent || this.$root
       let name = parent.$options.name
 
@@ -26,7 +33,7 @@ export default {
           name = parent.$options.name
       }
       if (parent)
-        parent.$emit([eventName].concat(params))
+        parent.$emit(...[eventName].concat(params))
 
       else
         console.error(`${componentName} was not found.`)

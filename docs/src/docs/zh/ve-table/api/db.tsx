@@ -8,7 +8,7 @@ const columnsType1 = [
     align: 'left',
     type: 'expand',
     renderBodyCell: ({ row, column, rowIndex }, h) => {
-      return <span domPropsInnerHTML={row.param}></span>
+      return <span innerHTML={row.param}></span>
     },
   },
   {
@@ -18,7 +18,7 @@ const columnsType1 = [
     width: '60%',
     align: 'left',
     renderBodyCell: ({ row, column, rowIndex }, h) => {
-      return <span domPropsInnerHTML={row.desc}></span>
+      return <span innerHTML={row.desc}></span>
     },
   },
   {
@@ -28,7 +28,7 @@ const columnsType1 = [
     width: '10%',
     align: 'left',
     renderBodyCell: ({ row, column, rowIndex }, h) => {
-      return <span domPropsInnerHTML={row.type}></span>
+      return <span innerHTML={row.type}></span>
     },
   },
   {
@@ -38,7 +38,7 @@ const columnsType1 = [
     width: '10%',
     align: 'left',
     renderBodyCell: ({ row, column, rowIndex }, h) => {
-      return <span domPropsInnerHTML={row.optionalVal}></span>
+      return <span innerHTML={row.optionalVal}></span>
     },
   },
   {
@@ -48,7 +48,7 @@ const columnsType1 = [
     width: '10%',
     align: 'left',
     renderBodyCell: ({ row, column, rowIndex }, h) => {
-      return <span domPropsInnerHTML={row.default}></span>
+      return <span innerHTML={row.default}></span>
     },
   },
 ]
@@ -63,7 +63,7 @@ const columnsType2 = [
   //     align: "left",
   //     type: "expand",
   //     renderBodyCell: ({ row, column, rowIndex }, h) => {
-  //         return <span domPropsInnerHTML={row.param}></span>;
+  //         return <span innerHTML={row.param}></span>;
   //     },
   // },
   {
@@ -73,7 +73,7 @@ const columnsType2 = [
     width: '15%',
     align: 'left',
     renderBodyCell: ({ row, column, rowIndex }, h) => {
-      return <span domPropsInnerHTML={row.name}></span>
+      return <span innerHTML={row.name}></span>
     },
   },
   {
@@ -83,7 +83,7 @@ const columnsType2 = [
     width: '65%',
     align: 'left',
     renderBodyCell: ({ row, column, rowIndex }, h) => {
-      return <span domPropsInnerHTML={row.desc}></span>
+      return <span innerHTML={row.desc}></span>
     },
   },
   {
@@ -93,7 +93,7 @@ const columnsType2 = [
     width: '20%',
     align: 'left',
     renderBodyCell: ({ row, column, rowIndex }, h) => {
-      return <span domPropsInnerHTML={row.param}></span>
+      return <span innerHTML={row.param}></span>
     },
   },
 ]

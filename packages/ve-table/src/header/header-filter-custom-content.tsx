@@ -82,13 +82,11 @@ export default {
   },
   render(h) {
     const compProps = {
-      props: {
-        isCustomContent: true,
-        isControlled: true,
-        visible: this.internalVisible,
-        beforeVisibleChange:
+      isCustomContent: true,
+      isControlled: true,
+      visible: this.internalVisible,
+      beforeVisibleChange:
                     this.column.filterCustom.beforeVisibleChange,
-      },
       on: {
         'on-dropdown-visible-change': this.visibleChange,
       },

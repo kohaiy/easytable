@@ -8,7 +8,7 @@ import { COMPS_NAME, EMIT_EVENTS, HOOKS_NAME } from '../util/constant'
 import { clsName, getFixedTotalWidthByColumnKey } from '../util'
 import { INSTANCE_METHODS } from './constant'
 
-export default {
+export default defineComponent({
   name: COMPS_NAME.VE_TABLE_EDIT_INPUT,
   directives: {
     focus,
@@ -482,44 +482,39 @@ export default {
     const textareaProps = {
       ref: this.textareaInputRef,
       class: textareaClass,
-      directives: [
-        {
-          name: 'focus',
-          value: {
-            focus: isEditCellFocus,
-          },
-        },
-      ],
-      domProps: { value: rawCellValue },
-      attrs: {
-        tabindex: -1,
+      value: rawCellValue,
+      title: rawCellValue,
+      tabindex: -1,
+      onInput: (e) => {
+        if (isCellEditing) {
+          this.textareaValueChange(e.target.value)
+          this.rawCellValue = e.target.value
+        }
       },
-      on: {
-        input: (e) => {
-          if (isCellEditing) {
-            this.textareaValueChange(e.target.value)
-            this.rawCellValue = e.target.value
-          }
-        },
-        click: () => {
-          this.$emit(EMIT_EVENTS.EDIT_INPUT_CLICK)
-        },
-        copy: (e) => {
-          this.$emit(EMIT_EVENTS.EDIT_INPUT_COPY, e)
-        },
-        paste: (e) => {
-          this.$emit(EMIT_EVENTS.EDIT_INPUT_PASTE, e)
-        },
-        cut: (e) => {
-          this.$emit(EMIT_EVENTS.EDIT_INPUT_CUT, e)
-        },
+      onClick: () => {
+        this.$emit(EMIT_EVENTS.EDIT_INPUT_CLICK)
+      },
+      onCopy: (e) => {
+        this.$emit(EMIT_EVENTS.EDIT_INPUT_COPY, e)
+      },
+      onPaste: (e) => {
+        this.$emit(EMIT_EVENTS.EDIT_INPUT_PASTE, e)
+      },
+      onCut: (e) => {
+        this.$emit(EMIT_EVENTS.EDIT_INPUT_CUT, e)
       },
     }
 
     return (
       <div {...containerProps}>
-        <textarea {...textareaProps}></textarea>
+        <textarea
+          {...textareaProps}
+          v-focus={{
+            focus: isEditCellFocus,
+          }}
+        >
+        </textarea>
       </div>
     )
   },
-}
+})

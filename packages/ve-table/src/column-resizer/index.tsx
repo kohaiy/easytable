@@ -2,7 +2,7 @@ import { isNumber } from '@easytable/common/utils'
 import { clsName } from '../util'
 import { COMPS_NAME, HOOKS_NAME } from '../util/constant'
 
-export default {
+export default defineComponent({
   name: COMPS_NAME.VE_TABLE_COLUMN_RESISZER,
   props: {
     parentRendered: {
@@ -200,9 +200,7 @@ export default {
       let differWidth
       // 拖动小于列最小宽度
       if (
-        currentResizingColumn._realTimeWidth
-        + (event.clientX - columnResizerStartX)
-        < columnMinWidth
+        currentResizingColumn._realTimeWidth + (event.clientX - columnResizerStartX) < columnMinWidth
       ) {
         differWidth
                     = columnMinWidth - currentResizingColumn._realTimeWidth
@@ -281,22 +279,20 @@ export default {
         top: `${top}px`,
         height: `${height}px`,
       },
-      on: {
-        click: () => {
-          //
-        },
-        mousedown: (event) => {
-          this.columnResizerHandlerMousedown({ event })
-        },
-        mouseenter: () => {
-          this.setIsColumnResizerHover(true)
-        },
-        mouseleave: () => {
-          this.setIsColumnResizerHover(false)
-        },
-        mouseup: (event) => {
-          this.columnResizerMouseup(event)
-        },
+      onClick: () => {
+        //
+      },
+      onMousedown: (event) => {
+        this.columnResizerHandlerMousedown({ event })
+      },
+      onMouseenter: () => {
+        this.setIsColumnResizerHover(true)
+      },
+      onMouseleave: () => {
+        this.setIsColumnResizerHover(false)
+      },
+      onMouseup: (event) => {
+        this.columnResizerMouseup(event)
       },
     }
 
@@ -315,4 +311,4 @@ export default {
       </div>
     )
   },
-}
+})

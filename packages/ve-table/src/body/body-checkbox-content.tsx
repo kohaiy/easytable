@@ -1,11 +1,9 @@
 import emitter from '@easytable/common/mixins/emitter'
+import VeCheckbox from '@easytable/ve-checkbox'
 import { COMPS_NAME, EMIT_EVENTS } from '../util/constant'
 import { clsName } from '../util'
 
-// import VeCheckbox from 'vue-easytable/packages/ve-checkbox'
-const VeCheckbox = () => 'VeCheckbox'
-
-export default {
+export default defineComponent({
   name: COMPS_NAME.VE_TABLE_BODY_CHECKBOX_CONTENT,
   mixins: [emitter],
   props: {
@@ -88,7 +86,7 @@ export default {
     },
 
     // selected change
-    selectedChange(isSelected) {
+    selectedChange(isSelected: boolean) {
       const { isControlledProp } = this
 
       // 非受控
@@ -110,16 +108,12 @@ export default {
 
     const checkboxProps = {
       class: clsName('checkbox-wrapper'),
-      props: {
-        isControlled: true,
-        isSelected,
-        disabled,
-      },
-      on: {
-        'on-checked-change': isSelected => selectedChange(isSelected),
-      },
+      isControlled: true,
+      isSelected,
+      disabled,
+      onOnCheckedChange: (isSelected: boolean) => selectedChange(isSelected),
     }
 
     return <VeCheckbox {...checkboxProps} />
   },
-}
+})

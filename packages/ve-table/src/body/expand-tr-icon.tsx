@@ -1,10 +1,8 @@
 import { ICON_NAMES } from '@easytable/common/utils/constant'
 import { computed, defineComponent } from 'vue'
+import VeIcon from '@easytable/ve-icon'
 import { clsName } from '../util'
 import { COLUMN_TYPES, COMPS_NAME } from '../util/constant'
-
-// import VeIcon from 'vue-easytable/packages/ve-icon'
-const VeIcon = () => 'VeIcon'
 
 export default defineComponent({
   name: COMPS_NAME.VE_TABLE_EXPAND_TR_ICON,

@@ -1579,3 +1579,12 @@ export function cancelColumnFixed({
     return colItem
   })
 }
+
+/**
+ * 转换 vue2 的事件名为 vue3
+ * @param event emit 事件名 `on-aaa-bbb`
+ * @returns 转换后 Vue3 jsx 的事件名 `onOnAaaBbb`
+ */
+export function getEmitEventName(event: string) {
+  return `on${event.replace(/-?\b(\w)/g, (_, $1) => $1.toUpperCase())}`
+}

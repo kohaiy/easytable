@@ -24,6 +24,7 @@ import emitter from '@easytable/common/mixins/emitter'
 import clickoutside from '@easytable/common/directives/clickoutside'
 import VueDomResizeObserver from '@easytable/common/comps/resize-observer'
 import { isInputKeyCode } from '@easytable/common/utils/event-key-codes'
+import mitt from 'mitt'
 import {
   cancelColumnFixed,
   cellAutofill,
@@ -31,6 +32,7 @@ import {
   createEmptyRowData,
   getColKeysByHeaderColumn,
   getColumnByColkey,
+  getEmitEventName,
   getLeftmostColKey,
   getNotFixedTotalWidthByColumnKey,
   getRowKey,
@@ -87,6 +89,11 @@ export default defineComponent({
     'click-outside': clickoutside,
   },
   mixins: [emitter],
+  provide() {
+    return {
+      eventBus: this.eventBus,
+    }
+  },
   props: {
     tableData: {
       required: true,
@@ -274,6 +281,7 @@ export default defineComponent({
   },
   data() {
     return {
+      eventBus: mitt(),
       // Hooks instance
       hooks: {},
       // is parent rendered
@@ -903,37 +911,33 @@ export default defineComponent({
 
     // create hook instance
     this.hooks = new Hooks()
-    return
     // receive sort change
-    this.$on(EMIT_EVENTS.SORT_CHANGE, (params) => {
+    this.eventBus.on(EMIT_EVENTS.SORT_CHANGE, (params) => {
       this.updateColgroupsBySortChange(params)
     })
 
     // receive row selected change
-    this.$on(EMIT_EVENTS.CHECKBOX_SELECTED_ALL_CHANGE, (params) => {
+    this.eventBus.on(EMIT_EVENTS.CHECKBOX_SELECTED_ALL_CHANGE, (params) => {
       this.selectedAllChange(params)
     })
 
     // receive selected all info
-    this.$on(EMIT_EVENTS.CHECKBOX_SELECTED_ALL_INFO, (params) => {
+    this.eventBus.on(EMIT_EVENTS.CHECKBOX_SELECTED_ALL_INFO, (params) => {
       this.setSelectedAllInfo(params)
     })
 
     // receive multiple header row height change
-    this.$on(
-      EMIT_EVENTS.HEADER_ROW_HEIGHT_CHANGE,
-      ({ rowIndex, height }) => {
-        this.headerRowHeightChange({ rowIndex, height })
-      },
-    )
+    this.eventBus.on(EMIT_EVENTS.HEADER_ROW_HEIGHT_CHANGE, ({ rowIndex, height }: any) => {
+      this.headerRowHeightChange({ rowIndex, height })
+    })
 
     // receive virtual scroll row height change
-    this.$on(EMIT_EVENTS.BODY_ROW_HEIGHT_CHANGE, ({ rowKey, height }) => {
+    this.eventBus.on(EMIT_EVENTS.BODY_ROW_HEIGHT_CHANGE, ({ rowKey, height }) => {
       this.bodyRowHeightChange({ rowKey, height })
     })
 
     // receive footer row height change
-    this.$on(
+    this.eventBus.on(
       EMIT_EVENTS.FOOTER_ROW_HEIGHT_CHANGE,
       ({ rowIndex, height }) => {
         this.footRowHeightChange({ rowIndex, height })
@@ -941,82 +945,82 @@ export default defineComponent({
     )
 
     // recieve body cell click
-    this.$on(EMIT_EVENTS.BODY_CELL_CLICK, (params) => {
+    this.eventBus.on(EMIT_EVENTS.BODY_CELL_CLICK, (params) => {
       this.bodyCellClick(params)
     })
 
     // recieve body cell mouseover
-    this.$on(EMIT_EVENTS.BODY_CELL_MOUSEOVER, (params) => {
+    this.eventBus.on(EMIT_EVENTS.BODY_CELL_MOUSEOVER, (params) => {
       this.bodyCellMouseover(params)
     })
 
     // recieve body cell mousedown
-    this.$on(EMIT_EVENTS.BODY_CELL_MOUSEDOWN, (params) => {
+    this.eventBus.on(EMIT_EVENTS.BODY_CELL_MOUSEDOWN, (params) => {
       this.bodyCellMousedown(params)
     })
 
     // recieve body cell mousemove
-    this.$on(EMIT_EVENTS.BODY_CELL_MOUSEMOVE, (params) => {
+    this.eventBus.on(EMIT_EVENTS.BODY_CELL_MOUSEMOVE, (params) => {
       this.bodyCellMousemove(params)
     })
 
     // recieve body cell mouseup
-    this.$on(EMIT_EVENTS.BODY_CELL_MOUSEUP, (params) => {
+    this.eventBus.on(EMIT_EVENTS.BODY_CELL_MOUSEUP, (params) => {
       this.bodyCellMouseup(params)
     })
 
     // recieve selection corner mousedown
-    this.$on(EMIT_EVENTS.SELECTION_CORNER_MOUSEDOWN, (params) => {
+    this.eventBus.on(EMIT_EVENTS.SELECTION_CORNER_MOUSEDOWN, (params) => {
       this.cellSelectionCornerMousedown(params)
     })
 
     // recieve selection corner mouseup
-    this.$on(EMIT_EVENTS.SELECTION_CORNER_MOUSEUP, (params) => {
+    this.eventBus.on(EMIT_EVENTS.SELECTION_CORNER_MOUSEUP, (params) => {
       this.cellSelectionCornerMouseup(params)
     })
 
     // autofilling direction change
-    this.$on(EMIT_EVENTS.AUTOFILLING_DIRECTION_CHANGE, (params) => {
+    this.eventBus.on(EMIT_EVENTS.AUTOFILLING_DIRECTION_CHANGE, (params) => {
       this.autofillingDirectionChange(params)
     })
 
     // recieve body cell contextmenu(right click)
-    this.$on(EMIT_EVENTS.BODY_CELL_CONTEXTMENU, (params) => {
+    this.eventBus.on(EMIT_EVENTS.BODY_CELL_CONTEXTMENU, (params) => {
       this.bodyCellContextmenu(params)
     })
 
     // recieve body cell double click
-    this.$on(EMIT_EVENTS.BODY_CELL_DOUBLE_CLICK, (params) => {
+    this.eventBus.on(EMIT_EVENTS.BODY_CELL_DOUBLE_CLICK, (params) => {
       this.bodyCellDoubleClick(params)
     })
 
     // recieve header cell contextmenu(right click)
-    this.$on(EMIT_EVENTS.HEADER_CELL_CLICK, (params) => {
+    this.eventBus.on(EMIT_EVENTS.HEADER_CELL_CLICK, (params) => {
       this.headerCellClick(params)
     })
 
     // recieve header cell contextmenu(right click)
-    this.$on(EMIT_EVENTS.HEADER_CELL_CONTEXTMENU, (params) => {
+    this.eventBus.on(EMIT_EVENTS.HEADER_CELL_CONTEXTMENU, (params) => {
       this.headerCellContextmenu(params)
     })
 
     // recieve header cell mousedown
-    this.$on(EMIT_EVENTS.HEADER_CELL_MOUSEDOWN, (params) => {
+    this.eventBus.on(EMIT_EVENTS.HEADER_CELL_MOUSEDOWN, (params) => {
       this.headerCellMousedown(params)
     })
 
     // recieve header cell mouseover
-    this.$on(EMIT_EVENTS.HEADER_CELL_MOUSEOVER, (params) => {
+    this.eventBus.on(EMIT_EVENTS.HEADER_CELL_MOUSEOVER, (params) => {
       this.headerCellMouseover(params)
     })
 
     // recieve header cell mousemove
-    this.$on(EMIT_EVENTS.HEADER_CELL_MOUSEMOVE, (params) => {
+    this.eventBus.on(EMIT_EVENTS.HEADER_CELL_MOUSEMOVE, (params) => {
       this.headerCellMousemove(params)
     })
 
     // recieve header cell mouseleave
-    this.$on(EMIT_EVENTS.HEADER_CELL_MOUSELEAVE, (params) => {
+    this.eventBus.on(EMIT_EVENTS.HEADER_CELL_MOUSELEAVE, (params) => {
       this.headerCellMouseleave(params)
     })
 
@@ -1949,16 +1953,12 @@ export default defineComponent({
 
       if (isVirtualScroll || (hasLeftFixedColumn && expandOption)) {
         const props = {
-          props: {
-            tagName: 'div',
-          },
+          tagName: 'div',
           style: {
             width: '100%',
           },
-          on: {
-            'on-dom-resize-change': ({ width }) => {
-              this.tableViewportWidth = width
-            },
+          onOnDomResizeChange: ({ width }) => {
+            this.tableViewportWidth = width
           },
         }
 
@@ -2944,6 +2944,8 @@ export default defineComponent({
 
     // update editing cell value
     updateEditingCellValue(value) {
+      console.log('updateEditingCellValue', value)
+
       const { editingCell } = this
       const { row, column } = editingCell
       row[column.field] = value
@@ -3833,13 +3835,11 @@ export default defineComponent({
       cellSelectionData,
       cellSelectionRangeData,
       headerIndicatorColKeys,
-      nativeOn: {
-        click: () => {
-          this[INSTANCE_METHODS.STOP_EDITING_CELL]()
-        },
-        mouseleave: (event) => {
-          this.headerMouseleave(event)
-        },
+      onClick: () => {
+        this[INSTANCE_METHODS.STOP_EDITING_CELL]()
+      },
+      onMouseleave: (event) => {
+        this.headerMouseleave(event)
       },
     }
 
@@ -3869,12 +3869,10 @@ export default defineComponent({
       highlightRowKey: this.highlightRowKey,
       showVirtualScrollingPlaceholder,
       bodyIndicatorRowKeys,
-      on: {
-        [EMIT_EVENTS.BODY_CELL_WIDTH_CHANGE]:
+      [getEmitEventName(EMIT_EVENTS.BODY_CELL_WIDTH_CHANGE)]:
                     debouncedBodyCellWidthChange,
-        [EMIT_EVENTS.HIGHLIGHT_ROW_CHANGE]:
+      [getEmitEventName(EMIT_EVENTS.HIGHLIGHT_ROW_CHANGE)]:
                     this[INSTANCE_METHODS.SET_HIGHLIGHT_ROW],
-      },
     }
 
     // footer props
@@ -3890,10 +3888,8 @@ export default defineComponent({
       hasFixedColumn: this.hasFixedColumn,
       allRowKeys,
       footerRows: this.footerRows,
-      nativeOn: {
-        click: () => {
-          this[INSTANCE_METHODS.STOP_EDITING_CELL]()
-        },
+      onClick: () => {
+        this[INSTANCE_METHODS.STOP_EDITING_CELL]()
       },
     }
 
@@ -3922,14 +3918,6 @@ export default defineComponent({
         this.setScrollBarStatus()
         this.hooks.triggerHook(HOOKS_NAME.TABLE_SIZE_CHANGE)
       },
-      directives: [
-        {
-          name: 'click-outside',
-          value: (e) => {
-            this.tableClickOutside(e)
-          },
-        },
-      ],
     }
 
     // table container props
@@ -3937,50 +3925,48 @@ export default defineComponent({
       ref: this.tableContainerRef,
       class: this.tableContainerClass,
       style: tableContainerStyle,
-      on: {
-        scroll: () => {
-          const tableContainerRef
+      onScroll: () => {
+        const tableContainerRef
                         = this.$refs[this.tableContainerRef]
 
-          this.hooks.triggerHook(
-            HOOKS_NAME.TABLE_CONTAINER_SCROLL,
+        this.hooks.triggerHook(
+          HOOKS_NAME.TABLE_CONTAINER_SCROLL,
+          tableContainerRef,
+        )
+        this.setScrolling(tableContainerRef)
+
+        if (isVirtualScroll) {
+          this.tableContainerVirtualScrollHandler(
             tableContainerRef,
           )
-          this.setScrolling(tableContainerRef)
 
-          if (isVirtualScroll) {
-            this.tableContainerVirtualScrollHandler(
-              tableContainerRef,
-            )
+          const {
+            virtualScrollStartIndex: startIndex,
+            previewVirtualScrollStartIndex: previewStartIndex,
+          } = this
 
-            const {
-              virtualScrollStartIndex: startIndex,
-              previewVirtualScrollStartIndex: previewStartIndex,
-            } = this
+          const differ = Math.abs(startIndex - previewStartIndex)
 
-            const differ = Math.abs(startIndex - previewStartIndex)
+          this.previewVirtualScrollStartIndex = startIndex
 
-            this.previewVirtualScrollStartIndex = startIndex
+          // default placeholder per scrolling row count
+          if (
+            differ > this.defaultPlaceholderPerScrollingRowCount
+          )
+            this.showVirtualScrollingPlaceholder = true
 
-            // default placeholder per scrolling row count
-            if (
-              differ > this.defaultPlaceholderPerScrollingRowCount
-            )
-              this.showVirtualScrollingPlaceholder = true
+          else
+            this.showVirtualScrollingPlaceholder = false
 
-            else
-              this.showVirtualScrollingPlaceholder = false
-
-            this.debounceScrollEnded()
-          }
-        },
-        mouseup: () => {
-          // 事件的先后顺序 containerMouseup > bodyCellMousedown > bodyCellMouseup > bodyCellClick
-          this.tableContainerMouseup()
-        },
-        mousemove: (event) => {
-          // todo
-        },
+          this.debounceScrollEnded()
+        }
+      },
+      onMouseup: () => {
+        // 事件的先后顺序 containerMouseup > bodyCellMousedown > bodyCellMouseup > bodyCellClick
+        this.tableContainerMouseup()
+      },
+      onMousemove: (event) => {
+        // todo
       },
     }
 
@@ -4018,10 +4004,8 @@ export default defineComponent({
       virtualScrollVisibleIndexs: this.virtualScrollVisibleIndexs,
       isCellEditing: this.isCellEditing,
       cellAutofillOption: this.cellAutofillOption,
-      on: {
-        [EMIT_EVENTS.CELL_SELECTION_RANGE_DATA_CHANGE]: (newData) => {
-          this.cellSelectionRangeDataChange(newData)
-        },
+      [getEmitEventName(EMIT_EVENTS.CELL_SELECTION_RANGE_DATA_CHANGE)]: (newData) => {
+        this.cellSelectionRangeDataChange(newData)
       },
     }
 
@@ -4042,63 +4026,60 @@ export default defineComponent({
       hasYScrollBar: this.hasYScrollBar,
       hasRightFixedColumn: this.hasRightFixedColumn,
       scrollBarWidth: this.getScrollBarWidth(),
-      on: {
-        // edit input click
-        [EMIT_EVENTS.EDIT_INPUT_CLICK]: () => {
-          this.enableStopEditing = false
-        },
-        // edit input value change
-        [EMIT_EVENTS.EDIT_INPUT_VALUE_CHANGE]: (value) => {
-          this.updateEditingCellValue(value)
-        },
-        // copy
-        [EMIT_EVENTS.EDIT_INPUT_COPY]: (e) => {
-          this.editorCopy(e)
-        },
-        // paste
-        [EMIT_EVENTS.EDIT_INPUT_PASTE]: (e) => {
-          this.editorPaste(e)
-        },
-        // cut
-        [EMIT_EVENTS.EDIT_INPUT_CUT]: (e) => {
-          this.editorCut(e)
-        },
+      // edit input click
+      [getEmitEventName(EMIT_EVENTS.EDIT_INPUT_CLICK)]: () => {
+        this.enableStopEditing = false
+      },
+      // edit input value change
+      [getEmitEventName(EMIT_EVENTS.EDIT_INPUT_VALUE_CHANGE)]: (value) => {
+        this.updateEditingCellValue(value)
+      },
+      // copy
+      [getEmitEventName(EMIT_EVENTS.EDIT_INPUT_COPY)]: (e) => {
+        this.editorCopy(e)
+      },
+      // paste
+      [getEmitEventName(EMIT_EVENTS.EDIT_INPUT_PASTE)]: (e) => {
+        this.editorPaste(e)
+      },
+      // cut
+      [getEmitEventName(EMIT_EVENTS.EDIT_INPUT_CUT)]: (e) => {
+        this.editorCut(e)
       },
     }
 
     // 直接在组件上写事件，单元测试无法通过。如 on={{"on-node-click":()=>{}}}
     const contextmenuProps = {
       ref: this.contextmenuRef,
-      props: {
-        eventTarget: this.contextmenuEventTarget,
-        options: contextmenuOptions,
-      },
-      on: {
-        'on-node-click': (type) => {
-          this.contextmenuItemClick(type)
-        },
+      eventTarget: this.contextmenuEventTarget,
+      options: contextmenuOptions,
+      onOnNodeClick: (type) => {
+        this.contextmenuItemClick(type)
       },
     }
 
     // column resizer props
     const columnResizerProps = {
-      props: {
-        parentRendered: this.parentRendered,
-        tableContainerEl: this.$refs[this.tableContainerRef],
-        hooks: this.hooks,
-        colgroups,
-        isColumnResizerHover: this.isColumnResizerHover,
-        isColumnResizing: this.isColumnResizing,
-        setIsColumnResizerHover: this.setIsColumnResizerHover,
-        setIsColumnResizing: this.setIsColumnResizing,
-        setColumnWidth: this.setColumnWidth,
-        columnWidthResizeOption: this.columnWidthResizeOption,
-      },
+      parentRendered: this.parentRendered,
+      tableContainerEl: this.$refs[this.tableContainerRef],
+      hooks: this.hooks,
+      colgroups,
+      isColumnResizerHover: this.isColumnResizerHover,
+      isColumnResizing: this.isColumnResizing,
+      setIsColumnResizerHover: this.setIsColumnResizerHover,
+      setIsColumnResizing: this.setIsColumnResizing,
+      setColumnWidth: this.setColumnWidth,
+      columnWidthResizeOption: this.columnWidthResizeOption,
     }
 
     return (
       <div {...tableRootProps}>
-        <VueDomResizeObserver {...tableContainerWrapperProps}>
+        <VueDomResizeObserver
+          {...tableContainerWrapperProps}
+          v-click-outside={(e) => {
+            this.tableClickOutside(e)
+          }}
+        >
           <div {...tableContainerProps}>
             {/* virtual view phantom */}
             {this.getVirtualViewPhantom()}

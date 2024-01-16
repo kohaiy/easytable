@@ -49,7 +49,7 @@
                         width: 200,
                         align: "left",
                         renderBodyCell: ({ row }, h) => {
-                            return <span domPropsInnerHTML={row.name}></span>;
+                            return <span innerHTML={row.name}></span>;
                         },
                     },
                     {

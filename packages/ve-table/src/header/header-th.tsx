@@ -13,7 +13,7 @@ import HeaderFilterContent from './header-filter-content'
 import HeaderFilterCustomContent from './header-filter-custom-content'
 import HeaderCheckboxContent from './header-checkbox-content'
 
-export default {
+export default defineComponent({
   name: COMPS_NAME.VE_TABLE_THADER_Th,
   mixins: [emitter],
   props: {
@@ -344,10 +344,8 @@ export default {
         if (!checkboxOption.hideSelectAll) {
           // checkbox content props
           const checkboxProps = {
-            props: {
-              column: this.groupColumnItem,
-              checkboxOption: this.checkboxOption,
-            },
+            column: this.groupColumnItem,
+            checkboxOption: this.checkboxOption,
           }
 
           result = <HeaderCheckboxContent {...checkboxProps} />
@@ -426,9 +424,7 @@ export default {
       if (groupColumnItem.filter) {
         // filter content props
         const filterProps = {
-          props: {
-            column: this.groupColumnItem,
-          },
+          column: this.groupColumnItem,
         }
         result = <HeaderFilterContent {...filterProps} />
       }
@@ -444,9 +440,7 @@ export default {
       if (groupColumnItem.filterCustom) {
         // filter content props
         const filterProps = {
-          props: {
-            column: this.groupColumnItem,
-          },
+          column: this.groupColumnItem,
         }
         result = <HeaderFilterCustomContent {...filterProps} />
       }
@@ -600,7 +594,7 @@ export default {
     } = customEvents
 
     const events = {
-      click: (e) => {
+      onClick: (e) => {
         this.cellClick(e, click)
 
         if (
@@ -609,28 +603,28 @@ export default {
         )
           this.sortChange()
       },
-      dblclick: (e) => {
+      onDblclick: (e) => {
         this.cellDblclick(e, dblclick)
       },
-      contextmenu: (e) => {
+      onContextmenu: (e) => {
         this.cellContextmenu(e, contextmenu)
       },
-      mouseenter: (e) => {
+      onMouseenter: (e) => {
         this.cellMouseenter(e, mouseenter)
       },
-      mouseleave: (e) => {
+      onMouseleave: (e) => {
         this.cellMouseleave(e, mouseleave)
       },
-      mousemove: (e) => {
+      onMousemove: (e) => {
         this.cellMousemove(e, mousemove)
       },
-      mouseover: (e) => {
+      onMouseover: (e) => {
         this.cellMouseover(e, mouseover)
       },
-      mousedown: (e) => {
+      onMousedown: (e) => {
         this.cellMousedown(e, mousedown)
       },
-      mouseup: (e) => {
+      onMouseup: (e) => {
         this.cellMouseup(e, mouseup)
       },
     }
@@ -638,11 +632,9 @@ export default {
     const thProps = {
       style: getTheadThStyle(groupColumnItem, rowIndex),
       class: getTheadThClass(groupColumnItem),
-      attrs: {
-        rowspan: groupColumnItem._rowspan,
-        colspan: groupColumnItem._colspan,
-      },
-      on: events,
+      rowspan: groupColumnItem._rowspan,
+      colspan: groupColumnItem._colspan,
+      ...events,
     }
 
     return (
@@ -659,4 +651,4 @@ export default {
       </th>
     )
   },
-}
+})

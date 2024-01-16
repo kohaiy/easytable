@@ -13,9 +13,10 @@ import ExpandTrIcon from './expand-tr-icon'
 import BodyRadioContent from './body-radio-content'
 import BodyCheckboxContent from './body-checkbox-content'
 
-export default {
+export default defineComponent({
   name: COMPS_NAME.VE_TABLE_BODY_TD,
   mixins: [emitter],
+  inject: ['eventBus'],
   props: {
     rowData: {
       type: Object,
@@ -365,13 +366,11 @@ export default {
       if (this.column.type === COLUMN_TYPES.CHECKBOX) {
         // checkbox content props
         const checkboxProps = {
-          props: {
-            column: this.column,
-            checkboxOption: this.checkboxOption,
-            rowKey: this.rowData[this.rowKeyFieldName],
-            internalCheckboxSelectedRowKeys:
+          column: this.column,
+          checkboxOption: this.checkboxOption,
+          rowKey: this.rowData[this.rowKeyFieldName],
+          internalCheckboxSelectedRowKeys:
                             this.internalCheckboxSelectedRowKeys,
-          },
         }
 
         return <BodyCheckboxContent {...checkboxProps} />
@@ -384,13 +383,11 @@ export default {
       if (this.column.type === COLUMN_TYPES.RADIO) {
         // radio props
         const radioProps = {
-          props: {
-            column: this.column,
-            radioOption: this.radioOption,
-            rowKey: this.rowData[this.rowKeyFieldName],
-            internalRadioSelectedRowKey:
+          column: this.column,
+          radioOption: this.radioOption,
+          rowKey: this.rowData[this.rowKeyFieldName],
+          internalRadioSelectedRowKey:
                             this.internalRadioSelectedRowKey,
-          },
         }
 
         return <BodyRadioContent {...radioProps} />
@@ -573,14 +570,12 @@ export default {
 
     // expand icon props
     const expandIconProps = {
-      props: {
-        rowData,
-        column,
-        expandOption,
-        expandedRowkeys,
-        rowKeyFieldName,
-        cellClick,
-      },
+      rowData,
+      column,
+      expandOption,
+      expandedRowkeys,
+      rowKeyFieldName,
+      cellClick,
     }
 
     const { rowspan, colspan } = this.getCellSpan()
@@ -588,7 +583,7 @@ export default {
       return null
 
     // custom on cell event
-    let customEvents = {}
+    let customEvents: Record<string, any> = {}
     if (eventCustomOption) {
       const { bodyCellEvents } = eventCustomOption
 
@@ -610,31 +605,31 @@ export default {
     } = customEvents
 
     const events = {
-      click: (e) => {
+      onClick: (e) => {
         this.cellClick(e, click)
       },
-      dblclick: (e) => {
+      onDblclick: (e) => {
         this.cellDblclick(e, dblclick)
       },
-      contextmenu: (e) => {
+      onContextmenu: (e) => {
         this.cellContextmenu(e, contextmenu)
       },
-      mouseenter: (e) => {
+      onMouseenter: (e) => {
         this.cellMouseenter(e, mouseenter)
       },
-      mouseleave: (e) => {
+      onMouseleave: (e) => {
         this.cellMouseleave(e, mouseleave)
       },
-      mousemove: (e) => {
+      onMousemove: (e) => {
         this.cellMousemove(e, mousemove)
       },
-      mouseover: (e) => {
+      onMouseover: (e) => {
         this.cellMouseover(e, mouseover)
       },
-      mousedown: (e) => {
+      onMousedown: (e) => {
         this.cellMousedown(e, mousedown)
       },
-      mouseup: (e) => {
+      onMouseup: (e) => {
         this.cellMouseup(e, mouseup)
       },
     }
@@ -643,12 +638,10 @@ export default {
     const tdProps = {
       class: this.bodyTdClass(),
       style: this.bodyTdStyle(),
-      attrs: {
-        rowspan,
-        colspan,
-        [COMPS_CUSTOM_ATTRS.BODY_COLUMN_KEY]: column.key,
-      },
-      on: events,
+      rowspan,
+      colspan,
+      [COMPS_CUSTOM_ATTRS.BODY_COLUMN_KEY]: column.key,
+      ...events,
     }
 
     return (
@@ -664,4 +657,4 @@ export default {
       </td>
     )
   },
-}
+})

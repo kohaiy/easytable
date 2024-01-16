@@ -1,9 +1,8 @@
-import { computed, defineComponent } from 'vue'
-import emitter from '@easytable/common/mixins/emitter'
 import VueDomResizeObserver from '@easytable/common/comps/resize-observer'
+import emitter from '@easytable/common/mixins/emitter'
 import { isEmptyValue } from '@easytable/common/utils'
-import { clsName } from '../util'
 import { COMPS_CUSTOM_ATTRS, COMPS_NAME, EMIT_EVENTS } from '../util/constant'
+import { clsName, getEmitEventName } from '../util'
 import BodyTd from './body-td'
 
 export default defineComponent({
@@ -151,40 +150,22 @@ export default defineComponent({
       },
     },
   },
-
-  setup(props) {
-    const {
-      colgroups,
-      expandOption,
-      expandRowChange,
-      isExpandRow,
-      expandedRowkeys,
-      checkboxOption,
-      rowKeyFieldName,
-      rowIndex,
-      rowData,
-      internalCheckboxSelectedRowKeys,
-      internalRadioSelectedRowKey,
-      radioOption,
-      cellStyleOption,
-      eventCustomOption,
-    } = props
-
+  computed: {
     // current row key
-    const currentRowKey = computed(() => {
-      const { rowKeyFieldName } = props
+    currentRowKey() {
+      const { rowKeyFieldName } = this
       return rowKeyFieldName ? this.rowData[rowKeyFieldName] : null
-    })
+    },
     // tr class
-    const trClass = computed(() => {
+    trClass() {
       let result = null
 
-      const { highlightRowKey } = props
+      const { highlightRowKey, currentRowKey } = this
 
       let isHighlight = false
 
       if (!isEmptyValue(highlightRowKey)) {
-        if (highlightRowKey === currentRowKey.value)
+        if (highlightRowKey === currentRowKey)
           isHighlight = true
       }
 
@@ -194,136 +175,7 @@ export default defineComponent({
       }
 
       return result
-    })
-
-    // get td content
-    const getTdContent = () => {
-      return colgroups.map((column) => {
-        const tdProps = {
-          key: column.key,
-          rowIndex,
-          rowData,
-          column,
-          columnCollection: props.columnCollection,
-          colgroups,
-          expandOption,
-          expandedRowkeys,
-          checkboxOption,
-          rowKeyFieldName,
-          allRowKeys: props.allRowKeys,
-          isExpandRow,
-          internalCheckboxSelectedRowKeys,
-          internalRadioSelectedRowKey,
-          radioOption,
-          cellStyleOption,
-          cellSpanOption: props.cellSpanOption,
-          eventCustomOption,
-          cellSelectionData: props.cellSelectionData,
-          cellSelectionRangeData: props.cellSelectionRangeData,
-          bodyIndicatorRowKeys: props.bodyIndicatorRowKeys,
-          editOption: props.editOption,
-          on: {
-            [EMIT_EVENTS.EXPAND_ROW_CHANGE]: () =>
-              expandRowChange(rowData, rowIndex),
-          },
-        }
-        return <BodyTd {...tdProps} />
-      })
-    }
-
-    let result = null
-
-    // custom on row event
-    let customEvents = {}
-    if (eventCustomOption) {
-      const { bodyRowEvents } = eventCustomOption
-      customEvents = bodyRowEvents
-        ? bodyRowEvents({ row: rowData, rowIndex })
-        : {}
-    }
-
-    const {
-      click,
-      dblclick,
-      contextmenu,
-      mouseenter,
-      mouseleave,
-      mousemove,
-      mouseover,
-      mousedown,
-      mouseup,
-    } = customEvents
-
-    const events = {
-      click: (e) => {
-        this.rowClick(e, click)
-      },
-      dblclick: (e) => {
-        this.rowDblclick(e, dblclick)
-      },
-      contextmenu: (e) => {
-        this.rowContextmenu(e, contextmenu)
-      },
-      mouseenter: (e) => {
-        this.rowMouseenter(e, mouseenter)
-      },
-      mouseleave: (e) => {
-        this.rowMouseleave(e, mouseleave)
-      },
-      mousemove: (e) => {
-        this.rowMousemove(e, mousemove)
-      },
-      mouseover: (e) => {
-        this.rowMouseover(e, mouseover)
-      },
-      mousedown: (e) => {
-        this.rowMousedown(e, mousedown)
-      },
-      mouseup: (e) => {
-        this.rowMouseup(e, mouseup)
-      },
-    }
-
-    if (props.isVirtualScroll) {
-      const props = {
-        class: trClass.value,
-        tagName: 'tr',
-        id: currentRowKey.value,
-        attrs: {
-          [COMPS_CUSTOM_ATTRS.BODY_ROW_KEY]: currentRowKey.value,
-        },
-        onOnDomResizeChange: ({ key, height }) => {
-          this.dispatch(
-            COMPS_NAME.VE_TABLE,
-            EMIT_EVENTS.BODY_ROW_HEIGHT_CHANGE,
-            {
-              rowKey: key,
-              height,
-            },
-          )
-        },
-        nativeOn: events,
-      }
-
-      result = (
-        <VueDomResizeObserver {...props}>
-          {getTdContent()}
-        </VueDomResizeObserver>
-      )
-    }
-    else {
-      const props = {
-        class: trClass.value,
-        attrs: {
-          [COMPS_CUSTOM_ATTRS.BODY_ROW_KEY]: currentRowKey.value,
-        },
-        on: events,
-      }
-
-      result = <tr {...props}>{getTdContent()}</tr>
-    }
-
-    return () => result
+    },
   },
 
   methods: {
@@ -374,5 +226,147 @@ export default defineComponent({
     rowMouseup(e, fn) {
       fn && fn(e)
     },
+  },
+
+  render() {
+    const {
+      colgroups,
+      expandOption,
+      expandRowChange,
+      isExpandRow,
+      expandedRowkeys,
+      checkboxOption,
+      rowKeyFieldName,
+      rowIndex,
+      rowData,
+      internalCheckboxSelectedRowKeys,
+      internalRadioSelectedRowKey,
+      radioOption,
+      cellStyleOption,
+      eventCustomOption,
+    } = this
+
+    // get td content
+    const getTdContent = () => {
+      return colgroups.map((column: any) => {
+        const tdProps = {
+          key: column.key,
+          rowIndex,
+          rowData,
+          column,
+          columnCollection: this.columnCollection,
+          colgroups,
+          expandOption,
+          expandedRowkeys,
+          checkboxOption,
+          rowKeyFieldName,
+          allRowKeys: this.allRowKeys,
+          isExpandRow,
+          internalCheckboxSelectedRowKeys,
+          internalRadioSelectedRowKey,
+          radioOption,
+          cellStyleOption,
+          cellSpanOption: this.cellSpanOption,
+          eventCustomOption,
+          cellSelectionData: this.cellSelectionData,
+          cellSelectionRangeData: this.cellSelectionRangeData,
+          bodyIndicatorRowKeys: this.bodyIndicatorRowKeys,
+          editOption: this.editOption,
+          [EMIT_EVENTS.EXPAND_ROW_CHANGE]: () =>
+            expandRowChange(rowData, rowIndex),
+        }
+        return <BodyTd {...tdProps} />
+      })
+    }
+
+    let result = null
+
+    // custom on row event
+    let customEvents = {}
+    if (eventCustomOption) {
+      const { bodyRowEvents } = eventCustomOption
+      customEvents = bodyRowEvents
+        ? bodyRowEvents({ row: rowData, rowIndex })
+        : {}
+    }
+
+    const {
+      click,
+      dblclick,
+      contextmenu,
+      mouseenter,
+      mouseleave,
+      mousemove,
+      mouseover,
+      mousedown,
+      mouseup,
+    } = customEvents
+
+    const events = {
+      onClick: (e) => {
+        this.rowClick(e, click)
+      },
+      onDblclick: (e) => {
+        this.rowDblclick(e, dblclick)
+      },
+      onContextmenu: (e) => {
+        this.rowContextmenu(e, contextmenu)
+      },
+      onMouseenter: (e) => {
+        this.rowMouseenter(e, mouseenter)
+      },
+      onMouseleave: (e) => {
+        this.rowMouseleave(e, mouseleave)
+      },
+      onMousemove: (e) => {
+        this.rowMousemove(e, mousemove)
+      },
+      onMouseover: (e) => {
+        this.rowMouseover(e, mouseover)
+      },
+      onMousedown: (e) => {
+        this.rowMousedown(e, mousedown)
+      },
+      onMouseup: (e) => {
+        this.rowMouseup(e, mouseup)
+      },
+    }
+
+    if (this.isVirtualScroll) {
+      const props = {
+        class: this.trClass,
+        tagName: 'tr',
+        id: this.currentRowKey,
+        [COMPS_CUSTOM_ATTRS.BODY_ROW_KEY]: this.currentRowKey,
+        onOnDomResizeChange: ({ key, height }) => {
+          this.dispatch(
+            COMPS_NAME.VE_TABLE,
+            EMIT_EVENTS.BODY_ROW_HEIGHT_CHANGE,
+            {
+              rowKey: key,
+              height,
+            },
+          )
+        },
+        ...events,
+      }
+
+      result = (
+        <VueDomResizeObserver {...props}>
+          {getTdContent()}
+        </VueDomResizeObserver>
+      )
+    }
+    else {
+      const props = {
+        class: this.trClass,
+        [COMPS_CUSTOM_ATTRS.BODY_ROW_KEY]: this.currentRowKey,
+        ...events,
+      }
+
+      result = <tr {...props}>{getTdContent()}</tr>
+    }
+
+    return result
   },
 })

@@ -44,8 +44,6 @@ export default defineComponent({
     })
     // 更新子组件选中状态
     watch(() => props.modelValue, (newVal: string[]) => {
-      console.error('updateCheckbox', newVal)
-
       updateCheckbox(newVal)
     })
 

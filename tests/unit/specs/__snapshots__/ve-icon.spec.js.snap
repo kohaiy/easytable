@@ -1,0 +1,3 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`veIcon > render by different props 1`] = `<div><i class="ve-icon iconfont-vet icon-vet-double-right-arrow"></i><i style="color: blue;" class="ve-icon iconfont-vet icon-vet-double-right-arrow"></i><i style="font-size: 40px;" class="ve-icon iconfont-vet icon-vet-double-right-arrow"></i></div>`;

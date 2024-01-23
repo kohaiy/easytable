@@ -11,11 +11,10 @@ export default antfu({
       order: [['script', 'template'], 'style'],
     }],
   },
-  ignores: [
-    '**/font/*.js',
-  ],
 }, {
   ignores: [
     '**/font/*.js',
+    '**/*.spec.js',
+    '**/*.spec.jsx',
   ],
 })

@@ -1,0 +1,89 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`veLoading > render normal 1`] = `
+<div>
+  <div id="loading-plane" class="ve-loading-parent-relative">
+    <div style="background-color: rgba(255, 255, 255, 0.5);" class="ve-loading ve-loading-overlay ve-loading-hide">
+      <div class="ve-loading-spin-container">
+        <div class="ve-loading-spin">
+          <div style="width: 40px; height: 40px; background-color: rgb(24, 144, 255);" class="ve-loading-plane"></div>
+        </div>
+        <div style="color: rgb(24, 144, 255);" class="ve-loading-spin-tip"></div>
+      </div>
+    </div>
+  </div>
+  <div id="loading-grid" class="ve-loading-parent-relative">
+    <div style="background-color: rgba(255, 255, 255, 0.5);" class="ve-loading ve-loading-overlay ve-loading-hide">
+      <div class="ve-loading-spin-container">
+        <div class="ve-loading-spin">
+          <div style="width: 40px; height: 40px;" class="ve-loading-grid">
+            <div style="background-color: rgb(24, 144, 255);" class="ve-loading-grid-cube"></div>
+            <div style="background-color: rgb(24, 144, 255);" class="ve-loading-grid-cube"></div>
+            <div style="background-color: rgb(24, 144, 255);" class="ve-loading-grid-cube"></div>
+            <div style="background-color: rgb(24, 144, 255);" class="ve-loading-grid-cube"></div>
+            <div style="background-color: rgb(24, 144, 255);" class="ve-loading-grid-cube"></div>
+            <div style="background-color: rgb(24, 144, 255);" class="ve-loading-grid-cube"></div>
+            <div style="background-color: rgb(24, 144, 255);" class="ve-loading-grid-cube"></div>
+            <div style="background-color: rgb(24, 144, 255);" class="ve-loading-grid-cube"></div>
+            <div style="background-color: rgb(24, 144, 255);" class="ve-loading-grid-cube"></div>
+          </div>
+        </div>
+        <div style="color: rgb(24, 144, 255);" class="ve-loading-spin-tip"></div>
+      </div>
+    </div>
+  </div>
+  <div id="loading-wave" class="ve-loading-parent-relative">
+    <div style="background-color: rgba(255, 255, 255, 0.5);" class="ve-loading ve-loading-overlay ve-loading-hide">
+      <div class="ve-loading-spin-container">
+        <div class="ve-loading-spin">
+          <div style="width: 40px; height: 40px;" class="ve-loading-wave">
+            <div style="background-color: rgb(24, 144, 255);" class="ve-loading-wave-rect"></div>
+            <div style="background-color: rgb(24, 144, 255);" class="ve-loading-wave-rect"></div>
+            <div style="background-color: rgb(24, 144, 255);" class="ve-loading-wave-rect"></div>
+            <div style="background-color: rgb(24, 144, 255);" class="ve-loading-wave-rect"></div>
+            <div style="background-color: rgb(24, 144, 255);" class="ve-loading-wave-rect"></div>
+          </div>
+        </div>
+        <div style="color: rgb(24, 144, 255);" class="ve-loading-spin-tip"></div>
+      </div>
+    </div>
+  </div>
+  <div id="loading-flow" class="ve-loading-parent-relative">
+    <div style="background-color: rgba(255, 255, 255, 0.5);" class="ve-loading ve-loading-overlay ve-loading-hide">
+      <div class="ve-loading-spin-container">
+        <div class="ve-loading-spin">
+          <div style="width: 40px; height: 40px;" class="ve-loading-flow">
+            <div style="background-color: rgb(24, 144, 255);" class="ve-loading-flow-dot"></div>
+            <div style="background-color: rgb(24, 144, 255);" class="ve-loading-flow-dot"></div>
+            <div style="background-color: rgb(24, 144, 255);" class="ve-loading-flow-dot"></div>
+          </div>
+        </div>
+        <div style="color: rgb(24, 144, 255);" class="ve-loading-spin-tip"></div>
+      </div>
+    </div>
+  </div>
+  <div id="loading-bounce" class="ve-loading-parent-relative">
+    <div style="background-color: rgba(255, 255, 255, 0.5);" class="ve-loading ve-loading-overlay ve-loading-hide">
+      <div class="ve-loading-spin-container">
+        <div class="ve-loading-spin">
+          <div style="width: 40px; height: 40px;" class="ve-loading-bounce">
+            <div style="background-color: rgb(24, 144, 255);" class="ve-loading-bounce-dot"></div>
+            <div style="background-color: rgb(24, 144, 255);" class="ve-loading-bounce-dot"></div>
+          </div>
+        </div>
+        <div style="color: rgb(24, 144, 255);" class="ve-loading-spin-tip"></div>
+      </div>
+    </div>
+  </div>
+  <div id="loading-pulse" class="ve-loading-parent-relative">
+    <div style="background-color: rgba(255, 255, 255, 0.5);" class="ve-loading ve-loading-overlay ve-loading-hide">
+      <div class="ve-loading-spin-container">
+        <div class="ve-loading-spin">
+          <div style="width: 40px; height: 40px; background-color: rgb(24, 144, 255);" class="ve-loading-pulse"></div>
+        </div>
+        <div style="color: rgb(24, 144, 255);" class="ve-loading-spin-tip"></div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

@@ -192,7 +192,7 @@ export default defineComponent({
       handler(visible) {
         const { isControlled, showDropDown, hideDropDown } = this
         // deal after mounted hook
-        setTimeout(() => {
+        nextTick(() => {
           if (isControlled) {
             if (visible)
               showDropDown()
@@ -613,8 +613,8 @@ export default defineComponent({
             onClick={e => singleSelectOptionClick(e, item)}
           >
             <a
-              class={[clsName('items-li-a'), getTextAlignClass()]}
               href="javascript:void(0);"
+              class={[clsName('items-li-a'), getTextAlignClass()]}
             >
               {this.showRadio
                 ? (
@@ -663,21 +663,21 @@ export default defineComponent({
               {!isCustomContent && (
                 <div>
                   <div
+                    class={clsName('items-warpper')}
                     style={{
                       'max-height': `${maxHeight}px`,
                     }}
-                    class={clsName('items-warpper')}
                   >
                     {content}
                   </div>
                   {showOperation && (
                     <li class={clsName('operation')}>
                       <a
+                        href="javascript:void(0)"
                         class={[
                           clsName('operation-item'),
                           this.operationFilterClass,
                         ]}
-                        href="javascript:void(0)"
                         onClick={reset}
                       >
                         {this.resetFilterText}

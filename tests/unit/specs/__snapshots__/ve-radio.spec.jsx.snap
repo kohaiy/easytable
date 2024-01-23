@@ -1,0 +1,10 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`veRadio > render 1`] = `
+<div>
+  <div><label class="ve-radio"><span class="ve-radio-container ve-radio-checked"><input class="ve-radio-input" type="radio"><span class="ve-radio-inner"></span></span><span class="ve-radio-label">normal</span></label></div>
+  <div><label class="ve-radio"><span class="ve-radio-container ve-radio-checked ve-radio-disabled"><input class="ve-radio-input" type="radio"><span class="ve-radio-inner"></span></span><span class="ve-radio-label">disabled checked</span></label></div>
+  <div><label class="ve-radio"><span class="ve-radio-container ve-radio-disabled"><input class="ve-radio-input" type="radio"><span class="ve-radio-inner"></span></span><span class="ve-radio-label">disabled unChecked</span></label></div>
+  <div><label class="ve-radio"><span class="ve-radio-container ve-radio-checked"><input class="ve-radio-input" type="radio"><span class="ve-radio-inner"></span></span><span class="ve-radio-label">controlled</span></label></div>
+</div>
+`;

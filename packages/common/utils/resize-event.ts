@@ -22,7 +22,6 @@ const resizeHandler = function (entries: any) {
 export const addResizeListener = function (element: HTMLElement & Record<string, any>, fn: Function) {
   if (!element.__resizeListeners__) {
     element.__resizeListeners__ = []
-    console.log('element', element)
 
     element.__ro__ = new ResizeObserver(resizeHandler)
     element.__ro__.observe(element)

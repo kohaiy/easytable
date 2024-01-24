@@ -17,8 +17,6 @@ export default defineComponent({
     },
   },
   mounted() {
-    console.log(this)
-
     addResizeListener(this.$el, this.resizeListener)
   },
   unmounted() {
@@ -37,8 +35,6 @@ export default defineComponent({
     },
   },
   render() {
-    console.log('element', this.tagName)
-
     return <this.tagName>{this.$slots.default?.()}</this.tagName>
   },
 })

@@ -88,12 +88,7 @@ export default defineComponent({
   directives: {
     'click-outside': clickoutside,
   },
-  mixins: [emitter],
-  provide() {
-    return {
-      eventBus: this.eventBus,
-    }
-  },
+  mixins: [emitter('eventBus')],
   props: {
     tableData: {
       required: true,
@@ -1194,8 +1189,8 @@ export default defineComponent({
          * @desc  selected all change
          * @param {bool} isSelected - is selected
          */
-    selectedAllChange({ isSelected }) {
-      this.broadcast(
+    selectedAllChange({ isSelected }: { isSelected: boolean }) {
+      this.dispatch(
         COMPS_NAME.VE_TABLE_BODY,
         EMIT_EVENTS.CHECKBOX_SELECTED_ALL_CHANGE,
         {
@@ -1210,8 +1205,8 @@ export default defineComponent({
          * @param {bool} isSelected - is selected
          * @param {bool} isIndeterminate - is indeterminate
          */
-    setSelectedAllInfo({ isSelected, isIndeterminate }) {
-      this.broadcast(
+    setSelectedAllInfo({ isSelected, isIndeterminate }: { isSelected: boolean, isIndeterminate: boolean }) {
+      this.dispatch(
         COMPS_NAME.VE_TABLE_HEADER_CHECKBOX_CONTENT,
         EMIT_EVENTS.CHECKBOX_SELECTED_ALL_INFO,
         {
@@ -2944,8 +2939,6 @@ export default defineComponent({
 
     // update editing cell value
     updateEditingCellValue(value) {
-      console.log('updateEditingCellValue', value)
-
       const { editingCell } = this
       const { row, column } = editingCell
       row[column.field] = value
@@ -3822,7 +3815,8 @@ export default defineComponent({
                       : '',
       },
       columnsOptionResetTime: this.columnsOptionResetTime,
-      tableViewportWidth,
+      // TODO：好像没用
+      // tableViewportWidth,
       groupColumns,
       colgroups,
       isGroupHeader: this.isGroupHeader,

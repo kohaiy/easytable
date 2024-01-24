@@ -4,9 +4,9 @@ import { clsName } from '../util'
 import { COMPS_CUSTOM_ATTRS, COMPS_NAME, EMIT_EVENTS } from '../util/constant'
 import FooterTd from './footer-td'
 
-export default {
+export default defineComponent({
   name: COMPS_NAME.VE_TABLE_BODY_TR,
-  mixins: [emitter],
+  mixins: [emitter()],
   props: {
     rowData: {
       type: Object,
@@ -243,4 +243,4 @@ export default {
       </VueDomResizeObserver>
     )
   },
-}
+})

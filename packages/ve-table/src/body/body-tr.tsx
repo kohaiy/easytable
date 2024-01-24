@@ -7,7 +7,7 @@ import BodyTd from './body-td'
 
 export default defineComponent({
   name: COMPS_NAME.VE_TABLE_BODY_TR,
-  mixins: [emitter],
+  mixins: [emitter()],
   props: {
     rowData: {
       type: Object,

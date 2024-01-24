@@ -3,9 +3,9 @@ import emitter from '@easytable/common/mixins/emitter'
 import { COMPS_NAME, EMIT_EVENTS } from '../util/constant'
 import { clsName } from '../util'
 
-export default {
+export default defineComponent({
   name: COMPS_NAME.VE_TABLE_HEADER_CHECKBOX_CONTENT,
-  mixins: [emitter],
+  mixins: [emitter()],
   props: {
     // checkbox option
     checkboxOption: {
@@ -25,7 +25,7 @@ export default {
 
   methods: {
     // selected change
-    selectedChange(isSelected) {
+    selectedChange(isSelected: boolean) {
       this.isSelected = isSelected
 
       this.dispatch(
@@ -45,7 +45,7 @@ export default {
   },
   mounted() {
     // receive selected all info
-    this.$on(EMIT_EVENTS.CHECKBOX_SELECTED_ALL_INFO, (params) => {
+    this.on(EMIT_EVENTS.CHECKBOX_SELECTED_ALL_INFO, (params) => {
       this.setSelectedAllInfo(params)
     })
   },
@@ -63,4 +63,4 @@ export default {
 
     return <VeCheckbox {...checkboxProps} />
   },
-}
+})

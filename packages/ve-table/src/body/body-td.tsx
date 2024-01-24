@@ -15,7 +15,7 @@ import BodyCheckboxContent from './body-checkbox-content'
 
 export default defineComponent({
   name: COMPS_NAME.VE_TABLE_BODY_TD,
-  mixins: [emitter],
+  mixins: [emitter()],
   inject: ['eventBus'],
   props: {
     rowData: {

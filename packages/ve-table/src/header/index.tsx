@@ -5,7 +5,7 @@ import HeaderTr from './header-tr'
 
 export default defineComponent({
   name: COMPS_NAME.VE_TABLE_THADER,
-  mixins: [emitter],
+  mixins: [emitter()],
   props: {
     columnsOptionResetTime: {
       type: Number,
@@ -144,9 +144,8 @@ export default defineComponent({
     },
   },
   mounted() {
-    return
     // receive sort change
-    this.$on(EMIT_EVENTS.SORT_CHANGE, (params) => {
+    this.on(EMIT_EVENTS.SORT_CHANGE, (params) => {
       this.sortChange(params)
     })
   },

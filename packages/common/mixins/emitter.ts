@@ -2,44 +2,34 @@
 fork from:
 https://github.com/ElemeFE/element
 */
-function broadcast(componentName, eventName, params) {
-  this.$children.forEach((child) => {
-    const name = child.$options.name
+// function broadcast(componentName, eventName, params) {
+//   this.$children.forEach((child) => {
+//     const name = child.$options.name
 
-    if (name === componentName)
-      child.$emit([eventName].concat(params))
+//     if (name === componentName)
+//       child.$emit([eventName].concat(params))
 
-    else
-      broadcast.apply(child, [componentName, eventName].concat([params]))
-  })
-}
-export default {
-  inject: ['eventBus'],
+//     else
+//       broadcast.apply(child, [componentName, eventName].concat([params]))
+//   })
+// }
+import type { Emitter, EventType } from 'mitt'
+
+type EventBus = Emitter< Record<EventType, unknown>>
+
+export default (eventBusKey?: string) => defineComponent({
+  provide() {
+    return eventBusKey ? { eventBus: (this as any)[eventBusKey] } : {}
+  },
+  inject: eventBusKey ? [] : ['eventBus'],
   methods: {
-    dispatch(componentName, eventName, params) {
-      if (componentName === 'VeTable' && this.eventBus) {
-        this.eventBus.emit(eventName, params)
-        return
-      }
-      // console.log(componentName, eventName, this.eventBus)
-
-      let parent = this.$parent || this.$root
-      let name = parent.$options.name
-
-      while (parent && (!name || name !== componentName)) {
-        parent = parent.$parent
-
-        if (parent)
-          name = parent.$options.name
-      }
-      if (parent)
-        parent.$emit(...[eventName].concat(params))
-
-      else
-        console.error(`${componentName} was not found.`)
+    dispatch(componentName: string, eventName: string, params: any) {
+      const bus = ((this as any)[eventBusKey!] || this.eventBus) as EventBus
+      bus.emit([componentName, eventName].join(), params)
     },
-    broadcast(componentName, eventName, params) {
-      broadcast.call(this, componentName, eventName, params)
+    on(eventName: string, callback: (params: any) => void) {
+      const bus = ((this as any)[eventBusKey!] || this.eventBus) as EventBus
+      bus.on([this.$options.name, eventName].join(), callback.bind(this))
     },
   },
-}
+})

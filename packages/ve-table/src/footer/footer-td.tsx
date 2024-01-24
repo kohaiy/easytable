@@ -6,7 +6,7 @@ import { COMPS_NAME } from '../util/constant'
 
 export default {
   name: COMPS_NAME.VE_TABLE_BODY_TD,
-  mixins: [emitter],
+  mixins: [emitter()],
   props: {
     rowData: {
       type: Object,

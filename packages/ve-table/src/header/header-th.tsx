@@ -15,7 +15,7 @@ import HeaderCheckboxContent from './header-checkbox-content'
 
 export default defineComponent({
   name: COMPS_NAME.VE_TABLE_THADER_Th,
-  mixins: [emitter],
+  mixins: [emitter()],
   props: {
     // group columns item
     groupColumn: {

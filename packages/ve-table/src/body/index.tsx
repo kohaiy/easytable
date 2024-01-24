@@ -24,7 +24,7 @@ const BodyTrScrolling = () => 'BodyTrScrolling'
 
 export default defineComponent({
   name: COMPS_NAME.VE_TABLE_BODY,
-  mixins: [emitter],
+  mixins: [emitter()],
   props: {
     tableViewportWidth: {
       type: Number,
@@ -387,24 +387,24 @@ export default defineComponent({
       },
     },
   },
-  mounted1() {
+  mounted() {
     // receive checkbox row selected change from VE_TABLE_BODY_CHECKBOX_CONTENT
-    this.$on(EMIT_EVENTS.CHECKBOX_SELECTED_ROW_CHANGE, (params) => {
+    this.on(EMIT_EVENTS.CHECKBOX_SELECTED_ROW_CHANGE, (params) => {
       this.checkboxSelectedRowChange(params)
     })
 
     // receive checkbox row selected change from VE_TABLE_BODY_CHECKBOX_CONTENT
-    this.$on(EMIT_EVENTS.CHECKBOX_SELECTED_ALL_CHANGE, (params) => {
+    this.on(EMIT_EVENTS.CHECKBOX_SELECTED_ALL_CHANGE, (params) => {
       this.checkboxSelectedAllChange(params)
     })
 
     // receive radio row selected change from VE_TABLE_BODY_RADIO_CONTENT
-    this.$on(EMIT_EVENTS.RADIO_SELECTED_ROW_CHANGE, (params) => {
+    this.on(EMIT_EVENTS.RADIO_SELECTED_ROW_CHANGE, (params) => {
       this.radioSelectedRowChange(params)
     })
 
     // recieve tr click
-    this.$on(EMIT_EVENTS.BODY_ROW_CLICK, (params) => {
+    this.on(EMIT_EVENTS.BODY_ROW_CLICK, (params) => {
       this.rowClick(params)
     })
 
@@ -861,8 +861,6 @@ export default defineComponent({
                 height: 0,
               },
             }
-            console.log('measureTdProps', measureTdProps)
-
             return <VueDomResizeObserver {...measureTdProps} />
           })}
         </tr>

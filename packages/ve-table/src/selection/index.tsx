@@ -25,9 +25,9 @@ import {
 } from '../util/constant'
 import { INSTANCE_METHODS } from './constant'
 
-export default {
+export default defineComponent({
   name: COMPS_NAME.VE_TABLE_SELECTION,
-  mixins: [emitter],
+  mixins: [emitter()],
   props: {
     tableEl: {
       type: HTMLTableElement,
@@ -1626,4 +1626,4 @@ export default {
       </div>
     )
   },
-}
+})

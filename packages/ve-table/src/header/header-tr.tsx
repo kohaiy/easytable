@@ -6,7 +6,7 @@ import HeaderTh from './header-th'
 
 export default defineComponent({
   name: COMPS_NAME.VE_TABLE_THADER_TR,
-  mixins: [emitter],
+  mixins: [emitter()],
   props: {
     columnsOptionResetTime: {
       type: Number,

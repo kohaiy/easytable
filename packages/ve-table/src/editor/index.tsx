@@ -13,7 +13,7 @@ export default defineComponent({
   directives: {
     focus,
   },
-  mixins: [emitter],
+  mixins: [emitter()],
   props: {
     parentRendered: {
       type: Boolean,

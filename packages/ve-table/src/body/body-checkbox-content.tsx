@@ -5,7 +5,7 @@ import { clsName } from '../util'
 
 export default defineComponent({
   name: COMPS_NAME.VE_TABLE_BODY_CHECKBOX_CONTENT,
-  mixins: [emitter],
+  mixins: [emitter()],
   props: {
     // checkbox option
     checkboxOption: {

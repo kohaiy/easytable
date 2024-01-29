@@ -1,6 +1,5 @@
-import { mount } from "@vue/test-utils";
 import veTable from "@/ve-table";
-import { later } from "../util";
+import { later, wrapMount as mount } from "../util";
 
 describe("veTable cell span", () => {
     const TABLE_DATA = [

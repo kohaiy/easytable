@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`veTable > header filter render filter custom icon 1`] = `
+exports[`veTable header filter render filter custom icon 1`] = `
 <div class="vue-table-root">
   <div class="ve-table ve-table-border-around" style="width: 100%;">
     <div class="ve-table-container ve-table-enable-cell-selection" style="height: 0px;">
@@ -91,7 +91,7 @@ exports[`veTable > header filter render filter custom icon 1`] = `
 </div>
 `;
 
-exports[`veTable > header filter render multiple filter 1`] = `
+exports[`veTable header filter render multiple filter 1`] = `
 <div class="vue-table-root">
   <div class="ve-table ve-table-border-around" style="width: 100%;">
     <div class="ve-table-container ve-table-enable-cell-selection" style="height: 0px;">
@@ -182,7 +182,7 @@ exports[`veTable > header filter render multiple filter 1`] = `
 </div>
 `;
 
-exports[`veTable > header filter render single filter 1`] = `
+exports[`veTable header filter render single filter 1`] = `
 <div class="vue-table-root">
   <div class="ve-table ve-table-border-around" style="width: 100%;">
     <div class="ve-table-container ve-table-enable-cell-selection" style="height: 0px;">

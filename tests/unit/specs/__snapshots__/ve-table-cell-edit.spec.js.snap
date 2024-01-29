@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`veTable > cell edit cell editor render 1`] = `
+exports[`veTable cell edit cell editor > render 1`] = `
 <div class="vue-table-root">
   <div class="ve-table ve-table-border-around" style="width: 100%;">
     <div class="ve-table-container ve-table-enable-cell-selection" style="height: 0px;">

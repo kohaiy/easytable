@@ -40,7 +40,7 @@ export default defineComponent({
     },
   },
   setup(props) {
-    let content = null
+    let content: JSX.Element | null = null
 
     const { cellClick, column } = props
 
@@ -75,6 +75,6 @@ export default defineComponent({
         </span>
       )
     }
-    return content
+    return () => content
   },
 })

@@ -907,32 +907,32 @@ export default defineComponent({
     // create hook instance
     this.hooks = new Hooks()
     // receive sort change
-    this.eventBus.on(EMIT_EVENTS.SORT_CHANGE, (params) => {
+    this.on(EMIT_EVENTS.SORT_CHANGE, (params) => {
       this.updateColgroupsBySortChange(params)
     })
 
     // receive row selected change
-    this.eventBus.on(EMIT_EVENTS.CHECKBOX_SELECTED_ALL_CHANGE, (params) => {
+    this.on(EMIT_EVENTS.CHECKBOX_SELECTED_ALL_CHANGE, (params) => {
       this.selectedAllChange(params)
     })
 
     // receive selected all info
-    this.eventBus.on(EMIT_EVENTS.CHECKBOX_SELECTED_ALL_INFO, (params) => {
+    this.on(EMIT_EVENTS.CHECKBOX_SELECTED_ALL_INFO, (params) => {
       this.setSelectedAllInfo(params)
     })
 
     // receive multiple header row height change
-    this.eventBus.on(EMIT_EVENTS.HEADER_ROW_HEIGHT_CHANGE, ({ rowIndex, height }: any) => {
+    this.on(EMIT_EVENTS.HEADER_ROW_HEIGHT_CHANGE, ({ rowIndex, height }: any) => {
       this.headerRowHeightChange({ rowIndex, height })
     })
 
     // receive virtual scroll row height change
-    this.eventBus.on(EMIT_EVENTS.BODY_ROW_HEIGHT_CHANGE, ({ rowKey, height }) => {
+    this.on(EMIT_EVENTS.BODY_ROW_HEIGHT_CHANGE, ({ rowKey, height }) => {
       this.bodyRowHeightChange({ rowKey, height })
     })
 
     // receive footer row height change
-    this.eventBus.on(
+    this.on(
       EMIT_EVENTS.FOOTER_ROW_HEIGHT_CHANGE,
       ({ rowIndex, height }) => {
         this.footRowHeightChange({ rowIndex, height })
@@ -940,82 +940,82 @@ export default defineComponent({
     )
 
     // recieve body cell click
-    this.eventBus.on(EMIT_EVENTS.BODY_CELL_CLICK, (params) => {
+    this.on(EMIT_EVENTS.BODY_CELL_CLICK, (params) => {
       this.bodyCellClick(params)
     })
 
     // recieve body cell mouseover
-    this.eventBus.on(EMIT_EVENTS.BODY_CELL_MOUSEOVER, (params) => {
+    this.on(EMIT_EVENTS.BODY_CELL_MOUSEOVER, (params) => {
       this.bodyCellMouseover(params)
     })
 
     // recieve body cell mousedown
-    this.eventBus.on(EMIT_EVENTS.BODY_CELL_MOUSEDOWN, (params) => {
+    this.on(EMIT_EVENTS.BODY_CELL_MOUSEDOWN, (params) => {
       this.bodyCellMousedown(params)
     })
 
     // recieve body cell mousemove
-    this.eventBus.on(EMIT_EVENTS.BODY_CELL_MOUSEMOVE, (params) => {
+    this.on(EMIT_EVENTS.BODY_CELL_MOUSEMOVE, (params) => {
       this.bodyCellMousemove(params)
     })
 
     // recieve body cell mouseup
-    this.eventBus.on(EMIT_EVENTS.BODY_CELL_MOUSEUP, (params) => {
+    this.on(EMIT_EVENTS.BODY_CELL_MOUSEUP, (params) => {
       this.bodyCellMouseup(params)
     })
 
     // recieve selection corner mousedown
-    this.eventBus.on(EMIT_EVENTS.SELECTION_CORNER_MOUSEDOWN, (params) => {
+    this.on(EMIT_EVENTS.SELECTION_CORNER_MOUSEDOWN, (params) => {
       this.cellSelectionCornerMousedown(params)
     })
 
     // recieve selection corner mouseup
-    this.eventBus.on(EMIT_EVENTS.SELECTION_CORNER_MOUSEUP, (params) => {
+    this.on(EMIT_EVENTS.SELECTION_CORNER_MOUSEUP, (params) => {
       this.cellSelectionCornerMouseup(params)
     })
 
     // autofilling direction change
-    this.eventBus.on(EMIT_EVENTS.AUTOFILLING_DIRECTION_CHANGE, (params) => {
+    this.on(EMIT_EVENTS.AUTOFILLING_DIRECTION_CHANGE, (params) => {
       this.autofillingDirectionChange(params)
     })
 
     // recieve body cell contextmenu(right click)
-    this.eventBus.on(EMIT_EVENTS.BODY_CELL_CONTEXTMENU, (params) => {
+    this.on(EMIT_EVENTS.BODY_CELL_CONTEXTMENU, (params) => {
       this.bodyCellContextmenu(params)
     })
 
     // recieve body cell double click
-    this.eventBus.on(EMIT_EVENTS.BODY_CELL_DOUBLE_CLICK, (params) => {
+    this.on(EMIT_EVENTS.BODY_CELL_DOUBLE_CLICK, (params) => {
       this.bodyCellDoubleClick(params)
     })
 
     // recieve header cell contextmenu(right click)
-    this.eventBus.on(EMIT_EVENTS.HEADER_CELL_CLICK, (params) => {
+    this.on(EMIT_EVENTS.HEADER_CELL_CLICK, (params) => {
       this.headerCellClick(params)
     })
 
     // recieve header cell contextmenu(right click)
-    this.eventBus.on(EMIT_EVENTS.HEADER_CELL_CONTEXTMENU, (params) => {
+    this.on(EMIT_EVENTS.HEADER_CELL_CONTEXTMENU, (params) => {
       this.headerCellContextmenu(params)
     })
 
     // recieve header cell mousedown
-    this.eventBus.on(EMIT_EVENTS.HEADER_CELL_MOUSEDOWN, (params) => {
+    this.on(EMIT_EVENTS.HEADER_CELL_MOUSEDOWN, (params) => {
       this.headerCellMousedown(params)
     })
 
     // recieve header cell mouseover
-    this.eventBus.on(EMIT_EVENTS.HEADER_CELL_MOUSEOVER, (params) => {
+    this.on(EMIT_EVENTS.HEADER_CELL_MOUSEOVER, (params) => {
       this.headerCellMouseover(params)
     })
 
     // recieve header cell mousemove
-    this.eventBus.on(EMIT_EVENTS.HEADER_CELL_MOUSEMOVE, (params) => {
+    this.on(EMIT_EVENTS.HEADER_CELL_MOUSEMOVE, (params) => {
       this.headerCellMousemove(params)
     })
 
     // recieve header cell mouseleave
-    this.eventBus.on(EMIT_EVENTS.HEADER_CELL_MOUSELEAVE, (params) => {
+    this.on(EMIT_EVENTS.HEADER_CELL_MOUSELEAVE, (params) => {
       this.headerCellMouseleave(params)
     })
 

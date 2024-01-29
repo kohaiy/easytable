@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`veTable > cell span render 1`] = `
+exports[`veTable cell span > render 1`] = `
 <div class="vue-table-root">
   <div class="ve-table ve-table-border-around" style="width: 100%;">
     <div class="ve-table-container" style="height: 0px;">

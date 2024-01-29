@@ -4,7 +4,7 @@ import { clsName, getFixedTotalWidthByColumnKey } from '../util'
 
 import { COMPS_NAME } from '../util/constant'
 
-export default {
+export default defineComponent({
   name: COMPS_NAME.VE_TABLE_BODY_TD,
   mixins: [emitter()],
   props: {
@@ -342,31 +342,31 @@ export default {
     } = customEvents
 
     const events = {
-      click: (e) => {
+      onClick: (e) => {
         this.cellClick(e, click)
       },
-      dblclick: (e) => {
+      onDblclick: (e) => {
         this.cellDblclick(e, dblclick)
       },
-      contextmenu: (e) => {
+      onContextmenu: (e) => {
         this.cellContextmenu(e, contextmenu)
       },
-      mouseenter: (e) => {
+      onMouseenter: (e) => {
         this.cellMouseenter(e, mouseenter)
       },
-      mouseleave: (e) => {
+      onMouseleave: (e) => {
         this.cellMouseleave(e, mouseleave)
       },
-      mousemove: (e) => {
+      onMousemove: (e) => {
         this.cellMousemove(e, mousemove)
       },
-      mouseover: (e) => {
+      onMouseover: (e) => {
         this.cellMouseover(e, mouseover)
       },
-      mousedown: (e) => {
+      onMousedown: (e) => {
         this.cellMousedown(e, mousedown)
       },
-      mouseup: (e) => {
+      onMouseup: (e) => {
         this.cellMouseup(e, mouseup)
       },
     }
@@ -375,11 +375,9 @@ export default {
     const tdProps = {
       class: this.getBodyTdClass(column),
       style: this.getBodyTdStyle(column),
-      attrs: {
-        rowspan,
-        colspan,
-      },
-      on: events,
+      rowspan,
+      colspan,
+      ...events,
     }
 
     return (
@@ -389,4 +387,4 @@ export default {
       </td>
     )
   },
-}
+})

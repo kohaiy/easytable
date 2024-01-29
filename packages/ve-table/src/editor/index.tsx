@@ -483,7 +483,7 @@ export default defineComponent({
       ref: this.textareaInputRef,
       class: textareaClass,
       value: rawCellValue,
-      title: rawCellValue,
+      // title: rawCellValue,
       tabindex: -1,
       onInput: (e) => {
         if (isCellEditing) {

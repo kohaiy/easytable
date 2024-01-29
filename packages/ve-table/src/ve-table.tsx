@@ -4015,7 +4015,6 @@ export default defineComponent({
       colgroups,
       editingCell: this.editingCell,
       isCellEditing: this.isCellEditing,
-      allRowKeys,
       hasXScrollBar: this.hasXScrollBar,
       hasYScrollBar: this.hasYScrollBar,
       hasRightFixedColumn: this.hasRightFixedColumn,

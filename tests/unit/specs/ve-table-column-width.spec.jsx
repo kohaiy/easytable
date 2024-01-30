@@ -1,7 +1,7 @@
 import { mount } from "@vue/test-utils";
 import veTable from "@/ve-table";
 
-describe("veTable clolum width", () => {
+describe("veTable column width", () => {
     const TABLE_DATA = [
         {
             name: "John",

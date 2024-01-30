@@ -1,6 +1,7 @@
 import { mount } from "@vue/test-utils";
 import veTable from "@/ve-table";
 import { later } from "../util";
+import { expect } from 'vitest';
 
 describe("veTable footer", () => {
     const TABLE_DATA = [
@@ -116,8 +117,8 @@ describe("veTable footer", () => {
                 .findAll(".ve-table-footer-tr")
                 .at(0)
                 .findAll(".ve-table-footer-td .text-bold")
-                .exists(),
-        ).toBe(true);
+                .length,
+        ).gt(0);
     });
 
     it("custom cell style", () => {
@@ -140,15 +141,14 @@ describe("veTable footer", () => {
                 },
             },
         });
-
+        
         expect(
             wrapper
                 .findAll(".ve-table-footer-tr")
                 .at(0)
                 .findAll(".ve-table-footer-td")
                 .at(3)
-                .find(".table-footer-cell-class1")
-                .exists(),
+                .classes("table-footer-cell-class1")
         ).toBe(true);
 
         expect(
@@ -157,8 +157,7 @@ describe("veTable footer", () => {
                 .at(1)
                 .findAll(".ve-table-footer-td")
                 .at(1)
-                .find(".table-footer-cell-class2")
-                .exists(),
+                .classes("table-footer-cell-class2")
         ).toBe(true);
     });
 
@@ -203,11 +202,11 @@ describe("veTable footer", () => {
     });
 
     it("custom row events", () => {
-        const mockClickFn = jest.fn();
-        const mockDblclickFn = jest.fn();
-        const mockContextmenuFn = jest.fn();
-        const mockMouseenterFn = jest.fn();
-        const mockMouseleaveFn = jest.fn();
+        const mockClickFn = vi.fn();
+        const mockDblclickFn = vi.fn();
+        const mockContextmenuFn = vi.fn();
+        const mockMouseenterFn = vi.fn();
+        const mockMouseleaveFn = vi.fn();
 
         const wrapper = mount(veTable, {
             propsData: {
@@ -278,11 +277,11 @@ describe("veTable footer", () => {
     });
 
     it("custom cell events", () => {
-        const mockClickFn = jest.fn();
-        const mockDblclickFn = jest.fn();
-        const mockContextmenuFn = jest.fn();
-        const mockMouseenterFn = jest.fn();
-        const mockMouseleaveFn = jest.fn();
+        const mockClickFn = vi.fn();
+        const mockDblclickFn = vi.fn();
+        const mockContextmenuFn = vi.fn();
+        const mockMouseenterFn = vi.fn();
+        const mockMouseleaveFn = vi.fn();
 
         const wrapper = mount(veTable, {
             propsData: {
@@ -373,8 +372,8 @@ describe("veTable footer", () => {
         });
 
         expect(
-            wrapper.findAll(".ve-table-fixed-footer .ve-table-footer").exists(),
-        ).toBe(false);
+            wrapper.findAll(".ve-table-fixed-footer .ve-table-footer").length,
+        ).toBe(0);
     });
 
     it("column fixed", () => {

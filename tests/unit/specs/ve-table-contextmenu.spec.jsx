@@ -1,6 +1,5 @@
-import { mount } from "@vue/test-utils";
 import veTable from "@/ve-table";
-import { later } from "../util";
+import { later, wrapMount as mount } from "../util";
 import { cloneDeep } from "lodash";
 
 describe("veTable contextmenu", () => {
@@ -197,7 +196,7 @@ describe("veTable contextmenu", () => {
     });
 
     it("header contextmenu beforeShow callback", async () => {
-        const mockBeforeShowFn = jest.fn();
+        const mockBeforeShowFn = vi.fn();
 
         let tableData = cloneDeep(TABLE_DATA);
 
@@ -283,7 +282,7 @@ describe("veTable contextmenu", () => {
     });
 
     it("header contextmenu afterMenuClick callback", async () => {
-        const mockAfterMenuClickFn = jest.fn();
+        const mockAfterMenuClickFn = vi.fn();
 
         let tableData = cloneDeep(TABLE_DATA);
 
@@ -352,7 +351,7 @@ describe("veTable contextmenu", () => {
         expect(contextmenuNodes.length).toBe(7);
 
         const contentmenuItemClickEvent = new MouseEvent("click", {
-            view: window, // window
+            // view: window, // window
             bubbles: true,
             cancelable: true,
         });
@@ -379,7 +378,7 @@ describe("veTable contextmenu", () => {
     });
 
     it("body contextmenu beforeShow callback", async () => {
-        const mockBeforeShowFn = jest.fn();
+        const mockBeforeShowFn = vi.fn();
 
         let tableData = cloneDeep(TABLE_DATA);
 
@@ -467,7 +466,7 @@ describe("veTable contextmenu", () => {
     });
 
     it("body contextmenu afterMenuClick callback", async () => {
-        const mockAfterMenuClickFn = jest.fn();
+        const mockAfterMenuClickFn = vi.fn();
 
         let tableData = cloneDeep(TABLE_DATA);
 
@@ -538,7 +537,7 @@ describe("veTable contextmenu", () => {
         expect(contextmenuNodes.length).toBe(6);
 
         const contentmenuItemClickEvent = new MouseEvent("click", {
-            view: window, // window
+            // view: window, // window
             bubbles: true,
             cancelable: true,
         });
@@ -565,7 +564,7 @@ describe("veTable contextmenu", () => {
     });
 
     // it("contextmenu INSERT_ROW_ABOVE", async () => {
-    //     const mockFn = jest.fn();
+    //     const mockFn = vi.fn();
 
     //     let tableData = cloneDeep(TABLE_DATA);
 
@@ -659,7 +658,7 @@ describe("veTable contextmenu", () => {
     // });
 
     // it("contextmenu INSERT_ROW_BELOW", async () => {
-    //     const mockFn = jest.fn();
+    //     const mockFn = vi.fn();
 
     //     let tableData = cloneDeep(TABLE_DATA);
 
@@ -748,7 +747,7 @@ describe("veTable contextmenu", () => {
     // });
 
     // it("contextmenu REMOVE_ROW", async () => {
-    //     const mockFn = jest.fn();
+    //     const mockFn = vi.fn();
 
     //     let tableData = cloneDeep(TABLE_DATA);
 
@@ -837,7 +836,7 @@ describe("veTable contextmenu", () => {
     // });
 
     // it("contextmenu HIDE_COLUMN", async () => {
-    //     const mockFn = jest.fn();
+    //     const mockFn = vi.fn();
 
     //     let tableData = cloneDeep(TABLE_DATA);
 

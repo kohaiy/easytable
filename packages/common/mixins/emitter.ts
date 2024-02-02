@@ -24,11 +24,11 @@ export default (eventBusKey?: string) => defineComponent({
   inject: eventBusKey ? [] : ['eventBus'],
   methods: {
     dispatch(componentName: string, eventName: string, params: any) {
-      const bus = ((this as any)[eventBusKey!] || this.eventBus) as EventBus
+      const bus = ((eventBusKey && (this as any)[eventBusKey]) || this.eventBus) as EventBus
       bus.emit([componentName, eventName].join(), params)
     },
     on(eventName: string, callback: (params: any) => void) {
-      const bus = ((this as any)[eventBusKey!] || this.eventBus) as EventBus
+      const bus = ((eventBusKey && (this as any)[eventBusKey]) || this.eventBus) as EventBus
       bus.on([this.$options.name, eventName].join(), callback.bind(this))
     },
   },

@@ -5,7 +5,7 @@ import { ICON_NAMES } from '@easytable/common/utils/constant'
 import { COMPS_NAME } from '../util/constant'
 import { clsName } from '../util'
 
-export default {
+export default defineComponent({
   name: COMPS_NAME.VE_TABLE_HEADER_FILTER_CUSTOM_CONTENT,
   props: {
     column: {
@@ -43,7 +43,7 @@ export default {
       const { render } = this.column.filterCustom
       if (isFunction(render)) {
         const props = {
-          slot: 'custom-content',
+          // slot: 'custom-content',
         }
 
         result = (
@@ -87,13 +87,16 @@ export default {
       visible: this.internalVisible,
       beforeVisibleChange:
                     this.column.filterCustom.beforeVisibleChange,
-      on: {
-        'on-dropdown-visible-change': this.visibleChange,
-      },
+      onOnDropdownVisibleChange: this.visibleChange,
     }
 
     return (
-      <VeDropdown {...compProps}>
+      <VeDropdown
+        {...compProps}
+        v-slots={{
+          'custom-content': this.getCustomContent,
+        }}
+      >
         {/* icon */}
         <span class={clsName('filter')}>
           <span class={clsName('filter-icon')}>
@@ -101,8 +104,8 @@ export default {
           </span>
         </span>
         {/* custom content */}
-        {this.getCustomContent(h)}
+        {/* {this.getCustomContent(h)} */}
       </VeDropdown>
     )
   },
-}
+})

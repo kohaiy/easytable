@@ -40,10 +40,6 @@ export default defineComponent({
     },
   },
   setup(props) {
-    let content: JSX.Element | null = null
-
-    const { cellClick, column } = props
-
     // is row expanded
     const isExpanded = computed((): boolean => {
       let result = false
@@ -65,16 +61,18 @@ export default defineComponent({
       }
     })
 
-    if (column.type === COLUMN_TYPES.EXPAND) {
-      content = (
-        <span
-          onClick={e => cellClick(e)}
-          class={expandRowIconContainerClass}
-        >
-          <VeIcon name={ICON_NAMES.RIGHT_ARROW} />
-        </span>
-      )
+    return () => {
+      if (props.column.type === COLUMN_TYPES.EXPAND) {
+        return (
+          <span
+            onClick={e => props.cellClick(e)}
+            class={expandRowIconContainerClass.value}
+          >
+            <VeIcon name={ICON_NAMES.RIGHT_ARROW} />
+          </span>
+        )
+      }
+      return null
     }
-    return () => content
   },
 })

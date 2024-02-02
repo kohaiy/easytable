@@ -272,7 +272,7 @@ export default defineComponent({
           cellSelectionRangeData: this.cellSelectionRangeData,
           bodyIndicatorRowKeys: this.bodyIndicatorRowKeys,
           editOption: this.editOption,
-          [EMIT_EVENTS.EXPAND_ROW_CHANGE]: () =>
+          [getEmitEventName(EMIT_EVENTS.EXPAND_ROW_CHANGE)]: () =>
             expandRowChange(rowData, rowIndex),
         }
         return <BodyTd {...tdProps} />

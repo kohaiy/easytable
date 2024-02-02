@@ -189,9 +189,10 @@ export default defineComponent({
       this.init()
     },
     visible: {
-      handler(visible) {
+      async handler(visible) {
         const { isControlled, showDropDown, hideDropDown } = this
         // deal after mounted hook
+        await nextTick()
         nextTick(() => {
           if (isControlled) {
             if (visible)

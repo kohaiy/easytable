@@ -74,14 +74,14 @@
                                 <span>
                                     <button
                                         class="button-demo"
-                                        on-click={() => this.editRow(rowIndex)}
+                                        onClick={() => this.editRow(rowIndex)}
                                     >
                                         Edit
                                     </button>
                                     &nbsp;
                                     <button
                                         class="button-demo"
-                                        on-click={() => this.deleteRow(rowIndex)}
+                                        onClick={() => this.deleteRow(rowIndex)}
                                     >
                                         Delete
                                     </button>

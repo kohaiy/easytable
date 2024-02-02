@@ -4,8 +4,8 @@ import veIcon from "@/ve-table";
 import { later } from "../util";
 
 describe("veTable header filter custom", () => {
-    const mockFilterFn = jest.fn((closeFn) => closeFn());
-    const mockBeforeVisibleChangeFn = jest.fn();
+    const mockFilterFn = vi.fn((closeFn) => closeFn());
+    const mockBeforeVisibleChangeFn = vi.fn();
 
     const TABLE_DATA = [
         {
@@ -82,7 +82,7 @@ describe("veTable header filter custom", () => {
                                         <div class="custom-name-filter">
                                             <input
                                                 value={this.searchValue}
-                                                on-input={(e) =>
+                                                onInput={(e) =>
                                                     (this.searchValue =
                                                         e.target.value)
                                                 }
@@ -91,7 +91,7 @@ describe("veTable header filter custom", () => {
                                             <div class="custom-name-filter-operation">
                                                 <span
                                                     class="name-filter-cancel"
-                                                    on-click={() =>
+                                                    onClick={() =>
                                                         mockFilterFn(closeFn)
                                                     }
                                                 >
@@ -99,7 +99,7 @@ describe("veTable header filter custom", () => {
                                                 </span>
                                                 <span
                                                     class="name-filter-confirm"
-                                                    on-click={() =>
+                                                    onClick={() =>
                                                         mockFilterFn(closeFn)
                                                     }
                                                 >
@@ -143,6 +143,8 @@ describe("veTable header filter custom", () => {
         });
 
         expect(wrapper.html()).toMatchSnapshot();
+        wrapper.unmount()
+
     });
 
     it("custom filter", async () => {
@@ -174,7 +176,7 @@ describe("veTable header filter custom", () => {
                                             <div class="custom-name-filter">
                                                 <input
                                                     value={this.searchValue}
-                                                    on-input={(e) =>
+                                                    onInput={(e) =>
                                                         (this.searchValue =
                                                             e.target.value)
                                                     }
@@ -183,7 +185,7 @@ describe("veTable header filter custom", () => {
                                                 <div class="custom-name-filter-operation">
                                                     <span
                                                         class="name-filter-cancel"
-                                                        on-click={() =>
+                                                        onClick={() =>
                                                             mockFilterFn(
                                                                 closeFn,
                                                             )
@@ -193,7 +195,7 @@ describe("veTable header filter custom", () => {
                                                     </span>
                                                     <span
                                                         class="name-filter-confirm"
-                                                        on-click={() =>
+                                                        onClick={() =>
                                                             mockFilterFn(
                                                                 closeFn,
                                                             )
@@ -263,6 +265,7 @@ describe("veTable header filter custom", () => {
 
         expect(mockFilterFn).toBeCalled();
         expect(mockFilterFn).toHaveBeenCalledWith(expect.any(Function));
+        wrapper.unmount()
     });
 
     it("beforeVisibleChange callback method", async () => {
@@ -299,7 +302,7 @@ describe("veTable header filter custom", () => {
                                             <div class="custom-name-filter">
                                                 <input
                                                     value={this.searchValue}
-                                                    on-input={(e) =>
+                                                    onInput={(e) =>
                                                         (this.searchValue =
                                                             e.target.value)
                                                     }
@@ -308,7 +311,7 @@ describe("veTable header filter custom", () => {
                                                 <div class="custom-name-filter-operation">
                                                     <span
                                                         class="name-filter-cancel"
-                                                        on-click={() =>
+                                                        onClick={() =>
                                                             mockFilterFn(
                                                                 closeFn,
                                                             )
@@ -318,7 +321,7 @@ describe("veTable header filter custom", () => {
                                                     </span>
                                                     <span
                                                         class="name-filter-confirm"
-                                                        on-click={() =>
+                                                        onClick={() =>
                                                             mockFilterFn(
                                                                 closeFn,
                                                             )
@@ -378,7 +381,8 @@ describe("veTable header filter custom", () => {
         const showDropdownPopper = document.querySelector(
             ".ve-dropdown-popper > .ve-dropdown-dd",
         );
-
+        console.log(document.body.innerHTML);
+        
         expect(showDropdownPopper.textContent.length).toBeGreaterThan(1);
 
         const cancelClickEvent = new MouseEvent("click", {
@@ -393,5 +397,6 @@ describe("veTable header filter custom", () => {
         expect(mockBeforeVisibleChangeFn).toHaveBeenCalledWith({
             nextVisible: false,
         });
+        wrapper.unmount()
     });
 });

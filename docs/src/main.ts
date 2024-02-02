@@ -10,6 +10,8 @@ import '@/css/custom.less'
 import '@/comp/app.less'
 
 // import 'md-powerpack'
+import { ElDatePicker, ElIcon, ElInputNumber, ElRadio, ElRadioGroup, ElSelect } from 'element-plus'
+import 'element-plus/theme-chalk/index.css'
 import {
   // VeCheckbox,
   // VeCheckboxGroup,
@@ -32,7 +34,12 @@ import Anchor from '@/comp/anchor.vue'
 
 // console.log(VeTable);
 const app = createApp(App)
-
+app.use(ElDatePicker)
+app.use(ElInputNumber)
+app.use(ElIcon)
+app.use(ElSelect)
+app.use(ElRadio)
+app.use(ElRadioGroup)
 // app.use(VeTable)
 // app.use(VeIcon)
 // app.use(VeLoading)

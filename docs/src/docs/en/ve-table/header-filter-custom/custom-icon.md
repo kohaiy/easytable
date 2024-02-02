@@ -28,19 +28,19 @@ filterIcon function Support to return custom icon. The built-in `<ve-icon name="
                                     <div class="custom-name-filter">
                                         <input
                                             value={this.searchValue}
-                                            on-input={(e) => (this.searchValue = e.target.value)}
+                                            onInput={(e) => (this.searchValue = e.target.value)}
                                             placeholder="Search name"
                                         />
                                         <div class="custom-name-filter-operation">
                                             <span
                                                 class="name-filter-cancel"
-                                                on-click={() => this.searchCancel(closeFn)}
+                                                onClick={() => this.searchCancel(closeFn)}
                                             >
                                                 取消
                                             </span>
                                             <span
                                                 class="name-filter-confirm"
-                                                on-click={() => this.searchConfirm(closeFn)}
+                                                onClick={() => this.searchConfirm(closeFn)}
                                             >
                                                 查询
                                             </span>

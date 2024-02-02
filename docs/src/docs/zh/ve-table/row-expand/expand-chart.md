@@ -203,7 +203,8 @@
             },
         },
         mounted() {
-            this.renderChart();
+            console.log(document.getElementById("chart-container"));
+            // this.renderChart();
         },
     };
 </script>

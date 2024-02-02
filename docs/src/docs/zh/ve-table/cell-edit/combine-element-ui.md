@@ -66,17 +66,17 @@
                         width: "15%",
                         renderBodyCell: ({ row, column, rowIndex }, h) => {
                             return (
-                                <el-date-picker
+                                <ElDatePicker
                                     size="small"
-                                    value={row["date"]}
-                                    on-input={(val) => {
+                                    modelValue={row["date"]}
+                                    onUpdate:modelValue={(val) => {
                                         row["date"] = val;
                                         this.cellDataChange(row, column, val);
                                     }}
                                     type="date"
                                     value-format="yyyy-MM-dd"
                                     placeholder="选择日期"
-                                ></el-date-picker>
+                                />
                             );
                         },
                     },
@@ -91,11 +91,11 @@
                                 <el-input-number
                                     size="small"
                                     min={1}
-                                    value={row["age"]}
-                                    on-input={(val) => {
+                                    modelValue={row["age"]}
+                                    onUpdate:modelValue={(val) => {
                                         row["age"] = val;
                                     }}
-                                    on-change={(val) => {
+                                    onChange={(val) => {
                                         this.cellDataChange(row, column, val);
                                     }}
                                 ></el-input-number>
@@ -112,8 +112,8 @@
                             return (
                                 <el-select
                                     size="small"
-                                    value={row["gender"]}
-                                    on-input={(val) => {
+                                    modelValue={row["gender"]}
+                                    onUpdate:modelValue={(val) => {
                                         row["gender"] = val;
                                         this.cellDataChange(row, column, val);
                                     }}

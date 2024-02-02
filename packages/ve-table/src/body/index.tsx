@@ -14,13 +14,9 @@ import {
   EXPAND_TRIGGER_TYPES,
 } from '../util/constant'
 
-// import ExpandTr from './expand-tr'
-// import BodyTrScrolling from './body-tr-scrolling'
+import ExpandTr from './expand-tr'
+import BodyTrScrolling from './body-tr-scrolling'
 import BodyTr from './body-tr'
-
-const ExpandTr = () => 'ExpandTr'
-const BodyTrScrolling = () => 'BodyTrScrolling'
-// const BodyTr = () => 'BodyTr'
 
 export default defineComponent({
   name: COMPS_NAME.VE_TABLE_BODY,

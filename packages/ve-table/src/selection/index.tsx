@@ -1,6 +1,6 @@
 import { debounce } from 'lodash'
 import emitter from '@easytable/common/mixins/emitter'
-import { isBoolean, isEmptyValue } from '@easytable/common/utils/index.js'
+import { isBoolean, isEmptyValue } from '@easytable/common/utils/index'
 import {
   clsName,
   getColKeysByFixedTypeWithinColKeys,
@@ -1269,25 +1269,23 @@ export default defineComponent({
           left: `${cornerLeft}px`,
           borderWidth: `1px ${cornerBorderRightWidth} ${cornerBorderBottomtWidth} 1px`,
         },
-        on: {
-          mousedown: (e) => {
-            this.dispatch(
-              COMPS_NAME.VE_TABLE,
-              EMIT_EVENTS.SELECTION_CORNER_MOUSEDOWN,
-              {
-                event: e,
-              },
-            )
-          },
-          mouseup: (e) => {
-            this.dispatch(
-              COMPS_NAME.VE_TABLE,
-              EMIT_EVENTS.SELECTION_CORNER_MOUSEUP,
-              {
-                event: e,
-              },
-            )
-          },
+        onMousedown: (e) => {
+          this.dispatch(
+            COMPS_NAME.VE_TABLE,
+            EMIT_EVENTS.SELECTION_CORNER_MOUSEDOWN,
+            {
+              event: e,
+            },
+          )
+        },
+        onMouseup: (e) => {
+          this.dispatch(
+            COMPS_NAME.VE_TABLE,
+            EMIT_EVENTS.SELECTION_CORNER_MOUSEUP,
+            {
+              event: e,
+            },
+          )
         },
       }
 

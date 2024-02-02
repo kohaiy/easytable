@@ -33,19 +33,19 @@
                                     <div class="custom-name-filter">
                                         <input
                                             value={this.searchValue}
-                                            on-input={(e) => (this.searchValue = e.target.value)}
+                                            onInput={(e) => (this.searchValue = e.target.value)}
                                             placeholder="Search name"
                                         />
                                         <div class="custom-name-filter-operation">
                                             <span
                                                 class="name-filter-cancel"
-                                                on-click={() => this.searchCancel(closeFn)}
+                                                onClick={() => this.searchCancel(closeFn)}
                                             >
                                                 Cancel
                                             </span>
                                             <span
                                                 class="name-filter-confirm"
-                                                on-click={() => this.searchConfirm(closeFn)}
+                                                onClick={() => this.searchConfirm(closeFn)}
                                             >
                                                 Search
                                             </span>

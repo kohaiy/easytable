@@ -25,13 +25,14 @@ import {
   // VeSelect,
   useVeTable,
   version,
-} from '@easytable/vue'
+// } from '@easytable/vue'
+} from '../../packages/vue/src/index'
 
 // import '@easytable/vue/packages/theme-dark/index.less'
-import './css/table-reset.less'
 
-// } from '../../packages/vue/src/index'
-// import '../../packages/theme-default/index.less'
+// import './css/table-reset.less'
+
+import '../../packages/theme-default/index.less'
 import App from './App.vue'
 import router from './router'
 import DemoBlock from '@/comp/demo-block.vue'

@@ -37,6 +37,13 @@ jobs:
         run: |
           cd docs
           pnpm run build:gh-pages
+      - uses: actions/checkout@master
+        with:
+          ref: gh-pages
+
+      - name: Tree
+        run: |
+          tree
 
       - name: Deploy Doc 🚀
         uses: JamesIves/github-pages-deploy-action@4.1.1

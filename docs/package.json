@@ -10,10 +10,9 @@
     "test:unit": "vitest",
     "build-only": "vite build",
     "type-check": "vue-tsc --build --force",
-    "build:gh-pages": "vite build --mode gh-pages"
+    "build:gh-pages": "vite build --mode gh-pages && node ./build/deploy-gh/index.js"
   },
   "dependencies": {
-    "@easytable/vue": "workspace:^1.0.0",
     "echarts": "^5.4.3",
     "element-plus": "^2.4.4",
     "highlight.js": "^11.9.0",
@@ -40,6 +39,7 @@
     "@vue/tsconfig": "^0.5.0",
     "@yankeeinlondon/builder-api": "^1.4.1",
     "@yankeeinlondon/code-builder": "^1.2.1",
+    "fs-extra": "^11.2.0",
     "jsdom": "^23.0.1",
     "less": "^4.1.2",
     "markdown-it-chain": "^1.3.0",

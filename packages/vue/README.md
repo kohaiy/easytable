@@ -1,96 +1,107 @@
+[![npm](https://img.shields.io/npm/v/@easytable/vue.svg)](https://www.npmjs.com/package/@easytable/vue)
+[![vue3.2](https://img.shields.io/badge/vue-3.2+-brightgreen.svg)](https://vuejs.org/)
+[![NPM downloads](https://img.shields.io/npm/dm/@easytable/vue.svg?style=flat)](https://npmjs.org/package/@easytable/vue)
+[![license](https://img.shields.io/npm/l/@easytable/vue.svg?maxAge=2592000)](http://www.opensource.org/licenses/mit-license.php)
+
 # @easytable/vue
 
 > [!IMPORTANT]
 > 本仓库迁移自 [vue-easytable](https://github.com/huangshuwei/vue-easytable) Vue.js 2.x ，基于 Vue.js 3.x 重构中……
 
-## Introduction
+[English](./README-EN.md) | **中文**
 
-A powerful data table based on vue2.x You can use it as data grid、Microsoft Excel or Google sheets. It supports virtual scroll、cell edit etc.
+## 介绍
 
-## Characteristics
+一个强大的 vue3.x 表格组件。你可以将它用做数据表、微软 excel 或者 goole sheet. 支持虚拟滚动、单元格编辑等功能。
 
--   Support 300000 rows of data display through virtual scroll
--   Free forever. Of course, you can also choose to donate
+> [!WARNING]
+> 如果您正在使用 Vue2.x ，请使用 [vue-easytable](https://github.com/huangshuwei/vue-easytable) 组件库。
 
-## API & Examples
+## 特点
 
--   [Official documents (Github)](http://happy-coding-clans.github.io/vue-easytable/)
--   [Official documents (China)](http://huangshuwei.gitee.io/vue-easytable/)
+-   采用虚拟滚动技术，支持 30 万行数据展示
+-   永久免费。当然你也可以选择捐赠
 
-## Features
+## API & 文档
 
-**Base components**
+-   [官方文档](https://easytable.kohai.top/)
+-   [官方文档 (Cloudflare Pages)](https://easytable.pages.dev/)
 
--   [x] [Loading component](https://happy-coding-clans.github.io/vue-easytable/#/en/doc/base/loading)
--   [ ] [Pagination component](https://happy-coding-clans.github.io/vue-easytable/#/en/doc/base/pagination)
--   [ ] [Contextmenu component](https://happy-coding-clans.github.io/vue-easytable/#/en/doc/base/contextmenu)
--   [x] [Icon component](https://happy-coding-clans.github.io/vue-easytable/#/en/doc/base/icon)
--   [ ] [Locale component](https://happy-coding-clans.github.io/vue-easytable/#/en/doc/base/locale)
+## 功能支持
 
-**Table component**
+**基础组件**
 
--   [ ] [Internationalization](http://happy-coding-clans.github.io/vue-easytable/#/en/doc/locale)
--   [ ] [Theme Custom & Built in theme](http://happy-coding-clans.github.io/vue-easytable/#/en/doc/theme)
--   [ ] [Virtual Scroll](http://happy-coding-clans.github.io/vue-easytable/#/en/doc/table/virtual-scroll)
--   [ ] [Column Fixed](http://happy-coding-clans.github.io/vue-easytable/#/en/doc/table/column-fixed)
--   [ ] [Column Hidden](http://happy-coding-clans.github.io/vue-easytable/#/en/doc/table/column-hidden)
--   [ ] [Header Fixed](http://happy-coding-clans.github.io/vue-easytable/#/en/doc/table/header-fixed)
--   [ ] [Header Grouping](http://happy-coding-clans.github.io/vue-easytable/#/en/doc/table/header-grouping)
--   [ ] [Filter](http://happy-coding-clans.github.io/vue-easytable/#/en/doc/table/header-filter)
--   [ ] [Sort](http://happy-coding-clans.github.io/vue-easytable/#/en/doc/table/header-sort)
--   [ ] [Column Resize](https://happy-coding-clans.github.io/vue-easytable/#/en/doc/table/column-resize)
--   [ ] [Cell Style](http://happy-coding-clans.github.io/vue-easytable/#/en/doc/table/cell-style)
--   [ ] [Cell Custom](http://happy-coding-clans.github.io/vue-easytable/#/en/doc/table/cell-custom)
--   [ ] [Cell Span](http://happy-coding-clans.github.io/vue-easytable/#/en/doc/table/cell-span)
--   [ ] [Cell Selection(keyboard operation)](http://happy-coding-clans.github.io/vue-easytable/#/en/doc/table/cell-selection)
--   [ ] [Cell Autofill](http://happy-coding-clans.github.io/vue-easytable/#/en/doc/table/cell-autofill)
--   [ ] [Cell Edit](http://happy-coding-clans.github.io/vue-easytable/#/en/doc/table/cell-edit)
--   [ ] [Clipboard](http://happy-coding-clans.github.io/vue-easytable/#/en/doc/table/clipboard)
--   [ ] [Contextmenu](http://happy-coding-clans.github.io/vue-easytable/#/en/doc/table/contextmenu)
--   [ ] [Cell Ellipsis](http://happy-coding-clans.github.io/vue-easytable/#/en/doc/table/cell-ellipsis)
--   [ ] [Row Radio](http://happy-coding-clans.github.io/vue-easytable/#/en/doc/table/row-radio)
--   [ ] [Row Checkbox](http://happy-coding-clans.github.io/vue-easytable/#/en/doc/table/row-checkbox)
--   [ ] [Row Expand](http://happy-coding-clans.github.io/vue-easytable/#/en/doc/table/row-expand)
--   [ ] [Row Style](http://happy-coding-clans.github.io/vue-easytable/#/en/doc/table/row-style)
--   [ ] [Footer Summary](http://happy-coding-clans.github.io/vue-easytable/#/en/doc/table/footer-summary)
--   [ ] [Event Custom](http://happy-coding-clans.github.io/vue-easytable/#/en/doc/table/event-custom)
--   [More](http://happy-coding-clans.github.io/vue-easytable)
+-   [x] [Loading 加载组件](https://easytable.kohai.top/#/zh/doc/base/loading)
+-   [x] [Pagination 分页组件](https://easytable.kohai.top/#/zh/doc/base/pagination)
+-   [x] [Contextmenu 右键菜单组件](https://easytable.kohai.top/#/zh/doc/base/contextmenu)
+-   [x] [Icon 图标组件](https://easytable.kohai.top/#/zh/doc/base/icon)
+-   [x] [Locale 国际化组件](https://easytable.kohai.top/#/zh/doc/base/locale)
 
-If there is no feature you want,
-[Please Tell Us](http://happy-coding-clans.github.io/issue-template-generater/#/en)
+**Table 组件**
 
-## Install
+-   [x] [国际化](https://easytable.kohai.top/#/zh/doc/locale)
+-   [x] [主题定制 & 内置主题](https://easytable.kohai.top/#/zh/doc/theme)
+-   [x] [虚拟滚动](https://easytable.kohai.top/#/zh/doc/table/virtual-scroll)
+-   [x] [列固定](https://easytable.kohai.top/#/zh/doc/table/column-fixed)
+-   [x] [列隐藏](https://easytable.kohai.top/#/zh/doc/table/column-hidden)
+-   [x] [表头固定](https://easytable.kohai.top/#/zh/doc/table/header-fixed)
+-   [x] [表头分组](https://easytable.kohai.top/#/zh/doc/table/header-grouping)
+-   [x] [筛选](https://easytable.kohai.top/#/zh/doc/table/header-filter)
+-   [x] [排序](https://easytable.kohai.top/#/zh/doc/table/header-sort)
+-   [x] [列宽拖动](https://happy-coding-clans.github.io/vue-easytable/#/zh/doc/table/column-resize)
+-   [x] [单元格样式](https://easytable.kohai.top/#/zh/doc/table/cell-style)
+-   [x] [单元格自定义](https://easytable.kohai.top/#/zh/doc/table/cell-custom)
+-   [x] [单元格合并](https://easytable.kohai.top/#/zh/doc/table/cell-span)
+-   [x] [单元格选择（键盘操作）](https://easytable.kohai.top/#/zh/doc/table/cell-selection)
+-   [x] [单元格自动填充](https://easytable.kohai.top/#/zh/doc/table/cell-autofill)
+-   [x] [单元格编辑](https://easytable.kohai.top/#/zh/doc/table/cell-edit)
+-   [x] [剪贴板](https://easytable.kohai.top/#/zh/doc/table/clipboard)
+-   [x] [右键菜单](https://easytable.kohai.top/#/zh/doc/table/contextmenu)
+-   [x] [单元格省略](https://easytable.kohai.top/#/zh/doc/table/cell-ellipsis)
+-   [x] [行单选](https://easytable.kohai.top/#/zh/doc/table/row-radio)
+-   [x] [行多选](https://easytable.kohai.top/#/zh/doc/table/row-checkbox)
+-   [x] [行展开](https://easytable.kohai.top/#/zh/doc/table/row-expand)
+-   [x] [行样式](https://easytable.kohai.top/#/zh/doc/table/row-style)
+-   [x] [footer 汇总](https://easytable.kohai.top/#/zh/doc/table/footer-summary)
+-   [x] [自定义事件](https://easytable.kohai.top/#/zh/doc/table/event-custom)
+-   [更多](https://easytable.kohai.top)
 
-```
-npm install vue-easytable
+如果没有你想要的的功能
+，[请告诉我们](http://happy-coding-clans.github.io/issue-template-generater/#/zh)
+
+## 安装
+
+```sh
+pnpm install @easytable/vue
 ```
 
 or
 
-```
-yarn add vue-easytable
+```sh
+yarn add @easytable/vue
 ```
 
-## Usage
+## 使用
+
+### 使用 NPM 安装（推荐）
 
 Write the following in main.js:
 
 ```javascript
-import Vue from "vue";
-import "vue-easytable/libs/theme-default/index.css";
-import VueEasytable from "vue-easytable";
+import { createApp } from 'vue';
+import '@easytable/vue/libs/theme-default/index.css';
+import { useVeTable } from '@easytable/vue';
 
-Vue.use(VueEasytable);
-
-new Vue({
-    el: "#app",
-    render: (h) => h(App),
-});
+createApp({
+  render: (h) => h(App),
+})
+.use(useVeTable())
+.mount('#app');
 ```
 
 Example:
 
-```javascript
+```html
 <template>
   <ve-table :columns="columns" :table-data="tableData" />
 </template>
@@ -143,35 +154,111 @@ Example:
 </script>
 ```
 
-## Todo List
+### 通过 CDN 使用 @easytable/vue
 
-[What are we doing](https://github.com/Happy-Coding-Clans/vue-easytable/projects)
+你可以借助 script 标签直接通过 CDN 来使用 @easytable/vue：
 
-## Environment Support
+```html
+<script src="https://unpkg.com/@easytable/vue/libs/umd/easytable-vue.js"></script>
+```
 
--   Modern browser and ie11 and above
+这里我们使用了 unpkg，但你也可以使用任何提供 npm 包服务的 CDN，例如 jsdelivr 或 cdnjs。当然，你也可以下载此文件并自行提供服务。
+
+示例：
+
+```html
+<!-- 引入 Vue -->
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<!-- 引入 @easytable/vue -->
+<script src="https://unpkg.com/@easytable/vue/libs/umd/easytable-vue.js"></script>
+<!-- 引入样式文件 -->
+<link rel="stylesheet" href="https://unpkg.com/@easytable/vue@0.0.0-alpha.3/libs/theme-default/index.css">
+
+<div id="app">
+  <ve-table :columns="columns" :table-data="tableData" />
+</div>
+
+<script>
+  const { createApp, ref } = Vue
+  const { useVeTable } = EasytableVue
+
+  createApp({
+    setup() {
+      const columns = ref([
+        { field: "name", key: "a", title: "Name", align: "center" },
+        { field: "date", key: "b", title: "Date", align: "left" },
+        { field: "hobby", key: "c", title: "Hobby", align: "right" },
+        { field: "address", key: "d", title: "Address" },
+      ])
+      const tableData = ref([
+        {
+          name: "John",
+          date: "1900-05-20",
+          hobby: "coding and coding repeat",
+          address: "No.1 Century Avenue, Shanghai",
+        },
+        {
+          name: "Dickerson",
+          date: "1910-06-20",
+          hobby: "coding and coding repeat",
+          address: "No.1 Century Avenue, Beijing",
+        },
+        {
+          name: "Larsen",
+          date: "2000-07-20",
+          hobby: "coding and coding repeat",
+          address: "No.1 Century Avenue, Chongqing",
+        },
+        {
+          name: "Geneva",
+          date: "2010-08-20",
+          hobby: "coding and coding repeat",
+          address: "No.1 Century Avenue, Xiamen",
+        },
+        {
+          name: "Jami",
+          date: "2020-09-20",
+          hobby: "coding and coding repeat",
+          address: "No.1 Century Avenue, Shenzhen",
+        },
+      ])
+      return {
+        columns,
+        tableData
+      }
+    }
+  })
+    .use(useVeTable())
+    .mount('#app')
+</script>
+```
+
+## 开发计划
+
+[正在做的事情](https://github.com/kohaiy/easytable/projects)
+
+## 支持环境
+
+-   现代浏览器和 IE11 及以上
 
 | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_48x48.png" alt="IE / Edge" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>IE / Edge | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png" alt="Firefox" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Firefox | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png" alt="Chrome" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Chrome | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/safari/safari_48x48.png" alt="Safari" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Safari | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/opera/opera_48x48.png" alt="Opera" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Opera |
 | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | IE11, Edge                                                                                                                                                                                                      | last 2 versions                                                                                                                                                                                                   | last 2 versions                                                                                                                                                                                               | last 2 versions                                                                                                                                                                                               | last 2 versions                                                                                                                                                                                           |
 
-## How to contribute
+## 如何贡献
 
-If you want to contribute,just create a
-[Pull Request](https://github.com/huangshuwei/vue-easytable/pulls)
+如果你希望参与贡献，欢迎
+[Pull Request](https://github.com/kohaiy/easytable/pulls)
 
-## Contributors
+## 贡献者们
 
-Thanks to the following friends for their contributions 🙏
+感谢原组件库作者 [huangshuwei](https://github.com/huangshuwei)
 
-<a href="https://github.com/Happy-Coding-Clans/vue-easytable/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=Happy-Coding-Clans/vue-easytable" />
+同时感谢以下小伙伴们做出的贡献 🙏
+
+<a href="https://github.com/kohaiy/easytable/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=kohaiy/easytable" />
 </a>
-
-## Discussion group
-
--   [Join In Gitter Chat Room](https://gitter.im/vue-easytable/community)
--   [Join In Discord Chat Room](https://discord.gg/gBm3k6r)
 
 ## License
 

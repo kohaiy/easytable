@@ -1,6 +1,6 @@
 {
   "name": "@easytable/vue",
-  "version": "0.0.0-alpha.3",
+  "version": "0.0.1",
   "description": "Vue table component",
   "author": "https://github.com/kohaiy",
   "license": "MIT",
@@ -90,5 +90,11 @@
     "gulp": "^4.0.2",
     "less": "^4.1.2",
     "vite-plugin-dts": "^3.7.2"
-  }
+  },
+  "docVersions": [
+    {
+      "label": "0.0.1",
+      "value": "0.0.1"
+    }
+  ]
 }

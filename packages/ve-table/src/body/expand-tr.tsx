@@ -103,7 +103,7 @@ export default defineComponent({
   },
   methods: {
     // get expande row content
-    getExpandRowContent(h) {
+    getExpandRowContent() {
       const { expandOption } = this
       const result
                 = expandOption.render
@@ -119,13 +119,13 @@ export default defineComponent({
       return result
     },
   },
-  render(h) {
+  render() {
     const { isRowExpanded, columnCount, getExpandRowContent } = this
 
     let result = null
 
     if (isRowExpanded) {
-      const content = getExpandRowContent(h)
+      const content = getExpandRowContent()
       result = (
         <tr class={this.expanRowClass}>
           <td class={clsName('expand-td')} colSpan={columnCount}>

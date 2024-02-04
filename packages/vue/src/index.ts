@@ -67,18 +67,18 @@ export {
   VeTable,
 }
 
-export default {
-  useVeTable,
-  version,
-  VeCheckbox,
-  VeCheckboxGroup,
-  VeContextmenu,
-  VeDropdown,
-  VeIcon,
-  VeLoading,
-  //   VeLocale,
-  VePagination,
-  VeRadio,
-  VeSelect,
-  VeTable,
-}
+// export default {
+//   useVeTable,
+//   version,
+//   VeCheckbox,
+//   VeCheckboxGroup,
+//   VeContextmenu,
+//   VeDropdown,
+//   VeIcon,
+//   VeLoading,
+//   //   VeLocale,
+//   VePagination,
+//   VeRadio,
+//   VeSelect,
+//   VeTable,
+// }

@@ -1,13 +1,77 @@
 {
   "name": "@easytable/vue",
-  "version": "1.0.0",
-  "description": "",
-  "author": "",
+  "version": "0.0.0-alpha.3",
+  "description": "Vue table component",
+  "author": "https://github.com/kohaiy",
   "license": "MIT",
-  "keywords": [],
-  "main": "index.js",
+  "homepage": "https://github.com/kohaiy/easytable#readme",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:kohaiy/easytable.git"
+  },
+  "keywords": [
+    "vue",
+    "table",
+    "grid",
+    "vue-component",
+    "components",
+    "list",
+    "scrolling",
+    "infinite",
+    "virtualized",
+    "edit",
+    "expand",
+    "radio",
+    "checkbox",
+    "sort",
+    "filter",
+    "fixed",
+    "selection",
+    "ellipsis",
+    "header",
+    "body",
+    "footer",
+    "span"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "exports": {
+    ".": {
+      "types": "./libs/index.d.ts",
+      "import": "./libs/es/index.js",
+      "require": "./libs/cjs/index.js"
+    },
+    "./libs/theme-default/*": {
+      "import": "./libs/theme-default/*",
+      "require": "./libs/theme-default/*"
+    },
+    "./libs/theme-dark/*": {
+      "import": "./libs/theme-dark/*",
+      "require": "./libs/theme-dark/*"
+    },
+    "./packages/theme-default/*": {
+      "import": "./libs/packages/theme-default/*",
+      "require": "./libs/packages/theme-default/*"
+    },
+    "./packages/theme-dark/*": {
+      "import": "./libs/packages/theme-dark/*",
+      "require": "./libs/packages/theme-dark/*"
+    }
+  },
+  "main": "./libs/umd/easytable-vue.js",
+  "module": "./libs/es/index.js",
+  "files": [
+    "README.md",
+    "libs"
+  ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "gulp": "gulp",
+    "build:css": "lessc ../theme-default/index.less libs/theme-default/index.css && lessc ../theme-dark/index.less libs/theme-dark/index.css",
+    "build:vite": "vite build",
+    "build": "pnpm build:vite && pnpm build:css && pnpm gulp",
+    "publish": "node ./build/publish.js"
   },
   "dependencies": {
     "@easytable/ve-checkbox": "workspace:^1.0.0",
@@ -20,5 +84,11 @@
     "@easytable/ve-radio": "workspace:^1.0.0",
     "@easytable/ve-select": "workspace:^1.0.0",
     "@easytable/ve-table": "workspace:^1.0.0"
+  },
+  "devDependencies": {
+    "fs-extra": "^11.2.0",
+    "gulp": "^4.0.2",
+    "less": "^4.1.2",
+    "vite-plugin-dts": "^3.7.2"
   }
 }

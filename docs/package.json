@@ -12,6 +12,7 @@
     "type-check": "vue-tsc --build --force"
   },
   "dependencies": {
+    "@easytable/vue": "workspace:^1.0.0",
     "echarts": "^5.4.3",
     "element-plus": "^2.4.4",
     "highlight.js": "^11.9.0",

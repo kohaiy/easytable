@@ -23,14 +23,21 @@ import {
   // VePagination,
   // VeRadio,
   // VeSelect,
-  // VeTable,
   useVeTable,
-} from '../../packages/vue/src/index'
-import '../../packages/theme-default/index.less'
+  version,
+} from '@easytable/vue'
+
+// import '@easytable/vue/packages/theme-dark/index.less'
+import './css/table-reset.less'
+
+// } from '../../packages/vue/src/index'
+// import '../../packages/theme-default/index.less'
 import App from './App.vue'
 import router from './router'
 import DemoBlock from '@/comp/demo-block.vue'
 import Anchor from '@/comp/anchor.vue'
+
+console.log(version)
 
 // console.log(VeTable);
 const app = createApp(App)

@@ -22,7 +22,11 @@ jobs:
         with:
           node-version: 16.x
 
-      - name: Install inner env
+      - name: Install PNPM
+        run: |
+          npm i -g pnpm
+
+      - name: Install env
         run: |
           cd docs
           pnpm install

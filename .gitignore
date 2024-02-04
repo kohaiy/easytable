@@ -5,3 +5,4 @@ dist
 packages/vue/libs
 node_modules
 .DS_Store
+_build_gh_pages

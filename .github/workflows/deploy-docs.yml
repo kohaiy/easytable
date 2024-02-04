@@ -1,4 +1,6 @@
 name: deploy docs
+permissions:
+  contents: write
 # This workflow is triggered on pushes to the repository.
 on:
   push:

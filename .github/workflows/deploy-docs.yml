@@ -25,12 +25,12 @@ jobs:
       - name: Install inner env
         run: |
           cd docs
-          npm install
+          pnpm install
 
       - name: Build doc
         run: |
           cd docs
-          npm run build
+          pnpm run build
 
       - name: Deploy Doc 🚀
         uses: JamesIves/github-pages-deploy-action@4.1.1

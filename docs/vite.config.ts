@@ -14,9 +14,12 @@ export default defineConfig(({ mode }) => {
   // eslint-disable-next-line node/prefer-global/process
   const env = loadEnv(mode, process.cwd())
   let base = env.VITE_BASE_URL
-  if (mode === 'gh-pages-ver')
+  if (mode === 'gh-pages-ver') {
     // eslint-disable-next-line node/prefer-global/process
     base = `${loadEnv('gh-pages', process.cwd()).VITE_BASE_URL}/${version}`
+    // eslint-disable-next-line node/prefer-global/process
+    env.VITE_BASE_URL = loadEnv('gh-pages', process.cwd()).VITE_BASE_URL
+  }
 
   return {
     base,

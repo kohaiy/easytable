@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { version as latestVersion } from '../package.json'
+import { version as latestVersion } from '../../packages/vue/package.json'
 import locale from './comp/locale'
 import useI18n from './comp/mixins/i18n-mixins'
 import useThemeSwitch from './comp/mixins/theme-switch-mixins'
@@ -45,9 +45,10 @@ const showLogo = computed(() => {
 // current doc version
 const currentDocVersion = computed(() => {
   const { pathname } = window.location
+  const [version] = pathname.match(/(\d+\.{2}\d+)/) ?? []
 
   const versionItem = switchVersionOptions.value.find(
-    x => x.value === pathname,
+    x => x.value === version,
   )
 
   return versionItem ? versionItem.label : latestVersion

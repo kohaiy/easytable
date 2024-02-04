@@ -1,0 +1,40 @@
+name: deploy docs
+# This workflow is triggered on pushes to the repository.
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/deploy-docs.yml
+      - 'docs/**'
+      - package.json
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@master
+        with:
+          ref: master
+
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 16.x
+
+      - name: Install inner env
+        run: |
+          cd docs
+          npm install
+
+      - name: Build doc
+        run: |
+          cd docs
+          npm run build
+
+      - name: Deploy Doc 🚀
+        uses: JamesIves/github-pages-deploy-action@4.1.1
+        with:
+          branch: gh-pages
+          folder: ./docs/dist
+          clean: false

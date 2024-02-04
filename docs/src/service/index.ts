@@ -5,7 +5,7 @@ export function getVersions() {
 
     let url = `${net.protocol}//${net.hostname}:${net.port}`
 
-    url += import.meta.env.VITE_BASE_URL ?? ''
+    url += __VERSIONS_BASE_URL__ ?? ''
 
     url += `/versions.json?t=${new Date().getTime()}`
 

@@ -6,3 +6,6 @@ declare module '*.md' {
   const Component: ComponentOptions
   export default Component
 }
+
+declare const __BASE_URL__: string
+declare const __VERSIONS_BASE_URL__: string

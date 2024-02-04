@@ -24,8 +24,8 @@ export default defineConfig(({ mode }) => {
 
   return {
     define: {
-      __BASE_URL__: base,
-      __VERSIONS_BASE_URL__: versionsBase,
+      __BASE_URL__: JSON.stringify(base),
+      __VERSIONS_BASE_URL__: JSON.stringify(versionsBase),
     },
     base,
     build: {

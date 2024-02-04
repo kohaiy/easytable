@@ -42,9 +42,9 @@ jobs:
           ref: gh-pages
           clean: false
 
-      - name: Tree
+      - name: Check Docs Version
         run: |
-          tree
+          node _build_gh_pages/check-docs-version.js
 
       - uses: actions/checkout@master
         with:

@@ -10,7 +10,7 @@
     "test:unit": "vitest",
     "build-only": "vite build",
     "type-check": "vue-tsc --build --force",
-    "build:gh-pages": "vite build --mode gh-pages && node ./build/deploy-gh/index.cjs"
+    "build:gh-pages": "vite build --mode gh-pages"
   },
   "dependencies": {
     "echarts": "^5.4.3",

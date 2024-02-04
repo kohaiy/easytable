@@ -20,14 +20,14 @@ async function handlePublish() {
 
   await writeFile(resolve(__dirname, '../package.json'), JSON.stringify(publishPkg, null, 2), { encoding: 'utf8' })
 
-  // await new Promise((resolve) => {
-  //   exec('npm publish', (err) => {
-  //     if (err)
-  //       console.error(err)
+  await new Promise((resolve) => {
+    exec('npm publish', (err) => {
+      if (err)
+        console.error(err)
 
-  //     resolve()
-  //   })
-  // })
+      resolve()
+    })
+  })
   await copyFile(resolve(__dirname, '../../../README.md'), resolve(__dirname, '../README.md'))
   await writeFile(resolve(__dirname, '../package.json'), `${JSON.stringify(pkg, null, 2)}\n`, { encoding: 'utf8' })
 

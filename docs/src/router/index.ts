@@ -3,7 +3,7 @@ import routerConfig from './router.config'
 
 const router = createRouter({
   linkActiveClass: 'active',
-  history: createWebHashHistory(import.meta.env.BASE_URL),
+  history: createWebHashHistory(import.meta.env.VITE_BASE_URL),
   routes: routerConfig,
 })
 

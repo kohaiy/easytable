@@ -9,7 +9,8 @@
     "preview": "vite preview",
     "test:unit": "vitest",
     "build-only": "vite build",
-    "type-check": "vue-tsc --build --force"
+    "type-check": "vue-tsc --build --force",
+    "build:gh-pages": "vite build --mode gh-pages"
   },
   "dependencies": {
     "@easytable/vue": "workspace:^1.0.0",

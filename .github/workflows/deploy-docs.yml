@@ -36,7 +36,7 @@ jobs:
       - name: Build doc
         run: |
           cd docs
-          pnpm run build-only
+          pnpm run build:gh-pages
 
       - name: Deploy Doc 🚀
         uses: JamesIves/github-pages-deploy-action@4.1.1

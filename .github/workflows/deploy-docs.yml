@@ -45,6 +45,10 @@ jobs:
         run: |
           tree
 
+      - uses: actions/checkout@master
+        with:
+          ref: main
+
       - name: Deploy Doc 🚀
         uses: JamesIves/github-pages-deploy-action@4.1.1
         with:

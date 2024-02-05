@@ -1,6 +1,6 @@
-## vue-easytable
+## @easytable/vue
 
-一个基于 Vue2.x 的表格组件。
+一个基于 Vue3.x 的表格组件。
 
 ### 特点
 
@@ -48,7 +48,7 @@
 
 ### 支持环境
 
--   现代浏览器和 IE10 及以上
+-   现代浏览器和 IE11 及以上
 
 | [<img src="../../images/browsers/edge_48x48.png" alt="IE / Edge" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)<br/>IE / Edge | [<img src="../../images/browsers/firefox_48x48.png" alt="Firefox" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)<br/>Firefox | [<img src="../../images/browsers/chrome_48x48.png" alt="Chrome" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)<br/>Chrome | [<img src="../../images/browsers/safari_48x48.png" alt="Safari" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)<br/>Safari | [<img src="../../images/browsers/opera_48x48.png" alt="Opera" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)<br/>Opera |
 | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -56,4 +56,4 @@
 
 ### 如何贡献
 
-如果你希望参与贡献，欢迎 [Pull Request](https://github.com/huangshuwei/vue-easytable/pulls)
+如果你希望参与贡献，欢迎 [Pull Request](https://github.com/kohaiy/easytable/pulls)

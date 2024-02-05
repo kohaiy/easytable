@@ -1,4 +1,4 @@
-export default {
+export default defineComponent({
   props: {
     // vue-easytable version
     version: {
@@ -26,22 +26,22 @@ export default {
       const { version, exampleScript, exampleTpl, exampleStyle } = this
       const resourcesTpl
                 = '<scr'
-                + 'ipt src="//unpkg.com/vue/dist/vue.js"></scr'
+                + 'ipt src="//unpkg.com/vue@3/dist/vue.global.js"></scr'
                 + 'ipt>'
                 + '\n<scr'
-                + `ipt src="//unpkg.com/vue-easytable@${version}/libs/umd/index.js"></scr`
+                + `ipt src="//unpkg.com/@easytable/vue@${version}/libs/umd/easytable-vue.js"></scr`
                 + 'ipt>'
       let jsTpl = (exampleScript || '')
         .replace(/export default/, 'var Main =')
         .trim()
-      const htmlTpl = `${resourcesTpl}\n<div id="app">\n${exampleTpl.trim()}\n</div>`
-      const cssTpl = `@import url("//unpkg.com/vue-easytable@${version}/libs/theme-default/index.css");\n${(
+      const htmlTpl = `${resourcesTpl}\n<div id="app">\n${exampleTpl.replace('<template>', '').replace('</template>', '').trim()}\n</div>`
+      const cssTpl = `@import url("//unpkg.com/@easytable/vue@${version}/libs/theme-default/index.css");\n${(
                 exampleStyle || ''
             ).trim()}\n`
       jsTpl = jsTpl
         ? `${jsTpl
-                  }\nvar Ctor = Vue.extend(Main)\nnew Ctor().$mount('#app')`
-        : 'new Vue().$mount(\'#app\')'
+                  }\nVue.createApp(Main).use(EasytableVue.useVeTable()).mount(\'#app\')`
+        : 'Vue.createApp().use(EasytableVue.useVeTable()).mount(\'#app\')'
       const data = {
         js: jsTpl,
         css: cssTpl,
@@ -71,6 +71,6 @@ export default {
   },
 
   render() {
-    return <div onClick={this.goCodepen()}>open in codepen</div>
+    return <div onClick={this.goCodepen}>open in codepen</div>
   },
-}
+})

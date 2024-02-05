@@ -3,13 +3,19 @@
 :::anchor npm & yarn 安装
 
 ```bash
-npm install vue-easytable
+npm install @easytable/vue
 ```
 
 或者
 
 ```bash
-yarn add vue-easytable
+pnpm add @easytable/vue
+```
+
+或者
+
+```bash
+yarn add @easytable/vue
 ```
 
 :::anchor 使用
@@ -19,32 +25,31 @@ yarn add vue-easytable
 在 main.js 中写入以下内容：
 
 ```javascript
-import Vue from "vue";
+import { createApp } from "vue";
 // 引入样式
-import "vue-easytable/libs/theme-default/index.css";
+import "@easytable/vue/libs/theme-default/index.css";
 // 引入组件库
-import VueEasytable from "vue-easytable";
+import { useVeTable } from "@easytable/vue";
 
-Vue.use(VueEasytable);
-
-new Vue({
-    el: "#app",
-    render: (h) => h(App),
-});
+createApp({
+  render: (h) => h(App),
+})
+.use(useVeTable())
+.mount('#app')
 ```
 
-以上代码便完成了 vue-easytable 的引入。别忘了引入样式文件。
+以上代码便完成了 @easytable/vue 的引入。别忘了引入样式文件。
 
 #### 按需引入
 
 在 main.js 中写入以下内容：
 
 ```javascript
-import Vue from "vue";
+import { createApp } from "vue";
 // 引入样式
-import "vue-easytable/libs/theme-default/index.css";
+import "@easytable/vue/libs/theme-default/index.css";
 // 引入组件库
-import { VeTable, VePagination, VeIcon, VeLoading, VeLocale } from "vue-easytable";
+import { VeTable, VePagination, VeIcon, VeLoading, VeLocale } from "@easytable/vue";
 
 Vue.use(VeTable);
 Vue.use(VePagination);
@@ -130,15 +135,15 @@ new Vue({
 
 :::anchor CDN 方式使用
 
-通过 [https://unpkg.com/vue-easytable/](https://unpkg.com/vue-easytable/) 可以看到 vue-easytable 最新版本的资源，也可以切换版本选择需要的资源，在页面上引入 js 和 css 文件即可开始使用：
+通过 [https://unpkg.com/@easytable/vue/](https://unpkg.com/@easytable/vue/) 可以看到 @easytable/vue 最新版本的资源，也可以切换版本选择需要的资源，在页面上引入 js 和 css 文件即可开始使用：
 
 ```html
 <!-- 引入样式 -->
-<link rel="stylesheet" href="https://unpkg.com/vue-easytable/libs/theme-default/index.css">
+<link rel="stylesheet" href="https://unpkg.com/@easytable/vue/libs/theme-default/index.css">
 <!-- 引入Vue -->
-<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@3"></script>
 <!-- 引入组件库 -->
-<script src="https://unpkg.com/vue-easytable/libs/umd/index.js"></script>
+<script src="https://unpkg.com/@easytable/vue/libs/umd/index.js"></script>
 ```
 
 #### 示例
@@ -151,7 +156,7 @@ new Vue({
         <!-- 引入样式 -->
         <link
             rel="stylesheet"
-            href="https://unpkg.com/vue-easytable/libs/theme-default/index.css"
+            href="https://unpkg.com/@easytable/vue/libs/theme-default/index.css"
         />
     </head>
     <body>
@@ -160,12 +165,14 @@ new Vue({
         </div>
     </body>
     <!-- 引入 Vue -->
-    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@3"></script>
     <!-- 引入组件库 -->
-    <script src="https://unpkg.com/vue-easytable/libs/umd/index.js"></script>
+    <script src="https://unpkg.com/@easytable/vue/libs/umd/easytable-vue.js"></script>
     <script>
-        new Vue({
-            el: "#app",
+        const { createApp } = Vue
+        const { useVeTable } = EasytableVue
+
+        createApp({
             data: function () {
                 return {
                     columns: [
@@ -223,10 +230,12 @@ new Vue({
                     ],
                 };
             },
-        });
+        })
+        .use(useVeTable())
+        .mount("#app");
     </script>
 </html>
 ```
 
 :::anchor 浏览器兼容
-默认支持现代浏览器和 IE10 及以上
+默认支持现代浏览器和 IE11 及以上

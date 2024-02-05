@@ -2,13 +2,13 @@
 // 最外层
 import { computed, nextTick, onBeforeUnmount, onMounted, reactive, ref, toRefs, useSlots, watch } from 'vue'
 
+import { version } from '../../../package.json'
 import locale from './locale'
 import useI18n from './mixins/i18n-mixins'
 import { stripScript, stripStyle, stripTemplate } from '@/utils/index'
 import CodeSandBoxOnline from '@/comp/online-edit/code-sand-box/index'
 
-// import { version } from '../../../package.json'
-const version = '2.27.1'
+// const version = '0.0.1'
 
 const { currentDocLang } = useI18n()
 const slots = useSlots()

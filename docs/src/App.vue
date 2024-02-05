@@ -97,18 +97,12 @@ function themeChange({ value }: Option) {
 }
 // version change
 function versionChange(item: Option) {
-  const { protocol, host, pathname, hash } = window.location
-  // version 1.0
-  // eslint-disable-next-line ts/ban-ts-comment
-  // @ts-expect-error
-  if (item.isVersion1) {
-    const newUrl = `${protocol}//${host}${item.value}`
-    window.open(newUrl, '_blank')
-  }
-  else {
-    const newUrl = `${protocol}//${host}${item.value}${hash}`
-    window.open(item.value, '_self')
-  }
+  let { protocol, host, hash } = window.location
+  if (!host.includes('github.io'))
+    host = 'kohaiy.github.io'
+
+  const newUrl = `${protocol}//${host}/easytable/${item.value}${hash}`
+  location.href = newUrl
 }
 // go ro router path
 function gotoRouter(item: any) {
@@ -284,7 +278,7 @@ onMounted(() => {
             </span>
 
             <span class="main-banner-menu-item">
-              <a class="main-banner-menu-link" href="https://github.com/huangshuwei/vue-easytable">
+              <a class="main-banner-menu-link" href="https://github.com/kohaiy/easytable">
                 <i class="icon iconfont icon-github" />
               </a>
             </span>

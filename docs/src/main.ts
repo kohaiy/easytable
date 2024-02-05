@@ -3,7 +3,14 @@
 import { createApp } from 'vue'
 import hljs from 'highlight.js'
 
+import NProgress from 'nprogress'
+
+// Progress 进度条
+
 import 'highlight.js/styles/color-brewer.css'
+
+// Progress 进度条 样式
+import 'nprogress/nprogress.css'
 
 import '@/css/index.less'
 import '@/css/custom.less'
@@ -38,8 +45,6 @@ import router from './router'
 import DemoBlock from '@/comp/demo-block.vue'
 import Anchor from '@/comp/anchor.vue'
 
-console.log(version)
-
 // console.log(VeTable);
 const app = createApp(App)
 app.use(ElDatePicker)
@@ -54,6 +59,12 @@ app.use(ElRadioGroup)
 app.use(useVeTable())
 app.use(router)
 
+router.beforeEach((to, from, next) => {
+  NProgress.start()
+
+  next()
+})
+
 router.afterEach(() => {
   nextTick(() => {
     const blocks = document.querySelectorAll('pre code:not(.hljs)')
@@ -61,6 +72,7 @@ router.afterEach(() => {
 
     window.scroll(0, 0)
   })
+  NProgress.done() // 结束Progress
 })
 
 app.component('anchor', Anchor)

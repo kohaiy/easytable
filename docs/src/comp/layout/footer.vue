@@ -4,13 +4,24 @@
       <span>
         <i class="iconfont icon-github" />
         <a href="https://github.com/huangshuwei/vue-easytable">
-          GitHub
+          vue-easytable
+        </a>
+        for Vue2
+      </span>
+        &nbsp;
+      <span>
+        <a href="https://github.com/huangshuwei">@huangshuwei</a>
+      </span>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <span>
+        <i class="iconfont icon-github" />
+        <a href="https://github.com/kohaiy/easytable">
+          @easytable/vue
         </a>
       </span>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;
       <span>
-        Created by
-        <a href="https://github.com/huangshuwei">huangshuwei</a>
+        <a href="https://github.com/kohaiy">@kohaiy</a>
       </span>
     </div>
   </div>

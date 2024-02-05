@@ -19,7 +19,7 @@ export default {
       },
       {
         name: '更新日志',
-        path: 'https://github.com/Happy-Coding-Clans/vue-easytable/releases',
+        path: 'https://github.com/kohaiy/easytable/releases',
         isRouter: false,
       },
     ],

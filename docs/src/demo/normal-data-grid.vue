@@ -456,6 +456,8 @@ export default defineComponent({
           }
           return 0
         })
+        // 解决排序后不会刷新数据
+        this.tableData = [...this.tableData]
       }
       else {
         this.resetTableData()

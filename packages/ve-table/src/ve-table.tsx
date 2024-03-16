@@ -773,6 +773,7 @@ export default defineComponent({
           this.initVirtualScroll()
       },
       immediate: true,
+      deep: true,
     },
     'allRowKeys': {
       handler(newVal) {

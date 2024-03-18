@@ -7,14 +7,14 @@ import VeContextmenu from '@easytable/ve-contextmenu'
 import VeDropdown from '@easytable/ve-dropdown'
 import VeIcon from '@easytable/ve-icon'
 import VeLoading from '@easytable/ve-loading'
-
-// import VeLocale from './ve-locale'
+import VeLocale from '@easytable/ve-locale'
 import VePagination from '@easytable/ve-pagination'
 import VeRadio from '@easytable/ve-radio'
 import VeSelect from '@easytable/ve-select'
 import VeTable from '@easytable/ve-table/src'
+import type { LocaleMessage } from '@easytable/common/locale/types'
 
-const version = '0.0.1'
+const version = '0.0.2'
 const components = [
   VeCheckbox,
   VeCheckboxGroup,
@@ -22,19 +22,21 @@ const components = [
   VeDropdown,
   VeIcon,
   VeLoading,
-  //   VeLocale,
+  VeLocale,
   VePagination,
   VeRadio,
   VeSelect,
   VeTable,
 ]
 
-const useVeTable = function (): Plugin {
+const useVeTable = function (options?: { locale?: LocaleMessage }): Plugin {
   return {
     install(app) {
       components.forEach((Component) => {
         app.use(Component)
       })
+      if (options?.locale)
+        VeLocale.use(options.locale)
     },
   }
 }
@@ -60,7 +62,7 @@ export {
   VeDropdown,
   VeIcon,
   VeLoading,
-  //   VeLocale,
+  VeLocale,
   VePagination,
   VeRadio,
   VeSelect,

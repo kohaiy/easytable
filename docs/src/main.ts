@@ -17,7 +17,7 @@ import '@/css/custom.less'
 import '@/comp/app.less'
 
 // import 'md-powerpack'
-import { ElDatePicker, ElIcon, ElInputNumber, ElRadio, ElRadioGroup, ElSelect } from 'element-plus'
+import { ElButton, ElDatePicker, ElIcon, ElInput, ElInputNumber, ElRadio, ElRadioGroup, ElSelect } from 'element-plus'
 import 'element-plus/theme-chalk/index.css'
 import {
   // VeCheckbox,
@@ -53,6 +53,8 @@ app.use(ElIcon)
 app.use(ElSelect)
 app.use(ElRadio)
 app.use(ElRadioGroup)
+app.use(ElButton)
+app.use(ElInput)
 // app.use(VeTable)
 // app.use(VeIcon)
 // app.use(VeLoading)

@@ -60,6 +60,8 @@ export default defineConfig(({ mode }) => {
     resolve: {
       alias: {
         '@': fileURLToPath(new URL('./src', import.meta.url)),
+        '@easytable/vue/libs/locale': fileURLToPath(new URL('../packages/common/locale', import.meta.url)),
+        '@easytable/vue': fileURLToPath(new URL('../packages/vue/src', import.meta.url)),
       },
     },
   }

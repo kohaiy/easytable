@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { VeLocale } from '@easytable/vue'
 import { version as latestVersion } from '../../packages/vue/package.json'
 import locale from './comp/locale'
 import useI18n from './comp/mixins/i18n-mixins'
@@ -15,7 +16,7 @@ const { currentDocLang } = useI18n()
 interface Option { label: string, value: string }
 // switch lang option
 const switchLangOptions = ref([
-  { value: 'en', label: 'English' },
+  { value: 'en', label: 'English(TBC)' },
   { value: 'zh', label: '简体中文' },
 ])
 // show lang dropdown
@@ -55,8 +56,8 @@ const currentDocVersion = computed(() => {
 })
 
 watch(currentDocLang, () => {
-  // this.$veLocale.use(locale[currentDocLang.value]["compLang"]);
-})
+  VeLocale.update(locale[currentDocLang.value].compLang)
+}, { immediate: true })
 
 // lang change
 function langChange(item: Option) {
@@ -70,7 +71,7 @@ function langChange(item: Option) {
       lang,
     )
     router.push(path)
-    // this.$veLocale.use(locale[lang]["compLang"]);
+    VeLocale.use(locale[lang].compLang)
   }
   setTimeout(() => {
     showLangDropdown.value = false

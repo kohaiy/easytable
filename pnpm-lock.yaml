@@ -283,12 +283,14 @@ importers:
 
   packages/vue:
     specifiers:
+      '@easytable/common': workspace:^1.0.0
       '@easytable/ve-checkbox': workspace:^1.0.0
       '@easytable/ve-checkbox-group': workspace:^1.0.0
       '@easytable/ve-contextmenu': workspace:^1.0.0
       '@easytable/ve-dropdown': workspace:^1.0.0
       '@easytable/ve-icon': workspace:^1.0.0
       '@easytable/ve-loading': workspace:^1.0.0
+      '@easytable/ve-locale': workspace:^1.0.0
       '@easytable/ve-pagination': workspace:^1.0.0
       '@easytable/ve-radio': workspace:^1.0.0
       '@easytable/ve-select': workspace:^1.0.0
@@ -298,12 +300,14 @@ importers:
       less: ^4.1.2
       vite-plugin-dts: ^3.7.2
     dependencies:
+      '@easytable/common': link:../common
       '@easytable/ve-checkbox': link:../ve-checkbox
       '@easytable/ve-checkbox-group': link:../ve-checkbox-group
       '@easytable/ve-contextmenu': link:../ve-contextmenu
       '@easytable/ve-dropdown': link:../ve-dropdown
       '@easytable/ve-icon': link:../ve-icon
       '@easytable/ve-loading': link:../ve-loading
+      '@easytable/ve-locale': link:../ve-locale
       '@easytable/ve-pagination': link:../ve-pagination
       '@easytable/ve-radio': link:../ve-radio
       '@easytable/ve-select': link:../ve-select

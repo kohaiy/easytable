@@ -1,8 +1,5 @@
-// import zhCN from '../../../../packages/src/locale/lang/zh-CN'
-// import enUS from '../../../../packages/src/locale/lang/en-US'
-// TODO
-const zhCN = ''
-const enUS = ''
+import zhCN from '@easytable/vue/libs/locale/lang/zh-CN'
+import enUS from '@easytable/vue/libs/locale/lang/en-US'
 
 export default {
   zh: {

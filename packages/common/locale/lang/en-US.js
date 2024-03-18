@@ -1,11 +1,9 @@
-import type { LocaleMessage } from '../types'
-
 export default {
   pagination: {
     goto: 'Go to',
     page: '',
     itemsPerPage: ' / page',
-    total: (total: number) => `Total ${total}`,
+    total: total => `Total ${total}`,
     prev5: 'Previous 5 Pages',
     next5: 'Next 5 Pages',
   },
@@ -29,4 +27,4 @@ export default {
     rightFixedColumnTo: 'Right fixed column to',
     cancelRightFixedColumnTo: 'Cancel right fixed column to',
   },
-} as LocaleMessage
+}

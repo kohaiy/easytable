@@ -5,8 +5,8 @@
 
 # @easytable/vue
 
-> [!IMPORTANT]
-> 本仓库迁移自 [vue-easytable](https://github.com/huangshuwei/vue-easytable) Vue.js 2.x ，基于 Vue.js 3.x 重构中……
+> [!WARNING]
+> 本仓库迁移自 [vue-easytable](https://github.com/huangshuwei/vue-easytable) Vue.js 2.x ，基于 Vue.js 3.x 重构中，目前基本完成。
 
 [English](./README-EN.md) | **中文**
 
@@ -14,7 +14,7 @@
 
 一个强大的 vue3.x 表格组件。你可以将它用做数据表、微软 excel 或者 goole sheet. 支持虚拟滚动、单元格编辑等功能。
 
-> [!WARNING]
+> [!IMPORTANT]
 > 如果您正在使用 Vue2.x ，请使用 [vue-easytable](https://github.com/huangshuwei/vue-easytable) 组件库。
 
 ## 特点
@@ -25,7 +25,7 @@
 ## API & 文档
 
 -   [官方文档](https://easytable.kohai.top/)
--   [官方文档 (Cloudflare Pages)](https://easytable.pages.dev/)
+-   [官方文档 (GitHub Pages)](https://kohaiy.github.io/easytable/)
 
 ## 功能支持
 
@@ -82,8 +82,6 @@ yarn add @easytable/vue
 ```
 
 ## 使用
-
-### 使用 NPM 安装（推荐）
 
 Write the following in main.js:
 
@@ -151,85 +149,6 @@ Example:
       };
     },
   };
-</script>
-```
-
-### 通过 CDN 使用 @easytable/vue
-
-你可以借助 script 标签直接通过 CDN 来使用 @easytable/vue：
-
-```html
-<script src="https://unpkg.com/@easytable/vue/libs/umd/easytable-vue.js"></script>
-```
-
-这里我们使用了 unpkg，但你也可以使用任何提供 npm 包服务的 CDN，例如 jsdelivr 或 cdnjs。当然，你也可以下载此文件并自行提供服务。
-
-示例：
-
-```html
-<!-- 引入 Vue -->
-<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-<!-- 引入 @easytable/vue -->
-<script src="https://unpkg.com/@easytable/vue/libs/umd/easytable-vue.js"></script>
-<!-- 引入样式文件 -->
-<link rel="stylesheet" href="https://unpkg.com/@easytable/vue@0.0.0-alpha.3/libs/theme-default/index.css">
-
-<div id="app">
-  <ve-table :columns="columns" :table-data="tableData" />
-</div>
-
-<script>
-  const { createApp, ref } = Vue
-  const { useVeTable } = EasytableVue
-
-  createApp({
-    setup() {
-      const columns = ref([
-        { field: "name", key: "a", title: "Name", align: "center" },
-        { field: "date", key: "b", title: "Date", align: "left" },
-        { field: "hobby", key: "c", title: "Hobby", align: "right" },
-        { field: "address", key: "d", title: "Address" },
-      ])
-      const tableData = ref([
-        {
-          name: "John",
-          date: "1900-05-20",
-          hobby: "coding and coding repeat",
-          address: "No.1 Century Avenue, Shanghai",
-        },
-        {
-          name: "Dickerson",
-          date: "1910-06-20",
-          hobby: "coding and coding repeat",
-          address: "No.1 Century Avenue, Beijing",
-        },
-        {
-          name: "Larsen",
-          date: "2000-07-20",
-          hobby: "coding and coding repeat",
-          address: "No.1 Century Avenue, Chongqing",
-        },
-        {
-          name: "Geneva",
-          date: "2010-08-20",
-          hobby: "coding and coding repeat",
-          address: "No.1 Century Avenue, Xiamen",
-        },
-        {
-          name: "Jami",
-          date: "2020-09-20",
-          hobby: "coding and coding repeat",
-          address: "No.1 Century Avenue, Shenzhen",
-        },
-      ])
-      return {
-        columns,
-        tableData
-      }
-    }
-  })
-    .use(useVeTable())
-    .mount('#app')
 </script>
 ```
 

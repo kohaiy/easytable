@@ -169,6 +169,10 @@ Example:
 如果你希望参与贡献，欢迎
 [Pull Request](https://github.com/kohaiy/easytable/pulls)
 
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=kohaiy/easytable&type=Date)](https://star-history.com/#kohaiy/easytable&Date)
+
 ## 贡献者们
 
 感谢原组件库作者 [huangshuwei](https://github.com/huangshuwei)

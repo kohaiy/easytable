@@ -1,3 +1,5 @@
+import type { LocaleMessage } from '../types'
+
 export default {
   pagination: {
     goto: '이동',
@@ -26,4 +28,4 @@ export default {
     rightFixedColumnTo: '오른쪽 고정 열',
     cancelRightFixedColumnTo: '오른쪽 고정 열 취소',
   },
-}
+} as LocaleMessage

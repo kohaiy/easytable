@@ -1,3 +1,5 @@
+import type { LocaleMessage } from '../types'
+
 export default {
   pagination: {
     goto: 'Ir para',
@@ -26,4 +28,4 @@ export default {
     rightFixedColumnTo: 'Right fixed column to',
     cancelRightFixedColumnTo: 'Cancel right fixed column to',
   },
-}
+} as LocaleMessage

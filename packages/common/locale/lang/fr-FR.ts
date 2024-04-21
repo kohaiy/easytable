@@ -1,15 +1,17 @@
+import type { LocaleMessage } from '../types'
+
 export default {
   pagination: {
-    goto: 'Gaan na',
+    goto: 'Aller à',
     page: '',
-    itemsPerPage: ' / bladsy',
-    total: total => `Totaall ${total}`,
-    prev5: 'Vorige 5 Bladsye',
-    next5: 'Volgende 5 Bladsye',
+    itemsPerPage: ' / page',
+    total: total => `Total ${total}`,
+    prev5: 'Reculer de 5 pages',
+    next5: 'Avancer de 5 pages',
   },
   table: {
-    confirmFilter: 'Bevestig',
-    resetFilter: 'Stel terug',
+    confirmFilter: 'Confirmer',
+    resetFilter: 'Réinitialiser',
     // contextmenu event
     cut: 'Cut',
     copy: 'Copy',
@@ -26,4 +28,4 @@ export default {
     rightFixedColumnTo: 'Right fixed column to',
     cancelRightFixedColumnTo: 'Cancel right fixed column to',
   },
-}
+} as LocaleMessage

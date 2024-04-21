@@ -1,5 +1,5 @@
 const { resolve } = require('node:path')
-const { copy } = require('fs-extra')
+const { copy, readdir } = require('fs-extra')
 
 module.exports = async function () {
   return Promise.all([
@@ -16,8 +16,8 @@ async function handleIconfont() {
 }
 
 async function handleLang() {
-  const LANG_DIR = resolve(__dirname, '../../../common/locale/lang')
-  const DEST_DIR = resolve(__dirname, '../../libs/locale/lang')
+  const LANG_DIR = resolve(__dirname, '../../../common/locale/types.d.ts')
+  const DEST_DIR = resolve(__dirname, '../../libs/locale/types.d.ts')
   await copy(LANG_DIR, DEST_DIR)
 }
 

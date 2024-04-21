@@ -1,3 +1,5 @@
+import type { LocaleMessage } from '../types'
+
 export default {
   pagination: {
     goto: 'Перейти на',
@@ -26,4 +28,4 @@ export default {
     rightFixedColumnTo: 'Зафиксировать колонки справа',
     cancelRightFixedColumnTo: 'Отменить фиксацию колонок справа',
   },
-}
+} as LocaleMessage

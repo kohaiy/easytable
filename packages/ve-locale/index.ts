@@ -1,7 +1,8 @@
 // import Vue from 'vue'
 import { cloneDeep, merge } from 'lodash'
 import defaultLang from '@easytable/common/locale/lang/en-US'
-import type { InjectionKey, Plugin } from 'vue'
+import type { InjectionKey, Ref } from 'vue'
+import { Plugin, inject, provide, ref } from 'vue'
 import type { LocaleMessage } from '@easytable/common/locale/types'
 import { withUse } from '@easytable/common/uses/with-use'
 

@@ -1,3 +1,5 @@
+import type { LocaleMessage } from '../types'
+
 export default {
   pagination: {
     goto: '前往',
@@ -26,4 +28,4 @@ export default {
     rightFixedColumnTo: '右列凍結至該列',
     cancelRightFixedColumnTo: '取消右列凍結',
   },
-}
+} as LocaleMessage

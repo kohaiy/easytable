@@ -73,8 +73,9 @@
   "scripts": {
     "gulp": "gulp",
     "build:css": "lessc ../theme-default/index.less libs/theme-default/index.css && lessc ../theme-dark/index.less libs/theme-dark/index.css",
+    "build:lang": "tsc ../common/locale/lang/*.ts --isolatedModules --target es6 --moduleResolution node --declaration --outDir libs/locale/lang",
     "build:vite": "vite build",
-    "build": "pnpm build:vite && pnpm build:css && pnpm gulp",
+    "build": "pnpm build:vite && pnpm build:css && pnpm build:lang && pnpm gulp",
     "publish": "node ./build/publish.js"
   },
   "dependencies": {

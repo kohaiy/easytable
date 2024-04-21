@@ -1,4 +1,4 @@
-import { isBoolean, isEmptyValue, isNumber } from '@easytable/common/utils/index'
+import { getTextContentOfVNode, isBoolean, isEmptyValue, isNumber } from '@easytable/common/utils/index'
 import emitter from '@easytable/common/mixins/emitter'
 import { clsName, getRowKeysByRangeRowKeys } from '../util'
 
@@ -348,7 +348,7 @@ export default defineComponent({
 
         content = (
           <span
-            title={isShowTitle ? content : ''}
+            title={isShowTitle ? getTextContentOfVNode(content) : ''}
             style={this.getEllipsisContentStyle()}
             class={clsName('body-td-span-ellipsis')}
           >

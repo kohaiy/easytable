@@ -117,3 +117,18 @@ export function scrollTo(el, option) {
     el.scrollLeft = left
   }
 }
+
+export function getTextContentOfVNode(vNode: any): string {
+  if (!vNode)
+    return ''
+  if (typeof vNode === 'string')
+    return vNode
+
+  if (Array.isArray(vNode))
+    return vNode.map(item => getTextContentOfVNode(item)).join('')
+
+  if (vNode.children)
+    return getTextContentOfVNode(vNode.children)
+
+  return ''
+}

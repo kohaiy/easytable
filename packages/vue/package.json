@@ -1,6 +1,6 @@
 {
   "name": "@easytable/vue",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Vue table component",
   "author": "https://github.com/kohaiy",
   "license": "MIT",
@@ -100,8 +100,8 @@
   },
   "docVersions": [
     {
-      "label": "0.0.4",
-      "value": "0.0.4"
+      "label": "0.0.5",
+      "value": "0.0.5"
     }
   ]
 }

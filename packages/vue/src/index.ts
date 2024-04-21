@@ -14,7 +14,7 @@ import VeSelect from '@easytable/ve-select'
 import VeTable from '@easytable/ve-table/src'
 import type { LocaleMessage } from '@easytable/common/locale/types'
 
-const version = '0.0.3'
+const version = '0.0.4'
 const components = [
   VeCheckbox,
   VeCheckboxGroup,
